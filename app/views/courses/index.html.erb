@@ -1,31 +1,21 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>CrewCreator</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <div id='main'>
-      <h1>All Course</h1>
-        <table id='movies'>
-          <thead>
-            <tr>
-            <th>Code</th>
-            <th>Course Name</th>
-            <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @courses.each do |course| %>
-              <tr>
-                <td> <% course.code %> </td>
-                <td> <% course.name %> </td>
-                <td> <% course.description %> </td>
-            <% end %>
-          </tbody>
-  </body>
-</html>
+<div id='main'>
+  <h1>All Courses</h1>
+    <table id='courses'>
+      <thead>
+        <tr>
+        <th>Code</th>
+        <th>Course Name</th>
+        <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @courses.each do |course| %>
+          <tr>
+            <td> <%= course.code %> </td>
+            <td> <%= course.name %> </td>
+            <td> <%= course.description %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
