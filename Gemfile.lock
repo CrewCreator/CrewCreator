@@ -287,6 +287,7 @@ DEPENDENCIES
   rails (~> 5.1.6, >= 5.1.6.1)
   rerun (>= 0.10.0)
   rspec-rails
+
   sass-rails (~> 5.0)
   selenium-webdriver
   shoulda
