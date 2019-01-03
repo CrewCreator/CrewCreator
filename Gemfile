@@ -40,8 +40,10 @@ group :development, :test do
   # adds database for development and testing
   gem 'sqlite3'
   # adds model and integration testing gems
-  gem 'rspec', '~> 3.8'
-
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'factory_bot_rails'
+  
   gem 'rack-test', '>=1.1.0'
   gem 'rack_session_access', '>=0.1.1'
 
