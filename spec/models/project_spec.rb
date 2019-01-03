@@ -7,7 +7,9 @@ RSpec.describe Project, :type => :model do
   }
 
   describe "Associations" do
-     
+    #it { should have_many :teams }
+    #it { should have_many :skills }
+    #it { should belongs_to :challenge }
   end
  
   describe "Validations" do
@@ -35,5 +37,5 @@ RSpec.describe Project, :type => :model do
       expect(subject).to_not be_valid
     end
   end
-  
+
 end
