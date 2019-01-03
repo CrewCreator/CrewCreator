@@ -36,6 +36,8 @@ RSpec.describe Project, :type => :model do
       subject.total_interest = nil
       expect(subject).to_not be_valid
     end
+    
+    it { should validate_length_of(:name).is_at_most(60).on(:create) }
   end
 
 end
