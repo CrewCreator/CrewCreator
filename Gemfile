@@ -39,6 +39,18 @@ group :development, :test do
   gem 'selenium-webdriver'
   # adds database for development and testing
   gem 'sqlite3'
+  # adds model and integration testing gems
+  gem 'rspec', '~> 3.8'
+  gem 'rspec-autotest', '>=1.0.0'
+
+  gem 'rack-test', '>=1.1.0'
+  gem 'rack_session_access', '>=0.1.1'
+
+  gem 'launchy', '>=2.4.3'
+  gem 'rerun', '>=0.10.0'
+  
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
 
 group :development do
