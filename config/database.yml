@@ -4,9 +4,10 @@
 #   Ensure the pg gem is defined in your Gemfile
 #   gem 'pg'
 #
+
 default: &default
-  adapter: postgresql
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  adapter: sqlite3
+  pool: 5
   timeout: 5000
 
 development:
@@ -21,5 +22,7 @@ test:
   database: db/crewcreator_test
 
 production:
-  <<: *default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
   database: db/crewcreator_production

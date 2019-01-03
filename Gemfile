@@ -8,8 +8,6 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6', '>= 5.1.6.1'
-# Use postgress as the database for Active Record
-gem 'pg' , ' >= 1.1.3'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -39,6 +37,20 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  # adds database for development and testing
+  gem 'sqlite3'
+  # adds model and integration testing gems
+  gem 'rspec', '~> 3.8'
+  gem 'rspec-autotest', '>=1.0.0'
+
+  gem 'rack-test', '>=1.1.0'
+  gem 'rack_session_access', '>=0.1.1'
+
+  gem 'launchy', '>=2.4.3'
+  gem 'rerun', '>=0.10.0'
+  
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -48,6 +60,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :production do
+  # Use postgress as the database for Active Record
+  gem 'pg' , ' >= 1.1.3' # for Heroku deployment
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
