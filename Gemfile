@@ -43,7 +43,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'factory_bot_rails'
-  
+  gem 'shoulda'
+
   gem 'rack-test', '>=1.1.0'
   gem 'rack_session_access', '>=0.1.1'
 
