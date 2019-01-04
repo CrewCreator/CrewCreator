@@ -6,6 +6,6 @@ Feature: admin create class
   
 Scenario: I create a class
   When I am on the courses page
-  And I press "Create Class"
-  Then I should see "Create Class"
+  And I press "Create Course"
+  Then I should see "Create New Course"
   

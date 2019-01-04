@@ -12,9 +12,9 @@ class CoursesController < ApplicationController
     @course = Course.new
   end
   
-  '''def create
+  def create
     @course = Course.create!(params.require(:course).permit(:name, :code, :description))
-    flash[:notice] = "#{@course.title} was successfully created."
+    flash[:notice] = "#{@course.name} was successfully created."
     redirect_to courses_path
-  end'''
+  end
 end
