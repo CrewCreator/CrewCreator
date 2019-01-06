@@ -1,22 +1,18 @@
-<% if current_user %>
-  <h1>Create Account</h1>
+
+<h1>Create Account</h1>
+
+<%= form_for @admin, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+  <%= f.label "Full Name" %>
+  <%= f.text_field :name %>
   
-  <%= form_for @admin, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
-    <%= f.label "Full Name" %>
-    <%= f.text_field :name %>
-    
-    <%= f.label "Email" %>
-    <%= f.text_field :email %>
-    
-    <%= f.label "Password" %>
-    <%= f.text_field :password %>
-    
-    <%= f.label "Confirm Password" %>
-    <%= f.text_field :password_confirmation %>
-    
-    <%= f.submit "Create Account" %>
-  <% end %>
-<% else %>
-    <%= link_to 'Sign Up', createaccount_path %> or 
-  <%= link_to 'Log In', login_path %>
+  <%= f.label "Email" %>
+  <%= f.text_field :email %>
+  
+  <%= f.label "Password" %>
+  <%= f.text_field :password %>
+  
+  <%= f.label "Confirm Password" %>
+  <%= f.text_field :password_confirmation %>
+  
+  <%= f.submit "Create Account" %>
 <% end %>
