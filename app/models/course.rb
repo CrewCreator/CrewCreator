@@ -1,9 +1,5 @@
 class Course < ApplicationRecord
-  has_many :sections
+  #has_many :sections
+  #has_many :projects, through: :sections
   validates_presence_of :name, :code, :description
-  ''' initialize(name, code)
-    @name = name
-    @code = code
-    @description = ""
-  end'''
 end
