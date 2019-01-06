@@ -16,7 +16,7 @@ module NavigationHelpers
     when /^the home\s?page$/
       '/'
 
-    when /^the createaccount\s?page$/
+    when /^the create account\s?page$/
       '/createaccount'
 
     when /^the course\s?page$/

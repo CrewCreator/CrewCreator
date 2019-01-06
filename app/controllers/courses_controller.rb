@@ -13,8 +13,13 @@ class CoursesController < ApplicationController
   end
   
   def create
-    @course = Course.create!(params.require(:course).permit(:name, :code, :description))
-    flash[:notice] = "#{@course.name} was successfully created."
-    redirect_to courses_path
+    @course = Course.create(params.require(:course).permit(:name, :code, :description))
+    
+    if @course.save
+      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created."
+      redirect_to courses_path
+    elsif
+      render 'new' #add arnings for required fields
+    end
   end
 end
