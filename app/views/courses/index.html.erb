@@ -18,7 +18,5 @@
         <% end %>
       </tbody>
     </table>
-</div>
-<div id='create_course'>
-  <a href='/courses/new'>Create Course</a>
+    <%= button_to 'Create Course', {:action => :new, :controller => :courses}, :method => :get %>
 </div>

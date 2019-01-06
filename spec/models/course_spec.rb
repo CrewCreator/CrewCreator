@@ -25,6 +25,6 @@ describe Course, :type => :model do
   end
   
   '''describe "Associations" do
-    it { should have_many(:projects) }
+    it { should have_many(:sections) }
   end'''
 end
