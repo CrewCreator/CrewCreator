@@ -1,3 +1,4 @@
 class Section < ApplicationRecord
-    validates_presence_of :number
+  #belongs_to :course
+  validates_presence_of :number
 end
