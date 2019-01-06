@@ -1,15 +1,20 @@
-<div id='main'>
-  <h2>Create New Course</h2>
-  <form action="/courses" accept-charset="UTF-8" method="post">
-    <label for="course_name">Course Name</label> <br>
-    <input type="text" name="course[name]" id="course_name" />
-    <br>
-    <label for="course_code">Code</label> <br>
-    <input type="text" name="course[code]" id="course_code" />
-    <br>
-    <label for="course_description">Description</label> <br>
-    <input type="text" name="course[description]" id="course_description" />
-    <br>
-    <input type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_new_course" />
-  </form>
-</div>
+<% if current_user %>
+  <div id='main'>
+    <h2>Create New Course</h2>
+    <form action="/courses" accept-charset="UTF-8" method="post">
+      <label for="course_name">Course Name</label> <br>
+      <input type="text" name="course[name]" id="course_name" />
+      <br>
+      <label for="course_code">Code</label> <br>
+      <input type="text" name="course[code]" id="course_code" />
+      <br>
+      <label for="course_description">Description</label> <br>
+      <input type="text" name="course[description]" id="course_description" />
+      <br>
+      <input type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_new_course" />
+    </form>
+  </div>
+<% else %>
+  <%= link_to 'Sign Up', createaccount_path %> or 
+  <%= link_to 'Log In', login_path %>
+<% end %>
