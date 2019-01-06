@@ -1,21 +1,17 @@
-<div class="project-form">
-  
-  <%= form_with(model: @project, local: true) do |form| %>
-  
-    <p>
-      <%= form.label :name %><br>
-      <%= form.text_field :name %>
-    </p>
-    
-    <p>
-      <%= form.label :description %><br>
-      <%= form.text_area :description %>
-    </p>
-    
-    <p>
-      <%= form.submit "Create" %>
-    </p>
-  
-  <% end %>
+<%= form_with model: @project, local: true do |form| %>
 
-</div>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name, :id =>"name" %>
+  </p>
+  
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description, :id => "description" %>
+  </p>
+  
+  <p>
+    <%= form.submit "Create", :id => "create" %>
+  </p>
+
+<% end %>

@@ -10,3 +10,4 @@ class Project < ApplicationRecord
   #validates_numericality_of :total_interest, :only_integer
   
 end
+

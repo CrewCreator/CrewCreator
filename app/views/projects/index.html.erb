@@ -1,1 +1,14 @@
-<h1>hello</h1>
+<h1>Projects</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  
+  <% @projects.each do |project| %>
+    <tr>
+      <td><%= project.name %></td>
+      <td><%= project.description %></td>
+    </tr>
+  <% end %>
+</table>
