@@ -21,8 +21,11 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+    
+    when /^the projects\s?page$/
+      '/projects'
  
-    when /^the project creation\s?page$/
+    when /^the new project\s?page$/
       '/projects/new'
 
     else
