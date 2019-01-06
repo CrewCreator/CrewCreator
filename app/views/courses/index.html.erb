@@ -1,0 +1,22 @@
+<div id='main'>
+  <h1>All Courses</h1>
+    <table id='courses'>
+      <thead>
+        <tr>
+        <th>Code</th>
+        <th>Course Name</th>
+        <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @courses.each do |course| %>
+          <tr>
+            <td> <%= course.code %> </td>
+            <td> <%= course.name %> </td>
+            <td> <%= course.description %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= button_to 'Create Course', {:action => :new, :controller => :courses}, :method => :get %>
+</div>
