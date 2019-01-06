@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   resources :admins
     get 'createaccount', to: 'admins#new', as: 'createaccount'
     get 'account_profile', to: 'admins#show', as: 'accountprofile'
+    
+  resources :sessions, only: [:new, :create, :destroy]
+    get 'login', to: 'sessions#new', as: 'login'
+    get 'logout', to: 'sessions#destroy', as: 'logout'
 end
