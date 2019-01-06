@@ -1,0 +1,24 @@
+<div id='main'>
+  <h1>All Admins</h1>
+    <table id='courses'>
+      <thead>
+        <tr>
+        <th>Admin Name</th>
+        <th>Email</th>
+        <th>Hashed Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @admins.each do |admin| %>
+          <tr>
+            <td> <%= admin.name %> </td>
+            <td> <%= admin.email %> </td>
+            <td> <%= admin.password %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+<div id='create_admin'>
+  <a href='/createaccount'>Create Admin</a>
+</div> 
