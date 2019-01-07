@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action :is_admin, only: [:new]
+  
   def index
     @projects = Project.all
   end
