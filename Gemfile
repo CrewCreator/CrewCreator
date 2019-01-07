@@ -56,7 +56,6 @@ group :development, :test do
   gem 'launchy', '>=2.4.3'
   gem 'rerun', '>=0.10.0'
   
-  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
 end
 

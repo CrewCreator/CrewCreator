@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  get 'home/index'
+  
+  root :to => redirect('/home/index')
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   resources:courses
-    root :to => redirect('/courses')
   
   resources :admins
     get 'createaccount', to: 'admins#new', as: 'createaccount'
