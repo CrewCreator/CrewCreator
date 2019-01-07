@@ -5,7 +5,13 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.4.1'
+if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.16.6')
+  abort "Bundler version 1.16.6 is required"
+elsif Gem::Version.new(Bundler::VERSION) > Gem::Version.new('1.16.6')
+  abort "Bundler version 1.16.6 is required"
+end
+
+ruby '~> 2.4.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6', '>= 5.1.6.1'

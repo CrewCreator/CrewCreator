@@ -117,11 +117,8 @@ GEM
       thor (>= 0.18.1)
     guard-compat (1.2.1)
     guard-rspec (4.7.3)
-      concurrent-ruby (~> 1.0)
       guard (~> 2.1)
       guard-compat (~> 1.1)
-      hirb (= 0.7.3)
-      i18n (= 1.5.1)
       rspec (>= 2.99.0, < 4.0)
     hirb (0.7.3)
     i18n (1.5.1)
@@ -328,4 +325,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   2.0.1
+   1.16.6
