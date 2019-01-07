@@ -7,9 +7,11 @@ Scenario: Admin create a project
   Given I am on the new project page
   And I fill in "description" with "any description"
   And I fill in "name" with "any name"
+  And I select "4" from "project[difficulty]"
   When I press "create"
   Then I should see "any description"
   And I should see "any name"
+  And I should see "4"
   And I should be on the projects page
 
 Scenario: Admin press new project linke
@@ -18,3 +20,4 @@ Scenario: Admin press new project linke
   Then I should be on the new project page
   And should see "Name"
   And should see "Description"
+  And should see "Difficulty"

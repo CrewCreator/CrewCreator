@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Project, :type => :model do
   subject { 
-    described_class.new(name: "Anything", description: "Anything",
+    described_class.new(name: "Anything", description: "Anything", difficulty: 3,
                         students_rated: 0, total_interest: 0) 
   }
 
@@ -27,6 +27,11 @@ RSpec.describe Project, :type => :model do
       expect(subject).to_not be_valid
     end
   
+    it "is not valid without a difficulty" do
+      subject.difficulty = nil
+      expect(subject).to_not be_valid
+    end
+    
     it "is not valid without a students_rated" do
       subject.students_rated = nil
       expect(subject).to_not be_valid
@@ -38,6 +43,11 @@ RSpec.describe Project, :type => :model do
     end
     
     it { should validate_length_of(:name).is_at_most(60).on(:create) }
+    it { should validate_length_of(:description).is_at_most(65535).on(:create) }
+    
+    it { should validate_numericality_of(:difficulty).is_greater_than_or_equal_to(1).is_less_than_or_equal_to(5).only_integer }
+    it { should validate_numericality_of(:students_rated).only_integer }
+    it { should validate_numericality_of(:total_interest).only_integer }
   end
 
 end

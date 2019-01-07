@@ -11,6 +11,11 @@
   </p>
   
   <p>
+    <%= form.label :difficulty %><br>
+    <%= form.select :difficulty, @difficulties, :id => "difficulty" %>
+  </p>
+  
+  <p>
     <%= form.submit "Create", :id => "create" %>
   </p>
 
