@@ -1,0 +1,9 @@
+<h1> List of skills </h1>
+<ol>
+<% @skills.each do |skill| %>
+  <li>
+    <%= link_to skill.name  %>
+    <p> Delete Edit </p>
+  </li>
+<% end %>
+</ol>
