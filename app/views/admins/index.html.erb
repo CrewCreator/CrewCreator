@@ -1,0 +1,35 @@
+<% if current_user %>
+  Logged in as <%= current_user.email %>.
+  <%= link_to 'Log Out', logout_path %>
+<% else %>
+  <%= link_to 'Sign Up', createaccount_path %> or 
+  <%= link_to 'Log In', login_path %>
+<% end %>
+
+<div id='main'>
+  <h1>All Admins</h1>
+    <table id='courses'>
+      <thead>
+        <tr>
+        <th>Admin Name</th>
+        <th>Email</th>
+        <th>Hashed Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @admins.each do |admin| %>
+          <tr>
+            <td> <%= admin.name %> </td>
+            <td> <%= admin.email %> </td>
+            <td> <%= admin.password %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+
+<% if current_user %>
+  <div id='create_admin'>
+    <a href='/createaccount'>Create Admin</a>
+  </div> 
+<% end %>
