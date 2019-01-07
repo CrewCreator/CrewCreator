@@ -16,7 +16,7 @@ RSpec.describe Section, type: :model do
     end
     
     it "is not valid with a long section number" do
-      subject.number = 99999999999999
+      subject.number = 9999
       expect(subject).to_not be_valid
     end
     
