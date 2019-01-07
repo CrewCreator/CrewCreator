@@ -24,13 +24,12 @@ module NavigationHelpers
       
     when /^the new course\s?page$/
       '/courses/new'
-
-
-    # Add more mappings here.
-    # Here is an example that pulls values out of the Regexp:
-    #
-    #   when /^(.*)'s profile page$/i
-    #     user_profile_path(User.find_by_login($1))
+    
+    when /^the projects\s?page$/
+      '/projects'
+ 
+    when /^the new project\s?page$/
+      '/projects/new'
 
     else
       begin

@@ -1,0 +1,19 @@
+<h1>Projects</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Difficulty</th>
+  </tr>
+  
+  <% @projects.each do |project| %>
+    <tr>
+      <td><%= project.name %></td>
+      <td><%= project.description %></td>
+      <td><%= project.difficulty %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= button_to "New Project", {:action => :new, :controller => :projects}, :method => :get, :id => "new_project"  %>
