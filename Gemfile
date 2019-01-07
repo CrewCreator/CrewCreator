@@ -5,8 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-#if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.17.1')
-#  abort "Bundler version 1.17.1 is required"
 if Gem::Version.new(Bundler::VERSION) > Gem::Version.new('1.18.1')
   abort "Bundler version 1.18.1 is required"
 end
