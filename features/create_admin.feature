@@ -3,8 +3,9 @@ Feature: Create Admin
   I want to be able to create an admin,
   so that additional admins can setup and run courses
 
-Scenario: User sees the account page
-  When I am on the create account page
+Scenario: Admin sees the account page
+  Given I am logged in as "admin@admin.com"
+  When I am on the sign in page
   Then I should see "Sign Up"
   And I should see "Log In"
 
