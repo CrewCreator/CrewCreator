@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if user
       if user.authenticate(params[:password])
         session[:user_id] = user.id
-        redirect_to :controller => 'admins', :action => 'index'
+        redirect_to :controller => 'courses', :action => 'index'
       else
         flash.now[:alert] = 'Email or password is invalid'
         render 'new'
@@ -20,6 +20,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id)
-    redirect_to :controller => 'admins', :action => 'index'
+    redirect_to '/login'
   end
 end
