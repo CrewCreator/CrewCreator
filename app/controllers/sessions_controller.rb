@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if user
       if user.authenticate(params[:password])
         session[:user_id] = user.id
-        redirect_to :controller => 'courses', :action => 'index'
+        redirect_to :controller => 'home', :action => 'index'
       else
         flash.now[:alert] = 'Email or password is invalid'
         render 'new'
