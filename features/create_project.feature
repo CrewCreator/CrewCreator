@@ -22,7 +22,7 @@ Scenario: Admin press new project link
   And should see "Description"
   And should see "Difficulty"
 
-Scenario: Admin press create without filling details
+Scenario: Admin presses create without filling in the form
   Given I am on the new project page
   When I press "create"
   Then I should see "Name"
