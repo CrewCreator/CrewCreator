@@ -3,7 +3,10 @@ class SessionsController < ApplicationController
   end
 
   def create
+    #Determine if admin or student or moderator
     user = Admin.find_by_email(params[:email])
+
+    
     if user
       if user.authenticate(params[:password])
         session[:user_id] = user.id
@@ -16,7 +19,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    session.delete(:user_id)
     redirect_to :controller => 'admins', :action => 'index'
   end
 end
