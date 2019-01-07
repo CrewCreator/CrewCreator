@@ -9,7 +9,7 @@ Scenario: Admin sees the account page
   When I am on the home page
   Then I should see "CrewCreator"
 
-Scenario: Admin creates an account
+Scenario: Admin creates an account=======
   Given I have an account with name "User One" and email "admin@admin.com" and password "password"
   Given I am logged in as "admin@admin.com" with "password"
   When I go to the create account page

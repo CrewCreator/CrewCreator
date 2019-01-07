@@ -32,6 +32,7 @@ module NavigationHelpers
       '/courses/new'
 
     when /^the login page$/
+      '/login'
       '/sessions/new'
       
     when /^the projects\s?page$/

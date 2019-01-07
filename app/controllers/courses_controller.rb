@@ -16,13 +16,18 @@ class CoursesController < ApplicationController
   end
   
   def create
-    @course = Course.create(params.require(:course).permit(:name, :code, :description))
-    
+    @course = Course.create(params.require(:course).permit(:name, :code, :description)) #needs to check for uniqueness
     if @course.save
+      sections = ["200", "501", "502", "503", "505", "506"]
+      sections.each do |section|
+        if params[section.to_sym]
+          @course.sections.create(params.require(section.to_sym).permit(section.to_sym))
+        end
+      end
       flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created."
       redirect_to courses_path
     elsif
-      render new_courses_path #add arnings for required fields
+      render "/courses/new" #add warnings for required fields
     end
   end
 end
