@@ -4,6 +4,8 @@ I want to add projects to a course
 So that students can be assigned to projects
 
 Scenario: Admin create a project
+  Given I have an account with name "User One" and email "admin@admin.com" and password "password"
+  Given I am logged in as "admin@admin.com" with "password"
   Given I am on the new project page
   And I fill in "description" with "any description"
   And I fill in "name" with "any name"
@@ -15,6 +17,8 @@ Scenario: Admin create a project
   And I should be on the projects page
 
 Scenario: Admin press new project link
+  Given I have an account with name "User One" and email "admin@admin.com" and password "password"
+  Given I am logged in as "admin@admin.com" with "password"
   Given I am on the projects page
   And I press "new_project"
   Then I should be on the new project page
@@ -23,6 +27,8 @@ Scenario: Admin press new project link
   And should see "Difficulty"
 
 Scenario: Admin presses create without filling in the form
+  Given I have an account with name "User One" and email "admin@admin.com" and password "password"
+  Given I am logged in as "admin@admin.com" with "password"
   Given I am on the new project page
   When I press "create"
   Then I should see "Name"
