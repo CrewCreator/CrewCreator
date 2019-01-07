@@ -10,6 +10,12 @@
     <label for="course_description">Description</label> <br>
     <input type="text" name="course[description]" id="course_description" />
     <br>
+    <% sections = ["200", "501", "502", "503", "505", "506"]%>
+    <% sections.each do |section| %>
+    <%= check_box_tag section, section.to_i%>
+    <label><%= section %></label> <br>
+    <% end %>
+    <br>
     <input type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_new_course" />
   </form>
 </div>
