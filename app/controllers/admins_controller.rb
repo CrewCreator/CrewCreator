@@ -8,6 +8,7 @@ class AdminsController < ApplicationController
   def create
     @admin = Admin.new(params.require(:admin).permit(:name, :email, :password, :password_confirmation))
     if @admin.save
+      flash[:notice] = "#{@admin.email} -- #{@admin.name} was successfully created."
       redirect_to  :action => 'home'
     else
       # This line overrides the default rendering behavior, which would have been to render the 'create' view.

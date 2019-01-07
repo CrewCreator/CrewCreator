@@ -26,7 +26,7 @@ module NavigationHelpers
       '/courses/new'
 
     when /^the login page$/
-      '/sessions/new'
+      '/login'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

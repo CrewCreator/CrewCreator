@@ -1,15 +1,9 @@
-Feature: Create Admin
-  As a admin
-  I want to be able to create an admin,
-  so that additional admins can setup and run courses
-
-Scenario: Admin sees the account page
-  Given I am logged in as "admin@admin.com" with "password"
-  When I am on the home page
-  Then I should see "CrewCreator"
-
-Scenario: Admin create an account
-  Given I am logged in as "admin@admin.com" with "password"
+Feature: user login
+  As a user,
+  I want to login
+  So that I can use CrewCreator
+  
+Scenario: I create an account
   When I am on the login page
   And I follow "Sign Up"
   Then I go to the create account page

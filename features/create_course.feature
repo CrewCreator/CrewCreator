@@ -5,6 +5,7 @@ Feature: admin create class
   I want to create a class
   
 Scenario: Admin clicks on create a class link
+  Given I am logged in as "admin@admin.com" with "password"
   When I am on the courses page
   And I press "Create Course"
   Then I should be on the new course page
@@ -13,6 +14,7 @@ Scenario: Admin clicks on create a class link
   And I should see "Name"
   
 Scenario: Admin creates a class
+  Given I am logged in as "admin@admin.com" with "password"
   When I am on the new course page
   And I fill in "course_name" with "any name"
   And I fill in "course_code" with "any code"
