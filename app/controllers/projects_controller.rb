@@ -5,7 +5,6 @@ class ProjectsController < ApplicationController
   
   def new
     @project = Project.new
-    @difficulties = Project.difficulties
   end
   
   def create

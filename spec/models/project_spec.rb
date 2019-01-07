@@ -49,5 +49,11 @@ RSpec.describe Project, :type => :model do
     it { should validate_numericality_of(:students_rated).only_integer }
     it { should validate_numericality_of(:total_interest).only_integer }
   end
+  
+  describe "Class Functions" do
+    it "difficulties should return five difficulties" do
+      expect(Project.difficulties).to eq([1, 2, 3, 4, 5]) 
+    end
+  end
 
 end
