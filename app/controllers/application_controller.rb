@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
       end
     end
     
-  helper_method :current_user
+  helper_method :is_admin
     def is_admin
-      if current_user.nil?
+      if current_user.nil? && !Admin.exists?(session[:user_id])
         redirect_to :controller => 'sessions', :action => 'new'
       end
     end
