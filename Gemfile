@@ -49,7 +49,8 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'factory_bot_rails'
   gem 'shoulda'
-  
+  gem 'shoulda-matchers'
+
   gem 'rack-test', '>=1.1.0'
   gem 'rack_session_access', '>=0.1.1'
 
@@ -71,6 +72,9 @@ end
 group :test do
   gem 'cucumber-rails' 
   gem 'cucumber-rails-training-wheels'
+  
+  gem 'simplecov'
+  gem 'simplecov-console'
 end
 
 group :production do

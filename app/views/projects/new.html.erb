@@ -1,0 +1,22 @@
+<%= form_with model: @project, local: true do |form| %>
+
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name, :id =>"name" %>
+  </p>
+  
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description, :id => "description" %>
+  </p>
+  
+  <p>
+    <%= form.label :difficulty %><br>
+    <%= form.select :difficulty, Project.difficulties, :id => "difficulty" %>
+  </p>
+  
+  <p>
+    <%= form.submit "Create", :id => "create" %>
+  </p>
+
+<% end %>
