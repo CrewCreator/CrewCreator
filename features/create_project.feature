@@ -21,3 +21,11 @@ Scenario: Admin press new project linke
   And should see "Name"
   And should see "Description"
   And should see "Difficulty"
+
+Scenario: Admin press create without filling details
+  Given I am on the new project page
+  When I press "create"
+  Then I should see "Name"
+  And I should see "Description"
+  And I should see "Difficulty"
+  And I should be on the projects page
