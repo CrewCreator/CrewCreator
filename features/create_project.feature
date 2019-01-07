@@ -11,3 +11,10 @@ Scenario: Admin create a project
   Then I should see "any description"
   And I should see "any name"
   And I should be on the projects page
+
+Scenario: Admin press new project linke
+  Given I am on the projects page
+  And I press "new_project"
+  Then I should be on the new project page
+  And should see "Name"
+  And should see "Description"
