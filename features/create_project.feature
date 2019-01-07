@@ -14,7 +14,7 @@ Scenario: Admin create a project
   And I should see "4"
   And I should be on the projects page
 
-Scenario: Admin press new project linke
+Scenario: Admin press new project link
   Given I am on the projects page
   And I press "new_project"
   Then I should be on the new project page
