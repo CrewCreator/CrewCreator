@@ -6,7 +6,7 @@ class AdminsController < ApplicationController
   end
   
   def create
-    @admin = Admin.new(params.require(:admin).permit(:name, :email, :password, :password_confirmation))
+    @admin = Admin.new(project_params)
     if @admin.save
       flash[:notice] = "#{@admin.email} -- #{@admin.name} was successfully created."
       redirect_to  :controller => 'home', :action => 'index'
@@ -20,5 +20,7 @@ class AdminsController < ApplicationController
     @admins = Admin.all
   end
 
-  
+  private def project_params
+    params.require(:admin).permit(:name, :email, :password, :password_confirmation)
+  end
 end

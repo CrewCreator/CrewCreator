@@ -70,8 +70,11 @@ group :development do
 end
 
 group :test do
-  gem 'cucumber-rails' 
+  gem 'cucumber-rails'
   gem 'cucumber-rails-training-wheels'
+  
+  gem 'simplecov'
+  gem 'simplecov-console'
 end
 
 group :production do

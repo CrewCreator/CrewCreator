@@ -15,6 +15,15 @@ Given /^(?:|I )am (a |an )"(.*)"$/ do |user|
   #if user == "Admin"
 end
 
+Given /^(?:|I )have an account with name "(.*)" and email "(.*)" and password "(.*)"$/ do |name, email, password|
+  visit("/createaccount")
+  fill_in("admin_name", :with => name)
+  fill_in("admin_email", :with => email)
+  fill_in("admin_password", :with => password)
+  fill_in("admin_password_confirmation", :with => password)
+  click_button("Create Account")
+end
+
 Given /^(?:|I )am logged in as "(.*)" with "(.*)"$/ do |email, password|
   visit("/sessions/new")
   fill_in("Email", :with => email)

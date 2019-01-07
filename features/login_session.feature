@@ -10,8 +10,8 @@ Scenario: I create an account
   And I should see "Create Account"
   And I fill in "admin_name" with "anything"
   And I fill in "admin_email" with "any@thing.com"
-  And I fill in "admin_password" with "this"
-  And I fill in "admin_password_confirmation" with "this"
+  And I fill in "admin_password" with "password"
+  And I fill in "admin_password_confirmation" with "password"
   And I press "Create Account"
   Then I should be on the home page
   
@@ -31,4 +31,4 @@ Scenario: I try to login
   Then I should be on the login page
   When I fill in "Email" with "any@thing.com"
   And fill in "Password" with "anything"
-  Then I should see "Failed to Log In!"
+  Then I should see "Log In"
