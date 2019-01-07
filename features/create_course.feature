@@ -4,17 +4,24 @@ Feature: admin create class
   So that I can manage groups of students and projects
   I want to create a class
   
-Scenario: I click on create a class link
+Scenario: Admin clicks on create a class link
+  Given I am logged in as "admin@admin.com" with "password"
   When I am on the courses page
   And I press "Create Course"
   Then I should be on the new course page
+  And I should see "Course Name"
+  And I should see "Code"
+  And I should see "Name"
   
-Scenario: I create a class
+Scenario: Admin creates a class
+  Given I am logged in as "admin@admin.com" with "password"
   When I am on the new course page
-  And I fill in "course_name" with "Intro to Engineering"
-  And I fill in "course_code" with "ENGR 111"
-  And I fill in "course_description" with "First engineering course a A&M"
+  And I fill in "course_name" with "any name"
+  And I fill in "course_code" with "any code"
+  And I fill in "course_description" with "any description"
   And I press "submit_new_course"
-  Then I should see "ENGR 111"
-  And I should see "Intro to Engineering"
-  And I should see "First engineering course a A&M"
+  Then I should see "successfully"
+  And I should see "any name"
+  And I should see "any code"
+  And I should see "any description"
+  And I should be on the courses page

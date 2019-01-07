@@ -15,12 +15,18 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
-      
+
+    when /^the create account\s?page$/
+      '/createaccount'
+
     when /^the course\s?page$/
       '/courses'
       
     when /^the new course\s?page$/
       '/courses/new'
+
+    when /^the login page$/
+      '/login'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

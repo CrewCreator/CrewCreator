@@ -1,4 +1,7 @@
 class CoursesController < ApplicationController
+  #Add authentication step
+  before_action :is_admin, only: [:new]
+  
   def index
     @courses = Course.all
   end
@@ -9,12 +12,17 @@ class CoursesController < ApplicationController
   end
   
   def new
-    @course = Course.new
+      @course = Course.new
   end
   
   def create
-    @course = Course.create!(params.require(:course).permit(:name, :code, :description))
-    flash[:notice] = "#{@course.name} was successfully created."
-    redirect_to courses_path
+    @course = Course.create(params.require(:course).permit(:name, :code, :description))
+    
+    if @course.save
+      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created."
+      redirect_to courses_path
+    elsif
+      render new_courses_path #add arnings for required fields
+    end
   end
 end
