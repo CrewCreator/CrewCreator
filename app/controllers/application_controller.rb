@@ -5,10 +5,17 @@ class ApplicationController < ActionController::Base
     def current_user
       if session[:user_id]
         if Admin.find(session[:user_id])
-          @current_user = Admin.find(session[:user_id])
+          @current_user ||= Admin.find(session[:user_id])
         end
       else
         @current_user = nil
+      end
+    end
+    
+  helper_method :current_user
+    def is_admin
+      if current_user.nil?
+        redirect_to :controller => 'sessions', :action => 'new'
       end
     end
 end

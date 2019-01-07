@@ -1,4 +1,7 @@
 class CoursesController < ApplicationController
+  
+  before_action :is_admin, only: [:new]
+  
   def index
     @courses = Course.all
   end
@@ -9,7 +12,7 @@ class CoursesController < ApplicationController
   end
   
   def new
-    @course = Course.new
+      @course = Course.new
   end
   
   def create
