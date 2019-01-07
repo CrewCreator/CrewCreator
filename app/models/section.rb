@@ -1,5 +1,6 @@
 class Section < ApplicationRecord
   #belongs_to :course, :admin
+  #has_many :student, :moderator, :project
   
   
   validates_presence_of :number

@@ -10,6 +10,7 @@ Feature: Section numbers are unique
   I want a unique section number
   So that my section is identifiable in the course for my group of projects and students
 
+# TODO: Need to fix to be syntactically similar to create course tests
 Scenario: User creates a new section
   When I have created a course
   And I add a section "501"
