@@ -8,11 +8,9 @@ Scenario: Admin sees the account page
   When I am on the home page
   Then I should see "CrewCreator"
 
-Scenario: Admin create an account
+Scenario: Admin creates an account
   Given I am logged in as "admin@admin.com" with "password"
-  When I am on the login page
-  And I follow "Sign Up"
-  Then I go to the create account page
+  When I go to the create account page
   And I should see "Create Account"
   And I fill in "admin_name" with "anything"
   And I fill in "admin_email" with "any@thing.com"
