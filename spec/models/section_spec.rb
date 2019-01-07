@@ -14,5 +14,20 @@ RSpec.describe Section, type: :model do
       subject.number = nil
       expect(subject).to_not be_valid
     end
+    
+    it "is not valid with a section number greater than 4 digits long" do
+      subject.number = 99999999999
+      expect(subject).to_not be_valid
+    end
+    
+    it "is not valid with a non-number" do 
+      subject.number = "This is wrong"
+      expect(subject).to_not be_valid
+    end
+    
+    it "is valid with a section number 1-4 digits long" do
+      subject.number = 1337
+      expect(subject).to be_valid
+    end
   end
 end
