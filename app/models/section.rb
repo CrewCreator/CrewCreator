@@ -1,5 +1,5 @@
 class Section < ApplicationRecord
-  #belongs_to :course, :admin
+  belongs_to :course #, :admin
   #has_many :student, :moderator, :project
   
   
