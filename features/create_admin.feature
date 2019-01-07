@@ -4,13 +4,13 @@ Feature: Create Admin
   so that additional admins can setup and run courses
 
 Scenario: Admin sees the account page
-  Given I am logged in as "admin@admin.com"
-  When I am on the sign in page
-  Then I should see "Sign Up"
+  Given I am logged in as "admin@admin.com" with "password"
+  When I am on the home page
+  Then I should see "Create Account"
   And I should see "Log In"
 
 Scenario: User presses the Sign Up button
   When I am on the login page
   And I follow "Sign Up"
   Then I go to the create account page
-  And I should see "Account Created"
+  And I should see "Create Account"
