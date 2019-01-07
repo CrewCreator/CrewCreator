@@ -7,3 +7,11 @@ new_courses = [
 new_courses.each do |course|
   Course.create!(course)
 end
+
+base_admins = [
+{:name => 'Admin', :email => 'admin@admin.com', :password => 'password'}
+]
+
+base_admins.each do |admin|
+  Admin.create!(admin)
+end
