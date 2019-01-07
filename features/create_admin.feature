@@ -9,7 +9,7 @@ Scenario: User sees the account page
   And I should see "Log In"
 
 Scenario: User presses the Sign Up button
-  When I am on the create account page
+  When I am on the login page
   And I follow "Sign Up"
-  Then I go to the account_profile page
+  Then I go to the create account page
   And I should see "Account Created"
