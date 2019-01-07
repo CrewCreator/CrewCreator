@@ -10,8 +10,13 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-Given /^(?:|I )am logged in as "(.*)"$/ do |user|
-  #visit login page
-  #follow log in
-  #etc...
+Given /^(?:|I )am (a |an )"(.*)"$/ do |user|
+  pending
+  #if user == "Admin"
+end
+
+Given /^(?:|I )am logged in as "(.*)" with "(.*)"$/ do |email, password|
+  visit("/sessions/new")
+  fill_in("Email", :with => email)
+  fill_in("Password", :with => password)
 end
