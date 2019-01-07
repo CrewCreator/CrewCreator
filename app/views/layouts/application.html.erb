@@ -13,6 +13,8 @@
       <div class="notice"><%= flash[:notice] %></div>
     <%elsif flash[:warning] %>
       <div class="warning"><%= flash[:warning] %></div>
+    <%elsif flash[:alert] %>
+      <div class="alert"><%= flash[:alert] %></div>
     <% end %>
     
     <% if current_user %>

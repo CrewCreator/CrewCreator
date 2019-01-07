@@ -14,7 +14,7 @@ module NavigationHelpers
     case page_name
 
     when /^the home\s?page$/
-      '/'
+      '/home'
 
     when /^the create account\s?page$/
       '/createaccount'
@@ -26,7 +26,7 @@ module NavigationHelpers
       '/courses/new'
 
     when /^the login page$/
-      '/login'
+      '/sessions/new'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
