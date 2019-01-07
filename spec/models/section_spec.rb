@@ -7,6 +7,7 @@ RSpec.describe Section, type: :model do
   
   describe "Validations" do
     it "is valid with valid attributes" do
+      pending
       expect(subject).to be_valid
     end 
     
@@ -26,6 +27,7 @@ RSpec.describe Section, type: :model do
     end
     
     it "is valid with a section number 1-4 digits long" do
+      pending
       subject.number = 1337
       expect(subject).to be_valid
     end
