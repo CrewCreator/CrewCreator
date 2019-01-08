@@ -1,7 +1,12 @@
-<% if @course.errors.any? %>
+<% if @course.errors.any? or @section.errors.any? %>
   <div id="error_explanation">
     <ul>
       <% @course.errors.full_messages.each do |msg| %>
+      <li> <%= msg %> </li>
+      <% end %>
+    </ul>
+    <ul>
+      <% @section.errors.full_messages.each do |msg| %>
       <li> <%= msg %> </li>
       <% end %>
     </ul>

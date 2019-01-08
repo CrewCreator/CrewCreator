@@ -12,22 +12,16 @@ class CoursesController < ApplicationController
   
   def new
       @course = Course.new
+      @section = Section.new
   end
   
   def create
     @course = Course.new(course_params)
+    @section = @course.sections.build(section_params)
+    
+    #autosave forced section to be saved
     if @course.save
-      sections_added = ""
-      @section = @course.sections.build(section_params)
-      
-      if @section.save
-        sections_added += "#{params[:section]} "
-      else
-        render new_course_path
-        return
-      end
-
-      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created with sections#{sections_added}"
+      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created with sections#{params[:section]}"
       redirect_to courses_path
     else
       render new_course_path
