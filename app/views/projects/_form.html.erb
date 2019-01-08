@@ -16,6 +16,14 @@
   </p>
   
   <p>
+    <%= form.label :skills %><br>
+    <%= form.fields_for :skills do |skill| %>
+      <%= skill.text_field :name, placeholder: "name", id: 'skill_name' %>
+      <%= skill.text_field :description, placeholder: "Description of skill", id: 'skill_description' %>
+    <% end %>
+  </p>
+  
+  <p>
     <%= form.submit "Create", :id => "create" %>
   </p>
 

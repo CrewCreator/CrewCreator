@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
   
   def new
     @project = Project.new
+    @project.skills.build
   end
   
   def create
@@ -22,7 +23,8 @@ class ProjectsController < ApplicationController
   end
   
   private def project_params
-    params.require(:project).permit(:name, :description, :difficulty)
+    params.require(:project).permit(:name, :description, :difficulty, 
+                                    skills_attributes: [:name, :description])
   end
   
   private def find_section

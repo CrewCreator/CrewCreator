@@ -9,6 +9,7 @@ RSpec.describe Project, :type => :model do
 
   describe "Associations" do
     it { should belong_to(:section) }
+    it { should have_and_belong_to_many(:skills) }
     #it { should have_many(:teams) }
     #it { should have_many :skills }
   end

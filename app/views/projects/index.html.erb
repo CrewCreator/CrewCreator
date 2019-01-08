@@ -5,6 +5,7 @@
     <th>Name</th>
     <th>Description</th>
     <th>Difficulty</th>
+    <th>Skills</th>
   </tr>
   
   <% @projects.each do |project| %>
@@ -12,6 +13,9 @@
       <td><%= project.name %></td>
       <td><%= project.description %></td>
       <td><%= project.difficulty %></td>
+      <% project.skills.each do |skill| %>
+        <td><%= skill.name %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
