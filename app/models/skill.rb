@@ -1,3 +1,5 @@
 class Skill < ApplicationRecord
-  validates_presence_of :name
+  validates :name, presence: {message: "Name cannot be empty"}, uniqueness: {message: "skill already exists"}
+  # validates :description, presence: true, message: "description cannot be empty"
+
 end
