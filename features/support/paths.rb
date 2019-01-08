@@ -14,9 +14,9 @@ module NavigationHelpers
     case page_name
 
     when /^the home\s?page$/
-      '/'
+      '/home'
 
-    when /^the createaccount\s?page$/
+    when /^the create account\s?page$/
       '/createaccount'
 
     when /^the course\s?page$/
@@ -25,8 +25,15 @@ module NavigationHelpers
     when /^the new course\s?page$/
       '/courses/new'
 
-    when /^the new skill\s?page$/
-      '/skills'
+    when /^the login page$/
+      '/login'
+      '/sessions/new'
+      
+    when /^the projects\s?page$/
+      '/projects'
+ 
+    when /^the new project\s?page$/
+      '/projects/new'
 
     when /^the create skill\s?page$/
       '/skills/new'
@@ -39,7 +46,6 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
-
     else
       begin
         page_name =~ /^the (.*) page$/

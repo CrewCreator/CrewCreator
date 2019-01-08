@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 describe Course, :type => :model do
-  
+   subject {Course.new(name: "Anything", code: "Anything", description: "Anything")}
   describe "Validations" do
-    subject {Course.new(name: "Anything", code: "Anything", description: "Anything")}
     it 'is valid with valid attributes' do
       expect(subject).to be_valid
     end
@@ -24,7 +23,7 @@ describe Course, :type => :model do
     end
   end
   
-  '''describe "Associations" do
+  describe "Associations" do
     it { should have_many(:sections) }
-  end'''
+  end
 end

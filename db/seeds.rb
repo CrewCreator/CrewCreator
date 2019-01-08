@@ -15,6 +15,10 @@ new_courses.each do |course|
   Course.create!(course)
 end
 
-new_skills.each do |skill|
-  Skill.create!(skill)
+base_admins = [
+{:name => 'Admin', :email => 'admin@admin.com', :password => 'password'}
+]
+
+base_admins.each do |admin|
+  Admin.create!(admin)
 end
