@@ -1,5 +1,6 @@
 class Section < ApplicationRecord
   belongs_to :course, dependent: :destroy, touch: true #, :admin
+  belongs_to :admin
   has_many :projects
   #has_many :student, :moderator
   

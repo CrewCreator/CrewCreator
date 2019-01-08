@@ -4,7 +4,11 @@ Rails.application.routes.draw do
     get 'home', to: 'home#index', as: 'home'
     root :to => redirect('/home')
     
-  resources:courses
+  resources:courses do
+    resources :sections do
+      resources :projects
+    end
+  end
   
   resources :admins
     get 'createaccount', to: 'admins#new', as: 'createaccount'
@@ -14,5 +18,4 @@ Rails.application.routes.draw do
     get 'login', to: 'sessions#new', as: 'login'
     get 'logout', to: 'sessions#destroy', as: 'logout'
 
-  resources :projects
 end
