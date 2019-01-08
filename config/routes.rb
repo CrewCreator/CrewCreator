@@ -6,9 +6,9 @@ Rails.application.routes.draw do
     
   resources:courses
   
-  resources :admins
+  resources :admins, except: [:show]
     get 'createaccount', to: 'admins#new', as: 'createaccount'
-    get 'account_profile', to: 'admins#show', as: 'accountprofile'
+    get 'admin_account', to: 'admins#edit', as:'admin_account'
     
   resources :sessions, only: [:new, :create, :destroy]
     get 'login', to: 'sessions#new', as: 'login'

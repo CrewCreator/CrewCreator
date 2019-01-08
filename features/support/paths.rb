@@ -18,7 +18,13 @@ module NavigationHelpers
 
     when /^the create account\s?page$/
       '/createaccount'
-
+    
+    when /^the all admin accounts\s?page$/
+      '/admins'
+      
+    when /^the admin profile\s?page$/
+      '/admin_account'
+      
     when /^the course\s?page$/
       '/courses'
       
