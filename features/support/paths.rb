@@ -18,7 +18,13 @@ module NavigationHelpers
 
     when /^the create account\s?page$/
       '/createaccount'
-
+    
+    when /^the all admin accounts\s?page$/
+      '/admins'
+      
+    when /^the admin profile\s?page$/
+      '/admin_account'
+      
     when /^the course\s?page$/
       '/courses'
       
@@ -27,13 +33,18 @@ module NavigationHelpers
 
     when /^the login page$/
       '/login'
-      '/sessions/new'
       
     when /^the projects\s?page$/
       '/courses/:course_id/sections/:section_id/projects'
  
     when /^the new project\s?page$/
       '/courses/:course_id/sections/:section_id/projects/new'
+
+    when /^the create skill\s?page$/
+      '/skills/new'
+
+
+
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
