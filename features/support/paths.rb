@@ -35,10 +35,10 @@ module NavigationHelpers
       '/login'
       
     when /^the projects\s?page$/
-      '/projects'
+      '/courses/:course_id/sections/:section_id/projects'
  
     when /^the new project\s?page$/
-      '/projects/new'
+      '/courses/:course_id/sections/:section_id/projects/new'
 
     when /^the create skill\s?page$/
       '/skills/new'

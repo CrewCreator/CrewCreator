@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   resources :home, only: [:index]
     root :to => redirect('/home')
     
-  resources:courses
+  resources:courses do
+    resources :sections do
+      resources :projects
+    end
+  end
   
   resources :admins, except: [:show]
     get 'createaccount', to: 'admins#new', as: 'createaccount'
@@ -24,5 +28,4 @@ Rails.application.routes.draw do
     get 'login', to: 'sessions#new', as: 'login'
     get 'logout', to: 'sessions#destroy', as: 'logout'
 
-  resources :projects
 end
