@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :skills
-    # get 'skills/create', to: 'skills#create', as: 'skills/create'
-    # get 'skills/destroy'
-    # get 'skills/new'
-
-
-  #   get 'skills', to 'skills#new', as: 'skills'
-
+  resources :skills do
+    get 'edit' => 'skills#edit'
+    get 'show' => 'skills#show'
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     get 'home', to: 'home#index', as: 'home'
