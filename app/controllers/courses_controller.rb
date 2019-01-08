@@ -27,12 +27,10 @@ class CoursesController < ApplicationController
         return
       end
 
-      puts(params)
       flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created with sections#{sections_added}"
       redirect_to courses_path
     else
-        render new_course_path
-      end
+      render new_course_path
     end
   end
   
