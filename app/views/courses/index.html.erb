@@ -17,6 +17,7 @@
             <td> <%= course.description %> </td>
             <% course.sections.each do |section| %>
               <td> <%= section.number %> </td>
+              <td> <%= link_to 'Projects', course_section_projects_path(course, section) %></td>
             <% end %>
             <td> <%= link_to 'Add Section', new_course_section_path(course) %></td>
           </tr>

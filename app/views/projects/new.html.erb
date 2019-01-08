@@ -1,4 +1,4 @@
-<%= form_with model: @project, local: true do |form| %>
+<%= form_for [@section.course, @section, @project] do |form| %>
 
   <p>
     <%= form.label :name %><br>
