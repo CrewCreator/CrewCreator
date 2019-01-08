@@ -31,22 +31,6 @@ class CoursesController < ApplicationController
       flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created with sections#{sections_added}"
       redirect_to courses_path
     else
-      if params[:course][:code] != "" and Course.where(code: params[:course][:code]).take
-        flash[:warning] = "Must have unique Course Code. #{params[:course][:code]} is already used."
-        render new_course_path
-      else
-        missing_attr = ""
-        i = 0
-        puts(params)
-        Course.new.attributes.keys.each do |var|
-          puts(var, i)
-          if params[:course][var.to_sym]=="" and i > 2
-            puts("add")
-            missing_attr += "#{var} "
-          end
-          i += 1
-        end
-        flash[:warning] = "#{missing_attr} required for creating a Course."
         render new_course_path
       end
     end
