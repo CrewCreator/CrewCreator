@@ -1,5 +1,4 @@
 class CoursesController < ApplicationController
-  #Add authentication step
   before_action :is_admin, only: [:new]
   
   def index
