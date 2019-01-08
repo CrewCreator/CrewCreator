@@ -61,5 +61,4 @@ RSpec.describe Admin, type: :model do
     subject.password_confirmation = "1234"
     expect(subject).to_not be_valid
   end
-
 end
