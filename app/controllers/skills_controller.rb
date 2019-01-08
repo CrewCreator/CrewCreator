@@ -16,7 +16,7 @@ class SkillsController < ApplicationController
   end
 
   def create
-    @skill = Skill.new(skill_params)
+    @skill = Skill.create(skill_params)
 
     redirect_to skills_path
   end
