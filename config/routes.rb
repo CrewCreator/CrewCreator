@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
+
+  resources :skills
+    # get 'skills/create', to: 'skills#create', as: 'skills/create'
+    # get 'skills/destroy'
+    # get 'skills/new'
+
+
+  #   get 'skills', to 'skills#new', as: 'skills'
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :home, only: [:index]
     get 'home', to: 'home#index', as: 'home'
+  resources :home, only: [:index]
     root :to => redirect('/home')
     
   resources:courses
