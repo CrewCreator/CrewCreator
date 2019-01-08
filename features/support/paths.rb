@@ -23,7 +23,7 @@ module NavigationHelpers
       '/admins'
       
     when /^the admin profile\s?page$/
-    '/admins/update'
+      '/admin_account'
       
     when /^the course\s?page$/
       '/courses'

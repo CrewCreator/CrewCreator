@@ -18,4 +18,13 @@ class ApplicationController < ActionController::Base
         redirect_to :controller => 'sessions', :action => 'new'
       end
     end
+    
+  helper_method :is_admin_html
+    def is_admin_html
+      if current_user.nil? && !Admin.exists?(session[:user_id])
+        false
+      else
+        true
+      end
+    end
 end
