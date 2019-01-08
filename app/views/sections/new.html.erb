@@ -1,12 +1,3 @@
-<%= form_for [@course, @section] do |form| %>
+<h1>Add Section</h1>
 
-  <p>
-    <%= form.label :number %><br>
-    <%= form.number_field :number, in: 1...9999, :id => "number" %>
-  </p>
-  
-  <p>
-    <%= form.submit "Create", :id => "create" %>
-  </p>
-
-<% end %>
+<%= render 'form' %>
