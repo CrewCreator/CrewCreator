@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Section, type: :model do
+  let(:course) { Course.new }
   subject{
-    described_class.new(number: 431)
+    described_class.new(number: 431, :course => course)
   }
   
   describe "Validations" do
     it "is valid with valid attributes" do
-      pending
       expect(subject).to be_valid
     end 
     
@@ -27,9 +27,13 @@ RSpec.describe Section, type: :model do
     end
     
     it "is valid with a section number 1-4 digits long" do
-      pending
       subject.number = 1337
       expect(subject).to be_valid
     end
+  end
+  
+  describe "Associations" do
+    it { should belong_to(:course) }
+    it { should have_many(:projects) }
   end
 end

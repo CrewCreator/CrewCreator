@@ -25,5 +25,6 @@ describe Course, :type => :model do
   
   describe "Associations" do
     it { should have_many(:sections) }
+    it { should have_many(:projects).through(:sections) }
   end
 end

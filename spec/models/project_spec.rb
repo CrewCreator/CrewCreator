@@ -1,15 +1,16 @@
 require "rails_helper"
 
 RSpec.describe Project, :type => :model do
+  let(:section) { Section.new }
   subject { 
     described_class.new(name: "Anything", description: "Anything", difficulty: 3,
-                        students_rated: 0, total_interest: 0) 
+                        students_rated: 0, total_interest: 0, :section => section) 
   }
 
   describe "Associations" do
-    #it { should have_many :teams }
+    it { should belong_to(:section) }
+    #it { should have_many(:teams) }
     #it { should have_many :skills }
-    #it { should belongs_to :challenge }
   end
  
   describe "Validations" do
