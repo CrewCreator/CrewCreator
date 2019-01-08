@@ -6,6 +6,7 @@
         <th>Code</th>
         <th>Course Name</th>
         <th>Description</th>
+        <th>Section Count</th>
         </tr>
       </thead>
       <tbody>
@@ -14,6 +15,7 @@
             <td> <%= course.code %> </td>
             <td> <%= course.name %> </td>
             <td> <%= course.description %> </td>
+            <td> <%= course.sections.count %> </td>
           </tr>
         <% end %>
       </tbody>

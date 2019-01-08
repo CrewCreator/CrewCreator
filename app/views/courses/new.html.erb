@@ -10,12 +10,9 @@
     <label for="course_description">Description</label> <br>
     <input type="text" name="course[description]" id="course_description" />
     <br>
-    <% def add_asection() puts("Section")
-      
-    %>
-    <label for="add_section">Add Section</label> <br>
-    <%= button_to "+", :id => "add_asection()", :onclick => add_asection() %>
-    <br>
+    <%= label("section_number", "Section Number") %> <br>
+    <%= number_field_tag "section[number]", in: 1...9999 %>
+    <br> <br>
     <input type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_new_course" />
   </form>
 </div>
