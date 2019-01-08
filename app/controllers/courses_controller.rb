@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
   end
   
   def create
-    @course = Course.create(params.require(:course).permit(:name, :code, :description))
+    @course = Course.new(course_params)
     if @course.save
       sections_added = ""
       @section = @course.sections.build(sec_params)
@@ -52,11 +52,11 @@ class CoursesController < ApplicationController
     end
   end
   
-  private def req_params
+  private def course_params 
     params.require(:course).permit(:name, :code, :description)
   end
   
-  private def sec_params
+  private def section_params
     params.require(:section).permit(:number)
   end
 end
