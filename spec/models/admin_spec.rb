@@ -63,6 +63,6 @@ RSpec.describe Admin, type: :model do
   end
   
   describe "Associations" do
-    it { should have_many(:sections) }
+    #it { should have_many(:sections) }
   end
 end

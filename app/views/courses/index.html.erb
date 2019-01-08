@@ -6,6 +6,7 @@
         <th>Code</th>
         <th>Course Name</th>
         <th>Description</th>
+        <th>Sections</th>
         </tr>
       </thead>
       <tbody>
@@ -14,6 +15,10 @@
             <td> <%= course.code %> </td>
             <td> <%= course.name %> </td>
             <td> <%= course.description %> </td>
+            <% course.sections.each do |section| %>
+              <td> <%= section.number %> </td>
+            <% end %>
+            <td> <%= link_to 'Add Section', new_course_section_path(course) %></td>
           </tr>
         <% end %>
       </tbody>

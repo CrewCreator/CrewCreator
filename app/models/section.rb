@@ -1,6 +1,6 @@
 class Section < ApplicationRecord
-  belongs_to :course, dependent: :destroy, touch: true #, :admin
-  belongs_to :admin
+  belongs_to :course#, dependent: :destroy, touch: true #, :admin
+  #belongs_to :admin
   has_many :projects
   #has_many :student, :moderator
   
@@ -10,6 +10,6 @@ class Section < ApplicationRecord
   
   validates_inclusion_of :number, in: 1..9999
   
-  validates_uniqueness_of :number
+  #validates_uniqueness_of :number
   
 end

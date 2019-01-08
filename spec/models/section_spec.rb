@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Section, type: :model do
   let(:course) { Course.new }
-  let(:admin) { Admin.new }
   subject{
-    described_class.new(number: 431, :course => course, :admin => admin)
+    described_class.new(number: 431, :course => course)
   }
   
   describe "Validations" do
@@ -35,7 +34,7 @@ RSpec.describe Section, type: :model do
   
   describe "Associations" do
     it { should belong_to(:course) }
-    it { should belong_to(:admin) }
+    #it { should belong_to(:admin) }
     it { should have_many(:projects) }
   end
 end

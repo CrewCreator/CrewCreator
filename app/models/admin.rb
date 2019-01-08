@@ -3,7 +3,7 @@ class Admin < ApplicationRecord
     
     before_save {email.downcase!}
     
-    has_many :sections
+    #has_many :sections
 
     validates_presence_of :name, :email, :password
     

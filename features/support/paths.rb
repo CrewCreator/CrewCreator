@@ -30,10 +30,10 @@ module NavigationHelpers
       '/sessions/new'
       
     when /^the projects\s?page$/
-      '/projects'
+      '/courses/:course_id/sections/:section_id/projects'
  
     when /^the new project\s?page$/
-      '/projects/new'
+      '/courses/:course_id/sections/:section_id/projects/new'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
