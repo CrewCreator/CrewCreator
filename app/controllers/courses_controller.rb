@@ -1,5 +1,4 @@
 class CoursesController < ApplicationController
-  #Add authentication step
   before_action :is_admin, only: [:new, :create]
   
   def index
@@ -13,21 +12,27 @@ class CoursesController < ApplicationController
   
   def new
       @course = Course.new
+      @section = Section.new
   end
   
   def create
-    @course = Course.create(params.require(:course).permit(:name, :code, :description)) #needs to check for uniqueness
+    @course = Course.new(course_params)
+    @section = @course.sections.build(section_params)
+    
+    #autosave forced section to be saved
     if @course.save
-      sections = ["200", "501", "502", "503", "505", "506"]
-      sections.each do |section|
-        if params[section.to_sym]
-          @course.sections.create(params.require(section.to_sym).permit(section.to_sym))
-        end
-      end
-      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created."
+      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created with sections#{params[:section]}"
       redirect_to courses_path
-    elsif
-      render "/courses/new" #add warnings for required fields
+    else
+      render new_course_path
     end
+  end
+  
+  private def course_params 
+    params.require(:course).permit(:name, :code, :description)
+  end
+  
+  private def section_params
+    params.require(:section).permit(:number)
   end
 end

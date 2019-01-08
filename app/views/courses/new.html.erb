@@ -1,3 +1,17 @@
+<% if @course.errors.any? or @section.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @course.errors.full_messages.each do |msg| %>
+      <li> <%= msg %> </li>
+      <% end %>
+    </ul>
+    <ul>
+      <% @section.errors.full_messages.each do |msg| %>
+      <li> <%= msg %> </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <div id='main'>
   <h2>Create New Course</h2>
   <form action="/courses" accept-charset="UTF-8" method="post">
@@ -10,6 +24,9 @@
     <label for="course_description">Description</label> <br>
     <input type="text" name="course[description]" id="course_description" />
     <br>
+    <%= label("section_number", "Section Number") %> <br>
+    <%= number_field_tag "section[number]", in: 1...9999 %>
+    <br> <br>
     <input type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_new_course" />
   </form>
 </div>

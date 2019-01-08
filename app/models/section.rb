@@ -1,5 +1,5 @@
 class Section < ApplicationRecord
-  belongs_to :course, dependent: :destroy, touch: true
+  belongs_to :course, dependent: :destroy, touch: true, validate: true, autosave: true
   #belongs_to :admin
   has_many :projects
   #has_many :student, :moderator
