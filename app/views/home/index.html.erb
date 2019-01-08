@@ -1,13 +1,24 @@
 <h1>CrewCreator</h1>
 <br\>
 <br\>
+<br\>
 
-<%= button_to 'Log In', {:action => :new, :controller => :sessions}, :method => :get %>
+<% if !current_user %>
+  <%= button_to 'Log In', '/login', :method => :get %>
+<%end%>
+
 <br\>
-<%= button_to 'Create Account', {:action => :new, :controller => :admins}, :method => :get %>
+
+<% if is_admin_html %>
+  <%= button_to 'My Account', '/admin_account', :method => :get %>
+<%end%>
+
 <br\>
+
 <%= button_to 'View Courses', {:action => :index, :controller => :courses}, :method => :get %>
+
 <br\>
+
 <%= button_to 'View Admins', {:action => :index, :controller => :admins}, :method => :get %>
-<br\>
+
 <%= button_to 'View Projects', {:action => :index, :controller => :projects}, :method => :get %>

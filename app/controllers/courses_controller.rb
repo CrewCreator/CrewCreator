@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :is_admin, only: [:new]
+  before_action :is_admin, only: [:new, :create]
   
   def index
     @courses = Course.all

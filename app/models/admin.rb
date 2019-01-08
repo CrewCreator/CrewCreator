@@ -2,6 +2,8 @@ class Admin < ApplicationRecord
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     
     before_save {email.downcase!}
+    
+    #has_many :sections
 
     validates_presence_of :name, :email, :password
     
