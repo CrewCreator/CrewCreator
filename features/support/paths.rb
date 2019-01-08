@@ -25,6 +25,9 @@ module NavigationHelpers
     when /^the admin profile\s?page$/
       '/admin_account'
       
+    when /^the remove admin page for email "(.*)"$/
+      remove_admin_path(Admin.find_by_email($1))
+      
     when /^the course\s?page$/
       '/courses'
       
