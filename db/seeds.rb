@@ -5,10 +5,10 @@ new_courses = [
 ]
 
 new_skills = [
-    {:name=>"Javascript"},
-    {:name=>"Python"},
-    {:name=>"Tensorflow"},
-    {:name=>"Scrum"}
+    {:name=>"Javascript", :description=> "The language of the web"},
+    {:name=>"Python", :description=> "Versatile scripting language that can possibly be used for Data Processing and Machine Learning"},
+    {:name=>"Tensorflow", :description=> "One of the most popular Deep Learning libraries"},
+    {:name=>"Scrum", :description=> "Awesome Project Management Framework for speedy project management"}
 ]
 
 new_courses.each do |course|

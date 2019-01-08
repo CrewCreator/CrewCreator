@@ -25,6 +25,14 @@ module NavigationHelpers
     when /^the new course\s?page$/
       '/courses/new'
 
+    when /^the new skill\s?page$/
+      '/skills'
+
+    when /^the create skill\s?page$/
+      '/skills/new'
+
+
+
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

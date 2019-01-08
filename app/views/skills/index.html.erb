@@ -2,8 +2,12 @@
 <ol>
 <% @skills.each do |skill| %>
   <li>
-    <%= link_to skill.name  %>
-    <p> Delete Edit </p>
+    <%= link_to skill.name, skill_path(skill) %> | <%= skill.description  %>
+
   </li>
 <% end %>
 </ol>
+
+
+
+<%= button_to 'Add a New Skill', new_skill_path, method: 'get'%>
