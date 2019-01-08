@@ -18,7 +18,7 @@ class CoursesController < ApplicationController
     @course = Course.new(course_params)
     if @course.save
       sections_added = ""
-      @section = @course.sections.build(sec_params)
+      @section = @course.sections.build(section_params)
       
       if @section.save
         sections_added += "#{params[:section]} "
