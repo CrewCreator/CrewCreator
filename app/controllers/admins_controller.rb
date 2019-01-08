@@ -7,11 +7,7 @@ class AdminsController < ApplicationController
   end
   
   def create
-<<<<<<< HEAD
-    @admin = Admin.new(project_params)
-=======
     @admin = Admin.new(admin_params_create)
->>>>>>> staging
     if @admin.save
       flash[:notice] = "#{@admin.email} -- #{@admin.name} was successfully created."
       redirect_to  :controller => 'home', :action => 'index'
