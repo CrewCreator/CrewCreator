@@ -1,0 +1,14 @@
+<h1><%=@current_user.name%>'s Account</h1>
+
+<%= form_for @current_user do |f| %>
+  <%= f.label "Full Name" %>
+  <%= f.text_field :name %>
+  <br/><br/>
+  <%= f.label "Email" %>
+  <%= f.text_field :email %>
+  <br/><br/><br/>
+  <%= f.label "Confirm Your Password Before Edit" %>
+  <%= f.password_field :password %>
+  <br/><br/>
+  <%= f.submit "Update Account" %>
+<% end %>

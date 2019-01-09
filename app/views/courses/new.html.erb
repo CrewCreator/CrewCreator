@@ -1,3 +1,27 @@
+<% if @course.errors.any? or @section.errors.any? %>
+  <div id="error_explanation">
+    <h3> Course Errors </h3>
+    <ul>
+      <% @course.errors.full_messages.each do |msg| %>
+      <li> <%= msg %> </li>
+      <% end %>
+    </ul>
+    <h3> Section Errors </h3>
+    <ul>
+      <% @section.errors.full_messages.each do |msg| %>
+      <li> <%= msg %> </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div id="error_explanation">
+  <h3> Course Guidelines </h3>
+  <ul>
+    <li>Code must follow examples: (csce-121, EGL-1201)</li>
+    <li>Name must be less then 150 characters</li>
+    <li>Description must be less than 250 words</li>
+  </ul>
+</div>
 <div id='main'>
   <h2>Create New Course</h2>
   <form action="/courses" accept-charset="UTF-8" method="post">
@@ -10,6 +34,9 @@
     <label for="course_description">Description</label> <br>
     <input type="text" name="course[description]" id="course_description" />
     <br>
-    <input type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_new_course" />
+    <%= label("section_number", "Section Number") %> <br>
+    <%= number_field_tag "section[number]", in: 1...9999 %>
+    <br> <br>
+    <input type="submit" name="commit" value="Create Course" data-disable-with="Save Changes" id="submit_new_course" />
   </form>
 </div>

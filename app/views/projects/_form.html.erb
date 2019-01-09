@@ -1,0 +1,42 @@
+<%= form_for [@section, @project] do |form| %>
+
+  <% if @project.errors.any? %>
+    <p>
+      <h4>
+        <%= pluralize(@project.errors.count, "error") %>
+        prohibited this project from being saved:
+      </h4>
+      <ul>
+        <% @project.errors.full_messages.each do |msg| %>
+          <li> <%= msg %> </li>
+        <% end %>
+      </ul>
+    </p>
+  <% end %>
+
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name, :id =>"name" %>
+  </p>
+  
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description, :id => "description" %>
+  </p>
+  
+  <p>
+    <%= form.label :difficulty %><br>
+    <%= form.select :difficulty, Project.difficulties, :id => "difficulty" %>
+  </p>
+  
+  <p>
+    <%= form.label :skills %><br>
+    <%= form.collection_check_boxes :skill_ids, Skill.all, :id, :name %> 
+    <%= link_to 'Add Skill', new_skill_path %>
+  </p>
+  
+  <p>
+    <%= form.submit "Create", :id => "create" %>
+  </p>
+
+<% end %>

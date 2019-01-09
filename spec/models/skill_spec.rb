@@ -6,7 +6,7 @@ RSpec.describe Skill, :type => :model do
   }
 
   describe "Associations" do
-
+    it { should have_and_belong_to_many(:projects) }
   end
 
   describe "Validations" do

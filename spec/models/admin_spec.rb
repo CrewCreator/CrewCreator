@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Admin, type: :model do
-  subject{Admin.new(name: "admin", email: "email@email.com", password: "password", password_confirmation: "password")}
+  subject{Admin.new(name: "admin", email: "email@email.com", password: "password1!", password_confirmation: "password1!")}
   
   it "is valid with valid attributes" do
     expect(subject).to be_valid
@@ -19,6 +19,16 @@ RSpec.describe Admin, type: :model do
   
   it "is not valid without a password" do
     subject.password = nil
+    expect(subject).to_not be_valid
+  end
+  
+  it "is not valid if password is missing a digit" do
+    subject.password = "aaaaaaaaaaaaaaaa12345"
+    expect(subject).to_not be_valid
+  end
+  
+  it "is not valid if password is missing a symbol" do
+    subject.password = "123456789"
     expect(subject).to_not be_valid
   end
   
@@ -60,5 +70,9 @@ RSpec.describe Admin, type: :model do
     subject.password = "1234"
     subject.password_confirmation = "1234"
     expect(subject).to_not be_valid
+  end
+  
+  describe "Associations" do
+    #it { should have_many(:sections) }
   end
 end

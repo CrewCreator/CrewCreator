@@ -18,7 +18,13 @@ module NavigationHelpers
 
     when /^the create account\s?page$/
       '/createaccount'
-
+    
+    when /^the all admin accounts\s?page$/
+      '/admins'
+      
+    when /^the admin profile\s?page$/
+      '/admin_account'
+      
     when /^the course\s?page$/
       '/courses'
       
@@ -27,13 +33,15 @@ module NavigationHelpers
 
     when /^the login page$/
       '/login'
-      '/sessions/new'
       
-    when /^the projects\s?page$/
-      '/projects'
- 
-    when /^the new project\s?page$/
-      '/projects/new'
+    when /^the projects page for section "(.*)"$/
+      section_projects_path(Section.find_by_number($1))
+      
+    when /^the new project page for section "(.*)"$/
+      new_section_project_path(Section.find_by_number($1))
+
+    when /^the create skill\s?page$/
+      '/skills/new'
 
     when /^the create skill\s?page$/
       '/skills/new'

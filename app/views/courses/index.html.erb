@@ -6,6 +6,10 @@
         <th>Code</th>
         <th>Course Name</th>
         <th>Description</th>
+        <th>Section(s)</th>
+        <% if is_admin_html %>
+        <th>Options</th>
+        <% end %>
         </tr>
       </thead>
       <tbody>
@@ -14,6 +18,25 @@
             <td> <%= course.code %> </td>
             <td> <%= course.name %> </td>
             <td> <%= course.description %> </td>
+            <td>
+              <table>
+                <tr>
+                <% course.sections.each do |section| %>
+                  <td> <%= link_to section.number, section_projects_path(section) %> </td>
+                <% end %>
+                </tr>
+              </table>
+            </td>
+            <% if is_admin_html %>
+            <td> 
+              <table>
+                <tr>
+                <td> <%= link_to 'Add Section', new_course_section_path(course), :id => "add_section_to_#{course}" %> </td>
+                <td> <%= link_to 'Edit', edit_course_path(course), :id => "edit_#{course}" %> </td>
+                </tr>
+              </table>
+            </td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
