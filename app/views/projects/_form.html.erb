@@ -16,6 +16,7 @@
   </p>
   
   <p>
+    <%= form.label :skills %><br>
     <%= form.collection_check_boxes :skill_ids, Skill.all, :id, :name %> 
     <%= link_to 'Add Skill', new_skill_path %>
   </p>
