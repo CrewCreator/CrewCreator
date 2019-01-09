@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Section, type: :model do
-  let(:course) { Course.new(name: "Anything", code: "Anything", description: "Anything") }
+  let(:course) { Course.new(name: "Some Course", code: "SOME 123", description: "This is a course") }
   subject{
     described_class.new(number: 431, :course => course)
   }
