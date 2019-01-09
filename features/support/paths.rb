@@ -34,8 +34,8 @@ module NavigationHelpers
     when /^the login page$/
       '/login'
 
-    when /^the new section page$/
-      '/courses/1/sections'
+    when /^the section page for course "(.*)"$/
+      course_sections_path(Course.find_by_name($1).id)
       
     when /^the new section page for course "(.*)"$/
       new_course_section_path(Course.find_by_name($1))
