@@ -34,12 +34,6 @@ module NavigationHelpers
     when /^the login page$/
       '/login'
       
-    #when /^the projects\s?page$/
-    #  '/courses/:course_id/sections/:section_id/projects'
- 
-    #when /^the new project\s?page$/
-    #  '/courses/:course_id/sections/:section_id/projects/new'
-      
     when /^the projects page for section "(.*)"$/
       section_projects_path(Section.find_by_number($1))
       
