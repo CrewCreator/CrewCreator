@@ -1,5 +1,19 @@
 <%= form_for [@section, @project] do |form| %>
 
+  <% if @project.errors.any? %>
+    <p>
+      <h4>
+        <%= pluralize(@project.errors.count, "error") %>
+        prohibited this project from being saved:
+      </h4>
+      <ul>
+        <% @project.errors.full_messages.each do |msg| %>
+          <li> <%= msg %> </li>
+        <% end %>
+      </ul>
+    </p>
+  <% end %>
+
   <p>
     <%= form.label :name %><br>
     <%= form.text_field :name, :id =>"name" %>
