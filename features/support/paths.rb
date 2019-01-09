@@ -33,7 +33,7 @@ module NavigationHelpers
 
     when /^the login page$/
       '/login'
-      
+
     when /^the section page for course "(.*)"$/
       course_sections_path(Course.find_by_name($1).id)
       
