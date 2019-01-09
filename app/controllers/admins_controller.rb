@@ -23,7 +23,7 @@ class AdminsController < ApplicationController
   end
   
   def edit
-    @current_user = current_user
+    @object_updating = current_user
   end
 
   def update
@@ -42,11 +42,7 @@ class AdminsController < ApplicationController
   end
   
   def remove
-    @user_removing = Admin.find_by_id(params[:id])
-    @current_user = current_user
-  end
-  
-  def confirm
+    @object_removing = Admin.find_by_id(params[:id])
     @current_user = current_user
   end
   
