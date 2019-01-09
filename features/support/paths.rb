@@ -43,9 +43,6 @@ module NavigationHelpers
     when /^the create skill\s?page$/
       '/skills/new'
 
-
-
-
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
