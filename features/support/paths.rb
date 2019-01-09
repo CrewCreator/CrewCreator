@@ -34,6 +34,12 @@ module NavigationHelpers
     when /^the login page$/
       '/login'
       
+    when /^the new section page$/
+      '/courses/1/sections'
+      
+    when /^the new section page for course "(.*)"$/
+      new_course_section_path(Course.find_by_name($1))
+      
     when /^the projects\s?page$/
       '/courses/:course_id/sections/:section_id/projects'
  
@@ -42,6 +48,9 @@ module NavigationHelpers
 
     when /^the create skill\s?page$/
       '/skills/new'
+
+
+
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
