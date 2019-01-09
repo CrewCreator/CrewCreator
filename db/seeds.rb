@@ -11,6 +11,20 @@ new_skills = [
     {:name=>"Scrum", :description=> "Awesome Project Management Framework for speedy project management"}
 ]
 
+new_skills = [
+    {:name=>"Javascript", :description=> "The language of the web"},
+    {:name=>"Python", :description=> "Versatile scripting language that can possibly be used for Data Processing and Machine Learning"},
+    {:name=>"Tensorflow", :description=> "One of the most popular Deep Learning libraries"},
+    {:name=>"Scrum", :description=> "Awesome Project Management Framework for speedy project management"}
+]
+
+name, :description, :created_at, :defined_id, :production_link,
+    :project_management_link, :scrum_time, :staging_link, :version_control_link
+
+# new_teams: [
+#     {name: "CrewCreator", description: "Best team", }
+# ]
+
 new_courses.each do |course|
   Course.create!(course)
 end

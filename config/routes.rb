@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
 
+  get 'teams/index'
+
+  get 'teams/show'
+
+  get 'teams/edit'
+
+  get 'teams/new'
+
   resources :skills
+  resources :teams
+
+
     # get 'skills/create', to: 'skills#create', as: 'skills/create'
     # get 'skills/destroy'
     # get 'skills/new'

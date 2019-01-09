@@ -1,0 +1,11 @@
+<h1>
+  ID <%= @team.id %>:
+</h1>
+<p> <%= @team.name %> </p>
+<p> <%= @team.description %> </p>
+<p> <%= @team.staging_link %></p>
+
+
+
+<p> <%= button_to 'Remove', @team, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= button_to 'Edit', edit_team_path(@team), method: 'get'%> </p>

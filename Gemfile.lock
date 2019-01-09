@@ -100,6 +100,8 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
+    factory_girl (4.9.0)
+      activesupport (>= 3.0.0)
     ffi (1.10.0)
     formatador (0.2.5)
     gherkin (5.1.0)
@@ -294,6 +296,7 @@ DEPENDENCIES
   cucumber-rails-training-wheels
   database_cleaner
   factory_bot_rails
+  factory_girl
   guard-rspec
   jbuilder (~> 2.5)
   launchy (>= 2.4.3)
@@ -323,4 +326,4 @@ RUBY VERSION
    ruby 2.5.3p105
 
 BUNDLED WITH
-   1.17.1
+   1.17.3

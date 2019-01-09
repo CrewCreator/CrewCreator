@@ -1,0 +1,13 @@
+<h1> List of Teams </h1>
+<ol>
+  <% @teams.each do |team| %>
+    <li>
+        <%= link_to team.name, team_path(team) %> |
+      <p> <%= team.description  %> </p>
+    </li>
+  <% end %>
+</ol>
+
+
+
+<%= button_to 'Add a New Team', new_team_path, method: 'get'%>
