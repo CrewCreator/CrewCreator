@@ -14,7 +14,10 @@ class AdminsController < ApplicationController
     @admin = Admin.new(admin_params_create)
     if @admin.save
       flash[:notice] = "#{@admin.email} -- #{@admin.name} was successfully created."
-      redirect_to  :controller => 'home', :action => 'index'
+      if !current_user
+        session[:user_id] = @admin.id
+      end
+        redirect_to  :controller => 'home', :action => 'index'
     else
       # This line overrides the default rendering behavior, which would have been to render the 'create' view.
     flash[:notice] = "Email was taken or password did not meet specifications!"
@@ -23,7 +26,7 @@ class AdminsController < ApplicationController
   end
   
   def edit
-    @current_user = current_user
+    @object_updating = current_user
   end
 
   def update
@@ -42,7 +45,7 @@ class AdminsController < ApplicationController
   end
   
   def remove
-    @user_removing = Admin.find_by_id(params[:id])
+    @object_removing = Admin.find_by_id(params[:id])
     @current_user = current_user
   end
   

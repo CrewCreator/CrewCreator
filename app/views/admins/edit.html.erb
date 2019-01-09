@@ -6,9 +6,7 @@
   <br/><br/>
   <%= f.label "Email" %>
   <%= f.text_field :email %>
-  <br/><br/><br/>
-  <%= f.label "Confirm Your Password Before Edit" %>
-  <%= f.password_field :password %>
-  <br/><br/>
-  <%= f.submit "Update Account" %>
+
+  <%= render "layouts/confirm_update" %>
+
 <% end %>
