@@ -1,7 +1,7 @@
-<%= form_for @current_user, url: {action: "edit"}, :method => :POST do |f| %>
-  <%= f.hidden_field :id, value: @object_updating.id %>
+<%= form_for current_user, url: {action: "edit"}, :method => :POST do |f| %>
+  <%= f.hidden_field :id, value: object.id %>
   <%= f.label "Confirm Password" %>
   <%= f.password_field :password %>
   
-  <%= f.submit "Remove #{@object_updating.name}" %>
+  <%= f.submit "Update #{object.name}" %>
 <% end %>
