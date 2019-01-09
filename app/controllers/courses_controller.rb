@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :is_admin, only: [:new, :create]
+  before_action :is_admin, only: [:new, :create, :edit, :update]
   
   def index
     @courses = Course.all
@@ -25,6 +25,21 @@ class CoursesController < ApplicationController
       redirect_to courses_path
     else
       render new_course_path
+    end
+  end
+  
+  def update
+    if @current_user = Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
+      if @course.update_attributes(course_params)
+        flash[:notice] = "#{@course.code} : #{@course.name} was successfully updated."
+        redirect_to :action => 'index'
+      else
+        flash[:notice] = "Failed to save update. Check your inputs!"
+        redirect_to edit_course_path(@course)
+      end
+    else
+      flash[:notice] = "Incorrect Password"
+      redirect_to courses_path
     end
   end
   
