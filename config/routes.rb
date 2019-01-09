@@ -18,8 +18,7 @@ Rails.application.routes.draw do
   resources :admins, except: [:show]
     get 'createaccount', to: 'admins#new', as: 'createaccount'
     get 'admin_account', to: 'admins#edit', as:'admin_account'
-    get 'remove_admin', to: 'admins#remove', as: 'remove_admin'
-    post 'remove_admin_destroy', to: 'admins#destroy', as: 'remove_admin_destroy'
+    get 'admins/:id/remove', to: 'admins#remove', as: 'remove_admin'
     
   resources :sessions, only: [:new, :create, :destroy]
     get 'login', to: 'sessions#new', as: 'login'
