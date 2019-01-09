@@ -16,7 +16,7 @@ Scenario: Admin attempts to remove another admin
   Given I am logged in as "admin1@admin.com" with "password1!"
   When I am on the all admin accounts page
   And I follow "Remove User Two"
-  Then I should see "Remove User Two"
+  Then I should see "Remove User: User Two"
 
 Scenario: Admin confirms the removal of another admin
   Given I have an account with name "User One" and email "admin1@admin.com" and password "password1!"
@@ -45,4 +45,4 @@ Scenario: Admin attempts edits his admin profile with wrong password
   Then I should see "admin2@admin.com"
   And I fill in "admin_password" with "wrong_password2"
   And I press "Remove User Two"
-  Then I should see "Remove User Two"
+  Then I should see "Remove User: User Two"

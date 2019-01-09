@@ -17,6 +17,7 @@ class AdminsController < ApplicationController
       redirect_to  :controller => 'home', :action => 'index'
     else
       # This line overrides the default rendering behavior, which would have been to render the 'create' view.
+    flash[:notice] = "Email was taken or password did not meet specifications!"
      redirect_to '/createaccount'
     end
   end
@@ -31,7 +32,7 @@ class AdminsController < ApplicationController
         flash[:notice] = "#{@current_user.email} -- #{@current_user.name} was successfully updated."
         redirect_to :action => 'index'
       else
-        flash[:notice] = "Failed to save update. Check your inputs!"
+        flash[:notice] = "Failed to save update. Invalid Email."
         redirect_to '/admin_account'
       end
     else
@@ -46,16 +47,19 @@ class AdminsController < ApplicationController
   end
   
   def destroy
+    removed_user = Admin.find_by_id(params[:admin][:id])
     if Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
       Admin.find_by_id(params[:admin][:id]).destroy
-      flash[:notice] = "Admin deleted"
       if session[:user_id] == params[:admin][:id]
+        flash[:notice] = "#{@current_user.email} -- #{@current_user.name} was successfully deleted. This was your account."
         session[:user_id] = nil
         redirect_to '/createaccount'
       else
+        flash[:notice] = "#{removed_user.email} -- #{removed_user.name} was successfully deleted."
         redirect_to  :controller => 'home', :action => 'index'
       end
     else
+      flash[:notice] = "Incorrect Password!"
       redirect_to :action => 'remove', :id => params[:admin][:id] , :method => :get
     end
   end
