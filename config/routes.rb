@@ -9,10 +9,7 @@ Rails.application.routes.draw do
     
   resources:courses, shallow: true do
     resources :sections, shallow: true do
-      resources :projects, shallow: true do
-        #get 'skills/new', to: 'projects#new_skill'
-        #post 'skills', to: 'projects#create_skill'
-      end
+      resources :projects
     end
   end
   

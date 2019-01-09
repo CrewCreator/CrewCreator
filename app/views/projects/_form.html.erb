@@ -1,4 +1,4 @@
-<%= form_for [@section.course, @section, @project] do |form| %>
+<%= form_for [@section, @project] do |form| %>
 
   <p>
     <%= form.label :name %><br>
@@ -16,11 +16,8 @@
   </p>
   
   <p>
-    <%= form.label :skills %><br>
-    <%= form.fields_for :skills do |skill| %>
-      <%= skill.text_field :name, placeholder: "name", id: 'skill_name' %>
-      <%= skill.text_field :description, placeholder: "Description of skill", id: 'skill_description' %>
-    <% end %>
+    <%= form.collection_check_boxes :skill_ids, Skill.all, :id, :name %> 
+    <%= link_to 'Add Skill', new_skill_path %>
   </p>
   
   <p>
