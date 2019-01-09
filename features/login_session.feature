@@ -17,18 +17,18 @@ Scenario: I create an account
   
 Scenario: I look at the list of admins
   When I am on the home page
-  And press "View Admins"
+  And I follow "View Admins"
   Then I should see "All Admins"
   
 Scenario: I look at the list of courses
   When I am on the home page
-  And press "View Courses"
+  And I follow "View Courses"
   Then I should see "All Courses"
   
 Scenario: I try to login
   When I am on the home page
-  And press "Log In"
+  And I follow "Log In"
   Then I should be on the login page
   When I fill in "Email" with "any@thing.com"
   And fill in "Password" with "anything"
-  Then I should see "Log In"
+  Then I should see "Sign Up"

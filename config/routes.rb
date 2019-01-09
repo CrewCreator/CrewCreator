@@ -1,17 +1,14 @@
 Rails.application.routes.draw do
 
-  resources :skills do
-    get 'edit' => 'skills#edit'
-    get 'show' => 'skills#show'
-  end
+  resources :skills, except: [:show]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     get 'home', to: 'home#index', as: 'home'
   resources :home, only: [:index]
     root :to => redirect('/home')
     
-  resources:courses do
-    resources :sections do
+  resources:courses, shallow: true do
+    resources :sections, shallow: true do
       resources :projects
     end
   end

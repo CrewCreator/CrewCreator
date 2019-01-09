@@ -28,7 +28,7 @@ Then(/^I should see the create skill page$/) do
 end
 
 
-Given /^(?:|I )want to create a skill with name "(.*)" and description "(.*)"$/ do |name, description|
+Given /^(?:|I )have a skill with name "(.*)" and description "(.*)"$/ do |name, description|
   visit("/skills/new")
   fill_in("skill_name", :with => name)
   fill_in("skill_description", :with => description)
