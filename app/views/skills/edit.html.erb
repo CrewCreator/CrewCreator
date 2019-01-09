@@ -1,7 +1,3 @@
 <h3>Update Skill Details</h3>
-<%= form_with model: @skill do |form| %>
-  <%= form.text_field :name, placeholder: "name" %>
-  <%= form.text_field :description, placeholder: "description" %>
 
-  <%= form.submit %>
-<% end %>
+<%= render 'form' %>

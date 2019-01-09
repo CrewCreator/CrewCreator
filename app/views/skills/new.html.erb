@@ -1,10 +1,3 @@
 <h3>Create a Skill</h3>
-<%= form_with model: @skill do |form| %>
-  <%= form.text_field :name, placeholder: "name", id: 'skill_name' %>
-  <%= form.text_field :description, placeholder: "Description of skill", id: 'skill_description' %>
 
-  <%#= form.text_field :description, placeholder: "desciption" %>
-
-  <%= form.submit id: 'submit_skill' %>
-<% end %>
-
+<%= render 'form' %>
