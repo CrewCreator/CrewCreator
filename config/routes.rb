@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     
   resources:courses, shallow: true do
     resources :sections, shallow: true do
-      resources :projects
+      resources :projects, except: [:show]
     end
   end
   
