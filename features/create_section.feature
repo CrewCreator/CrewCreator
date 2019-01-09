@@ -19,7 +19,7 @@ Scenario: Admin creates section with invalid input
   When I am on the new section page for course "Software Engineering"
   And I fill in "number" with "this is wrong"
   When I press "Create"
-  Then I should be on the new section page
+  Then I should be on the section page for course "Software Engineering"
   
 Scenario: Admin presses create without filling in the form
   Given I have an account with name "One User" and email "admin@admin.com" and password "password1!"
@@ -27,7 +27,7 @@ Scenario: Admin presses create without filling in the form
   When I am on the new section page for course "Software Engineering"
   When I press "Create"
   Then I should see "Number"
-  And I should be on the new section page
+  And I should be on the section page for course "Software Engineering"
   
 Scenario: Admin presses new section link
   Given I have an account with name "One User" and email "admin@admin.com" and password "password1!"
