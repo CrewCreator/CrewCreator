@@ -18,7 +18,7 @@
           </tr>
           <tr>
             <% course.sections.each do |section| %>
-              <td> <%= link_to section.number, course_section_projects_path(course, section) %> </td>
+              <td> <%= link_to section.number, section_projects_path(section) %> </td>
             <% end %>
           </tr>
         <% end %>

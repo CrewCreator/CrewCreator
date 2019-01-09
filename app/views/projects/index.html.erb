@@ -5,7 +5,6 @@
     <th>Name</th>
     <th>Description</th>
     <th>Difficulty</th>
-    <th>Skills</th>
   </tr>
   
   <% @projects.each do |project| %>
@@ -16,6 +15,7 @@
       <% project.skills.each do |skill| %>
         <td><%= skill.name %></td>
       <% end %>
+      <td> <%= link_to 'Add Skill', project_skills_new_path(project) %></td>
     </tr>
   <% end %>
 </table>
