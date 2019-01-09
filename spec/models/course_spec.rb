@@ -21,6 +21,21 @@ describe Course, :type => :model do
       subject.description = nil
       expect(subject).to_not be_valid
     end
+    
+    it 'is not valid wiht invalid code' do
+      subject.code = "blah"
+      expect(subject).to_not be_valid
+    end
+    
+    it 'is not valid with invalid description' do
+      subject.description = "character"*400
+      expect(subject).to_not be_valid
+    end
+       
+    it 'is not valid with invalid name' do
+      subject.name = "me"*76
+      expect(subject).to_not be_valid
+    end 
   end
   
   describe "Associations" do
