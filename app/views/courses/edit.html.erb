@@ -1,0 +1,14 @@
+<h1><%=@course.name%> Details</h1>
+
+<%= form_for @course do |f| %>
+  <%= f.label "Code" %> <br>
+  <%= f.text_field :code %> <br>
+  
+  <%= f.label "Name" %> <br>
+  <%= f.text_field :name %> <br>
+  
+  <%= f.label "Description" %> <br>
+  <%= f.text_field :description %> <br>
+  <br>
+  <%= f.submit "Update Course" %>
+<% end %>
