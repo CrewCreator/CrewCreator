@@ -1,13 +1,21 @@
-<h1>Remove <%=@user_removing.name%></h1>
+<h1>Remove User: <%=@user_removing.name%></h1>
 
-<h3>Name</h3> <p><%=@user_removing.name%></p>
-<h3>Email</h3> <p><%=@user_removing.email%></p>
-<h3>Sections</h3>
+<table border="1">
+  <tr>
+    <td>Name</td>
+    <td><%=@user_removing.name%></td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td><%=@user_removing.email%></td>
+  </tr>
+</table>
+</br></br>
 
 <%= form_for @current_user, url: {action: "destroy"}, :method => :POST do |f| %>
   <%= f.hidden_field :id, value: @user_removing.id %>
   <%= f.label "Confirm Password" %>
-  <%= f.text_field :password %>
+  <%= f.password_field :password %>
   
   <%= f.submit "Remove #{@user_removing.name}" %>
 <% end %>
