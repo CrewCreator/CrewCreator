@@ -15,12 +15,6 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
-  private
-  def team_params
-    params.require(:team).permit(:name, :description, :created_at, :defined_id, :production_link, :project_management_link,\
-                                  :scrum_time, :staging_link, :version_control_link)
-  end
-
   def create
     @team = Team.create(team_params)
 
@@ -34,6 +28,19 @@ class TeamsController < ApplicationController
     redirect_to team_path (@team)
   end
 
+  def destroy
+    @team = Team.find(params[:id])
+    @team.destroy
+
+    redirect_to skills_path
   end
+
+  private
+  def team_params
+    params.require(:team).permit(:name, :description, :created_at, :defined_id, :production_link, :project_management_link,\
+                                  :scrum_time, :staging_link, :version_control_link)
+  end
+
+end
 
 

@@ -2,7 +2,7 @@
 <ol>
   <% @teams.each do |team| %>
     <li>
-        <%= link_to team.name, team_path(team) %> |
+       <h3> <%= link_to team.name, team_path(team) %> </h3>
       <p> <%= team.description  %> </p>
     </li>
   <% end %>
