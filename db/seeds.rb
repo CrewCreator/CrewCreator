@@ -16,7 +16,7 @@ new_courses.each do |course|
 end
 
 base_admins = [
-{:name => 'Admin', :email => 'admin@admin.com', :password => 'password'}
+{:name => 'Admin', :email => 'admin@admin.com', :password => 'password1!'}
 ]
 
 base_admins.each do |admin|

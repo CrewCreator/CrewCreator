@@ -1,6 +1,6 @@
-<h1><%=@user.name%>'s Account</h1>
+<h1><%=@current_user.name%>'s Account</h1>
 
-<%= form_for @user do |f| %>
+<%= form_for @current_user do |f| %>
   <%= f.label "Full Name" %>
   <%= f.text_field :name %>
   
