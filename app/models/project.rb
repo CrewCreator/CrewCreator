@@ -1,5 +1,7 @@
 class Project < ApplicationRecord
   belongs_to :section, dependent: :destroy
+  has_and_belongs_to_many :skills
+  accepts_nested_attributes_for :skills
   #has_many :teams
   
   validates_presence_of :name, :description, :difficulty, :students_rated, :total_interest

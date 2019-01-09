@@ -9,22 +9,35 @@
   </head>
 
   <body>
+    <nav>
+      <% if !current_page?('/login') %>
+        <% if current_user %>
+          Logged in as <%= current_user.email %>.
+          <%= link_to 'Log Out', logout_path %> |
+        <% else %>
+          <%= link_to 'Sign Up', createaccount_path %> |
+          <%= link_to 'Log In', login_path %> |
+        <% end %>
+      <% else %>
+        <%= link_to 'Sign Up', createaccount_path %> |
+      <% end %>
+      <% if is_admin_html %>
+        <%= link_to 'My Account', '/admin_account', :method => :get %> |
+      <%end%>
+      <%= link_to 'View Courses', {:action => :index, :controller => :courses}, :method => :get %> |
+      <%= link_to 'View Admins', {:action => :index, :controller => :admins}, :method => :get %> |
+    </nav>
+    
     <% if flash[:notice] %>
+      <br/>
       <div class="notice"><%= flash[:notice] %></div>
     <%elsif flash[:warning] %>
+      <br/>
       <div class="warning"><%= flash[:warning] %></div>
     <%elsif flash[:alert] %>
+      <br/>
       <div class="alert"><%= flash[:alert] %></div>
     <% end %>
-    
-    <% if current_user %>
-      Logged in as <%= current_user.email %>.
-      <%= link_to 'Log Out', logout_path %>
-    <% else %>
-      <%= link_to 'Sign Up', createaccount_path %> or 
-      <%= link_to 'Log In', login_path %>
-    <% end %>
-    
-    <%= yield %>
+  <%= yield %>
   </body>
 </html>

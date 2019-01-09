@@ -1,6 +1,10 @@
 class AdminsController < ApplicationController
-  before_action :is_admin, only: [:edit, :update]
+  before_action :is_admin, only: [:edit, :update, :remove, :destroy]
     
+  def index
+    @admins = Admin.all
+  end
+  
   def new
      # default: render 'new' template
      @admin = Admin.new
@@ -13,30 +17,50 @@ class AdminsController < ApplicationController
       redirect_to  :controller => 'home', :action => 'index'
     else
       # This line overrides the default rendering behavior, which would have been to render the 'create' view.
+    flash[:notice] = "Email was taken or password did not meet specifications!"
      redirect_to '/createaccount'
     end
   end
   
-  def index
-    @admins = Admin.all
-  end
-  
   def edit
-    @user = current_user
+    @current_user = current_user
   end
 
   def update
-    if @user = Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
-      if @user.update_attributes(admin_params_edit)
-        flash[:notice] = "#{@user.email} -- #{@user.name} was successfully updated."
+    if @current_user = Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
+      if @current_user.update_attributes(admin_params_edit)
+        flash[:notice] = "#{@current_user.email} -- #{@current_user.name} was successfully updated."
         redirect_to :action => 'index'
       else
-        flash[:notice] = "Failed to save update. Check your inputs!"
+        flash[:notice] = "Failed to save update. Invalid Email."
         redirect_to '/admin_account'
       end
     else
       flash[:notice] = "Incorrect Password"
       redirect_to '/admin_account'
+    end
+  end
+  
+  def remove
+    @user_removing = Admin.find_by_id(params[:id])
+    @current_user = current_user
+  end
+  
+  def destroy
+    removed_user = Admin.find_by_id(params[:admin][:id])
+    if Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
+      Admin.find_by_id(params[:admin][:id]).destroy
+      if session[:user_id] == params[:admin][:id]
+        flash[:notice] = "#{@current_user.email} -- #{@current_user.name} was successfully deleted. This was your account."
+        session[:user_id] = nil
+        redirect_to '/createaccount'
+      else
+        flash[:notice] = "#{removed_user.email} -- #{removed_user.name} was successfully deleted."
+        redirect_to  :controller => 'home', :action => 'index'
+      end
+    else
+      flash[:notice] = "Incorrect Password!"
+      redirect_to :action => 'remove', :id => params[:admin][:id] , :method => :get
     end
   end
   
