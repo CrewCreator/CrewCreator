@@ -1,30 +1,30 @@
 <h3>Create a Team</h3>
 <%= form_with model: @team do |form| %>
   <p> Name
-  <p><%= form.text_field :name, placeholder: "name" %>
+  <p><%= form.text_field :name, placeholder: "name", id: 'team_name' %>
   </p>
 
   <p> Description
-  <p> <%= form.text_field :description, placeholder: "description" %>
+  <p> <%= form.text_field :description, placeholder: "description", id: 'team_description' %>
 
   </p> Team Scrum Time
-  <p> <%= form.text_field :scrum_time, placeholder: "Scrum Timings" %>
+  <p> <%= form.text_field :scrum_time, placeholder: "Scrum Timing", id: 'team_scrum_timing'  %>
   </p>
 
   <p> Link to Project Management e.g. Pivotal Tracker, Trello
-  <p> <%= form.text_field :project_management_link, placeholder: "Pivotal Tracker / Trello" %>
+  <p> <%= form.text_field :project_management_link, placeholder: "Pivotal Tracker / Trello", id: 'team_pm_link' %>
   </p>
 
   <p> Version Control Repository
-  <p> <%= form.text_field :version_control_link, placeholder: "Github, Gitlab" %>
+  <p> <%= form.text_field :version_control_link, placeholder: "Github, Gitlab", id: 'team_git_link' %>
   </p>
 
   <p> Staged App Link
-  <p><%= form.text_field :staging_link, placeholder: "Your staged app, good to have" %>
+  <p><%= form.text_field :staging_link, placeholder: "Your staged app, good to have", id: 'team_staging_link'%>
   </p>
 
   <p> Production App Link
-  <p><%= form.text_field :production_link, placeholder: "Your deployed app!" %>
+  <p><%= form.text_field :production_link, placeholder: "Your deployed app!", id: 'team_prod_link' %>
   </p>
 
 

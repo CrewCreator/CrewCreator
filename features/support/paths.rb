@@ -38,6 +38,9 @@ module NavigationHelpers
     when /^the create skill\s?page$/
       '/skills/new'
 
+    when /^the create team\s?page$/
+      '/teams/new'
+
 
 
 
