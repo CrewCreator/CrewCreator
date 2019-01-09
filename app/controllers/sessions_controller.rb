@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
   def create
     #Determine if admin or student or moderator
     user = Admin.find_by_email(params[:email])
-
     
     if user
       if user.authenticate(params[:password])
