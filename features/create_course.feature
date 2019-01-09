@@ -20,13 +20,13 @@ Scenario: Admin creates a course
   Given I am logged in as "admin@admin.com" with "password1!"
   When I am on the new course page
   And I fill in "course_name" with "any name"
-  And I fill in "course_code" with "any code"
+  And I fill in "course_code" with "code-123"
   And I fill in "course_description" with "any description"
   And I fill in "section_number" with "300"
   And I press "Create Course"
   Then I should see "successfully"
   And I should see "any name"
-  And I should see "any code"
+  And I should see "code-123"
   And I should see "any description"
   And I should see "300"
   And I should be on the courses page
@@ -46,7 +46,7 @@ Scenario: Admin create a course without name
   Given I have an account with name "Admin" and email "admin@admin.com" and password "password1!"
   And I am logged in as "admin@admin.com" with "password1!"
   When I am on the new course page
-  And I fill in "course_code" with "any code"
+  And I fill in "course_code" with "code-123"
   And I fill in "course_description" with "any description"
   And I fill in "section_number" with "300"
   And I press "Create Course"
@@ -57,7 +57,7 @@ Scenario: Admin create a course without description
   And I am logged in as "admin@admin.com" with "password1!"
   When I am on the new course page
   And I fill in "course_name" with "any name"
-  And I fill in "course_code" with "any code"
+  And I fill in "course_code" with "code-123"
   And I fill in "section_number" with "300"
   And I press "Create Course"
   Then I should see "Description can't be blank"
@@ -67,7 +67,7 @@ Scenario: Admin create a course without a section
   And I am logged in as "admin@admin.com" with "password1!"
   When I am on the new course page  
   And I fill in "course_name" with "any name"
-  And I fill in "course_code" with "any code"
+  And I fill in "course_code" with "code-123"
   And I fill in "course_description" with "any description"
   And I press "Create Course"
   Then I should see "Number is not a number"
@@ -77,7 +77,7 @@ Scenario: Admin create a course with a bad section
   And I am logged in as "admin@admin.com" with "password1!"
   When I am on the new course page  
   And I fill in "course_name" with "any name"
-  And I fill in "course_code" with "any code"
+  And I fill in "course_code" with "code-123"
   And I fill in "course_description" with "any description"
   And I fill in "section_number" with "-1"
   And I press "Create Course"
@@ -86,6 +86,6 @@ Scenario: Admin create a course with a bad section
 Scenario: Admin creates a course without a repeated code
   Given I have an account with name "Admin" and email "admin@admin.com" and password "password1!"
   And I am logged in as "admin@admin.com" with "password1!"
-  And I have a course with name "Anything" and code "this" and description "Anything" and sections "501 502"
-  When I create a course with name "Anything" and code "this" and description "Anything" and section "503"
+  And I have a course with name "Anything" and code "this-123" and description "Anything" and sections "501 502"
+  When I create a course with name "Anything" and code "this-123" and description "Anything" and section "503"
   Then I should see "Code has already been taken"

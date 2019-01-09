@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :is_admin, only: [:new , :create]
-  before_action :find_section
+  before_action :find_section, only: [:index, :new, :create]
   
   def index
     @projects = @section.projects
@@ -15,14 +15,14 @@ class ProjectsController < ApplicationController
     @project.students_rated = 0
     @project.total_interest = 0
     if @project.save
-      redirect_to course_section_projects_path
+      redirect_to section_projects_path
     else
       render 'new'
     end
   end
   
   private def project_params
-    params.require(:project).permit(:name, :description, :difficulty)
+    params.require(:project).permit(:name, :description, :difficulty, skill_ids: [])
   end
   
   private def find_section

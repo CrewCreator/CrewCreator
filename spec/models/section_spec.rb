@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Section, type: :model do
-  let(:course) { Course.new(name: "Some Course", code: "SOME 123", description: "This is a course") }
+  let(:course) { Course.new(name: "Anything", code: "any-1234", description: "Anything") }
   subject{
     described_class.new(number: 431, :course => course)
   }
@@ -33,7 +33,8 @@ RSpec.describe Section, type: :model do
   end
   
   describe "Associations" do
-    it { should belong_to(:course) }
+    it { should belong_to(:course).dependent(:destroy).touch(:true)
+                                  .autosave(:true).validate(:true) }
     #it { should belong_to(:admin) }
     it { should have_many(:projects) }
   end
