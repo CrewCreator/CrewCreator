@@ -10,6 +10,10 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
   
+  def edit
+    @project = Project.find(params[:id])
+  end
+  
   def create
     @project = @section.projects.build(project_params)
     @project.students_rated = 0
@@ -18,6 +22,16 @@ class ProjectsController < ApplicationController
       redirect_to section_projects_path
     else
       render 'new'
+    end
+  end
+  
+  def update
+    @project = Project.find(params[:id])
+    if @project.update_attributes(project_params)
+      flash[:notice] = "#{@project.name} was successfully updated."
+      redirect_to section_projects_path(@project.section)
+    else
+      render 'edit'
     end
   end
   
