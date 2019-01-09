@@ -16,7 +16,7 @@
             <td> <%= admin.name %> </td>
             <td> <%= admin.email %> </td>
             <% if is_admin_html %>
-              <td><%= link_to "Remove #{admin.name}", :action => 'remove', :id => admin.id , :method => :get %></td>
+              <td><%= link_to "Remove #{admin.name}", remove_admin_path(admin), :id => admin.id, :method => :get %></td>
             <%end%>
           </tr>
         <% end %>

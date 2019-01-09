@@ -1,0 +1,31 @@
+<h1>Remove Course: <%= @course.name %></h1>
+<h2>Sections will be removed.</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Course Name</th>
+      <th>Section(s)</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>
+      <%= @course.code %>
+    </td>
+    <td>
+      <%= @course.name %>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <% @course.sections.each do |section| %>
+            <td><%= section.number %></td>
+          <% end %>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</br></br>
+
+<%= render "layouts/confirm_destroy", object: @course, as: 'object'  %>

@@ -5,11 +5,6 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
   
-  def edit
-    id = params[:id]
-    @course = Course.find(id)
-  end
-  
   def new
       @course = Course.new
       @section = Section.new
@@ -21,11 +16,16 @@ class CoursesController < ApplicationController
     
     #autosave forced section to be saved
     if @course.save
-      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created with sections#{params[:section]}"
+      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created with sections#{params[:section][:number]}"
       redirect_to courses_path
     else
       render new_course_path
     end
+  end
+  
+  def edit
+    id = params[:id]
+    @course = Course.find(id)
   end
   
   def update
@@ -37,6 +37,23 @@ class CoursesController < ApplicationController
     else
       flash[:notice] = "Failed to save update. Check your inputs!"
       redirect_to edit_course_path(@course)
+    end
+  end
+  
+  def remove
+    id = params[:id]
+    @course = Course.find(id)
+  end
+  
+  def destroy
+    removed_course = Course.find_by_id(params[:admin][:id])
+    if Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
+      flash[:notice] = "#{removed_course.code} -- #{removed_course.name} was successfully deleted."
+      removed_course.destroy
+      redirect_to  courses_path
+    else
+      flash[:notice] = "Incorrect Password!"
+      redirect_to :action => 'remove', :id => params[:id] , :method => :get
     end
   end
   
