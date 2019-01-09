@@ -46,6 +46,10 @@ class AdminsController < ApplicationController
     @current_user = current_user
   end
   
+  def confirm
+    @current_user = current_user
+  end
+  
   def destroy
     removed_user = Admin.find_by_id(params[:admin][:id])
     if Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
