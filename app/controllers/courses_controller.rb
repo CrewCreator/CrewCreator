@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
   
-  def show
+  def edit
     id = params[:id]
     @course = Course.find(id)
   end

@@ -14,7 +14,8 @@
             <td> <%= course.code %> </td>
             <td> <%= course.name %> </td>
             <td> <%= course.description %> </td>
-            <td> <%= link_to 'Add Section', new_course_section_path(course) %></td>
+            <td> <%= link_to 'Add Section', new_course_section_path(course), :id => "add_section_to_#{course}" %> </td>
+            
           </tr>
           <tr>
             <% course.sections.each do |section| %>

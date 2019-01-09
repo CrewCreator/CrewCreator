@@ -1,0 +1,14 @@
+<h1><%=@course.name%> Details</h1>
+
+<%= form_for @user do |f| %>
+  <%= f.label "Full Name" %>
+  <%= f.text_field :name %>
+  
+  <%= f.label "Email" %>
+  <%= f.text_field :email %>
+  
+  <%= f.label "Confirm Password" %>
+  <%= f.password_field :password %>
+  
+  <%= f.submit "Update Account" %>
+<% end %>
