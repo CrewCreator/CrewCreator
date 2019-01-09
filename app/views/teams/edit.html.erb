@@ -1,12 +1,31 @@
 <h3>Update Team Details</h3>
-<%= form_with model: @skill do |form| %>
-  <%= form.text_field :name, placeholder: "name" %>
-  <%= form.text_field :description, placeholder: "description" %>
-  <%= form.text_field :project_management_link, placeholder: "Pivotal Tracker / Trello" %>
-  <%= form.text_field :version_control_link, placeholder: "Github, Gitlab" %>
-  <%= form.text_field :staging_link, placeholder: "Your staged app, good to have" %>
-  <%= form.text_field :production_link, placeholder: "Your deployed app!" %>
-  <%= form.text_field :scrum_time, placeholder: "description" %>
+<%= form_with model: @team do |form| %>
+  <p> Name
+  <p><%= form.text_field :name, placeholder: "name" %>
+  </p>
+
+  <p> Description
+  <p> <%= form.text_field :description, placeholder: "description" %>
+
+  </p> Team Scrum Time
+  <p> <%= form.text_field :scrum_time, placeholder: "Scrum Timings" %>
+  </p>
+
+  <p> Link to Project Management e.g. Pivotal Tracker, Trello
+  <p> <%= form.text_field :project_management_link, placeholder: "Pivotal Tracker / Trello" %>
+  </p>
+
+  <p> Version Control Repository
+  <p> <%= form.text_field :version_control_link, placeholder: "Github, Gitlab" %>
+  </p>
+
+  <p> Staged App Link
+  <p><%= form.text_field :staging_link, placeholder: "Your staged app, good to have" %>
+  </p>
+
+  <p> Production App Link
+  <p><%= form.text_field :production_link, placeholder: "Your deployed app!" %>
+  </p>
 
 <!--  name, :description, :created_at, :defined_id, :production_link,-->
 <!--  :project_management_link, :scrum_time, :staging_link, :version_control_link-->
