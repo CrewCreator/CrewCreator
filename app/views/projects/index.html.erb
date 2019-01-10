@@ -1,4 +1,11 @@
-<h1>Projects</h1>
+<h1>Projects for Section <%= @section.number %></h1>
+
+<% if is_admin_html %>
+<p>
+<%= link_to 'Edit Section' , edit_section_path(@section), :id => "edit_section_#{@section.number}" %>
+<%= link_to 'Delete Section' , remove_section_path(@section), :id => "remove_section_#{@section.number}" %>
+</p>
+<% end %>
 
 <table>
   <tr>
