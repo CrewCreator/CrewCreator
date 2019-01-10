@@ -12,4 +12,12 @@ class Section < ApplicationRecord
   
   #validates_uniqueness_of :number
   
+  def method_missing(m, *args, &block)
+    if m.to_s=="name"
+      self.send("number")
+    else
+      super
+    end
+  end 
+  
 end

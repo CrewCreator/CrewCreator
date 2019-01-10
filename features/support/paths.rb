@@ -40,6 +40,9 @@ module NavigationHelpers
     when /^the new section page for course "(.*)"$/
       new_course_section_path(Course.find_by_name($1))
       
+    when /^the remove section page for section "(.*)"$/
+      remove_section_path(Section.find_by_number($1))
+      
     when /^the projects page for section "(.*)"$/
       section_projects_path(Section.find_by_number($1))
       
