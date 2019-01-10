@@ -51,6 +51,10 @@ module NavigationHelpers
       
     when /^the patch project page for project "(.*)"$/
       project_path(Project.find_by_name($1))
+      
+     
+    when /^the remove project page for project "(.*)"$/
+      remove_project_path(Project.find_by_name($1))
 
     when /^the create skill\s?page$/
       '/skills/new'

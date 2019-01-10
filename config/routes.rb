@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     end
   end
     get 'courses/:id/remove', to: 'courses#remove', as: 'remove_course'
+    get 'projects/:id/remove', to: 'projects#remove', as: 'remove_project'
     
   resources :admins, except: [:show]
     get 'createaccount', to: 'admins#new', as: 'createaccount'
