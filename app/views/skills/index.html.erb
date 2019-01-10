@@ -1,13 +1,13 @@
 <h1> List of skills </h1>
 <ol>
-<% @skills.each do |skill| %>
-  <li>
-    <%= link_to skill.name, skill_path(skill) %> | <%= skill.description  %>
-
-  </li>
-<% end %>
+  <% @skills.each do |skill| %>
+    <li>
+      <%= link_to skill.name, skill_path(skill) %> | <%= skill.description  %>
+    </li>
+  <% end %>
 </ol>
 
 
-
-<%= button_to 'Add a New Skill', new_skill_path, method: 'get'%>
+<% if is_admin_html %>
+  <%= button_to 'Add a New Skill', new_skill_path, method: 'get'%>
+<% end %>

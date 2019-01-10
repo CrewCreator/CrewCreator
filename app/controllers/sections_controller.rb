@@ -1,4 +1,5 @@
 class SectionsController < ApplicationController
+  before_action :is_admin, only: [:new , :create, :edit, :update, :remove, :destroy]
   
   def new
     @course = Course.find(params[:course_id])

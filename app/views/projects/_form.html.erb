@@ -32,7 +32,7 @@
   <p>
     <%= form.label :skills %><br>
     <%= form.collection_check_boxes :skill_ids, Skill.all, :id, :name %> 
-    <%= link_to 'Add Skill', new_skill_path %>
+    <%= form.submit 'Add Skill', :controller => 'projects', :action => 'handle_add_skills' %>
   </p>
   
   <p>
