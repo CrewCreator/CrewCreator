@@ -39,7 +39,7 @@ describe Course, :type => :model do
   end
   
   describe "Associations" do
-    it { should have_many(:sections) }
+    it { should have_many(:sections).dependent(:delete_all) }
     it { should have_many(:projects).through(:sections) }
   end
 end

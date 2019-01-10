@@ -14,10 +14,12 @@ Rails.application.routes.draw do
     end
   end
     get 'courses/:id/remove', to: 'courses#remove', as: 'remove_course'
+    get 'projects/:id/remove', to: 'projects#remove', as: 'remove_project'
     
   resources :admins, except: [:show]
     get 'createaccount', to: 'admins#new', as: 'createaccount'
     get 'admin_account', to: 'admins#edit', as:'admin_account'
+    post 'admin_account', to: 'admins#update', as: 'update_admin'
     get 'admins/:id/remove', to: 'admins#remove', as: 'remove_admin'
     
   resources :sessions, only: [:new, :create, :destroy]
