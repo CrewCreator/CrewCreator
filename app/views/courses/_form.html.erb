@@ -1,13 +1,13 @@
+<div id="error_explanation">
+  <h3> Course Guidelines </h3>
+  <ul>
+    <li>Code must follow examples: (csce-121, EGL-1201)</li>
+    <li>Name must be less then 150 characters</li>
+    <li>Description must be less than 250 words</li>
+  </ul>
+</div>
 <%= form_for @course do |f| %>
   <%= render 'layouts/error', object: @course, as: 'object' %>
-  <div id="error_explanation">
-    <h3> Course Guidelines </h3>
-    <ul>
-      <li>Code must follow examples: (csce-121, EGL-1201)</li>
-      <li>Name must be less then 150 characters</li>
-      <li>Description must be less than 250 words</li>
-    </ul>
-  </div>
   <%= f.label "Code" %> <br>
   <%= f.text_field :code %> <br>
   

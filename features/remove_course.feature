@@ -6,4 +6,4 @@ Feature: Admin removes course
   
 #happy paths
   Scenario: Admin removes a course
-    Given I am logged in as an admin
+    Given I am a admin
