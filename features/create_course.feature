@@ -11,9 +11,10 @@ Scenario: Admin clicks on create a course link
   When I am on the courses page
   And I press "Create Course"
   Then I should be on the new course page
-  And I should see "Course Name"
-  And I should see "Code"
   And I should see "Name"
+  And I should see "Code"
+  And I should see "Description"
+  And I should see "Section number"
   
 Scenario: Admin creates a course
   Given I have an account with name "User One" and email "admin@admin.com" and password "password1!"
@@ -23,7 +24,7 @@ Scenario: Admin creates a course
   And I fill in "course_code" with "code-123"
   And I fill in "course_description" with "any description"
   And I fill in "section_number" with "300"
-  And I press "Create Course"
+  And I press "Save Course"
   Then I should see "successfully"
   And I should see "any name"
   And I should see "code-123"
@@ -39,7 +40,7 @@ Scenario: Admin create a course without code
   And I fill in "course_name" with "any name"
   And I fill in "course_description" with "any description"
   And I fill in "section_number" with "300"
-  And I press "Create Course"
+  And I press "Save Course"
   Then I should see "Code can't be blank"
   
 Scenario: Admin create a course without name
@@ -49,7 +50,7 @@ Scenario: Admin create a course without name
   And I fill in "course_code" with "code-123"
   And I fill in "course_description" with "any description"
   And I fill in "section_number" with "300"
-  And I press "Create Course"
+  And I press "Save Course"
   Then I should see "Name can't be blank"
   
 Scenario: Admin create a course without description
@@ -59,7 +60,7 @@ Scenario: Admin create a course without description
   And I fill in "course_name" with "any name"
   And I fill in "course_code" with "code-123"
   And I fill in "section_number" with "300"
-  And I press "Create Course"
+  And I press "Save Course"
   Then I should see "Description can't be blank"
   
 Scenario: Admin create a course without a section
@@ -69,8 +70,8 @@ Scenario: Admin create a course without a section
   And I fill in "course_name" with "any name"
   And I fill in "course_code" with "code-123"
   And I fill in "course_description" with "any description"
-  And I press "Create Course"
-  Then I should see "Number is not a number"
+  And I press "Save Course"
+  Then I should see "Sections is invalid"
   
 Scenario: Admin create a course with a bad section
   Given I have an account with name "Admin" and email "admin@admin.com" and password "password1!"
@@ -80,8 +81,8 @@ Scenario: Admin create a course with a bad section
   And I fill in "course_code" with "code-123"
   And I fill in "course_description" with "any description"
   And I fill in "section_number" with "-1"
-  And I press "Create Course"
-  Then I should see "Number is not included in the list"
+  And I press "Save Course"
+  Then I should see "Sections is invalid"
   
 Scenario: Admin creates a course without a repeated code
   Given I have an account with name "Admin" and email "admin@admin.com" and password "password1!"

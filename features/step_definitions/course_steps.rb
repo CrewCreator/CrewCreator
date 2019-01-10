@@ -15,7 +15,7 @@ When /^(?:|I )create a course with name "(.*)" and code "(.*)" and description "
   fill_in("course_code", :with => code)
   fill_in("course_description", :with => description)
   fill_in("section_number", :with => section)
-  click_button "Create Course"
+  click_button "Save Course"
 end
 
 Given /^(?:|I )have a course with name "(.*)" and code "(.*)" and description "(.*)" and sections "(.*)"$/ do |name, code, description, sections|
@@ -25,7 +25,7 @@ Given /^(?:|I )have a course with name "(.*)" and code "(.*)" and description "(
   fill_in("course_code", :with => code)
   fill_in("course_description", :with => description)
   fill_in("section_number", :with => sections[0])
-  click_button "Create Course"
+  click_button "Save Course"
   
   if sections.size >= 1
     sections[1..sections.size].each do |section|
