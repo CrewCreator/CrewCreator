@@ -21,13 +21,16 @@
           <% end %>
         </table>
       </td>
-      <td>
-        <table>
-          <td><%= link_to 'Edit', edit_project_path(project) %></td> 
-        </table>
-      </td>
+      <% if is_admin_html %>
+       <td>
+          <table>
+            <td><%= link_to 'Edit', edit_project_path(project) %></td> 
+          </table>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 </table>
-
-<%= button_to "New Project", {:action => :new, :controller => :projects}, :method => :get, :id => "new_project"  %>
+<% if is_admin_html %>
+  <%= button_to "New Project", {:action => :new, :controller => :projects}, :method => :get, :id => "new_project"  %>
+<% end %>
