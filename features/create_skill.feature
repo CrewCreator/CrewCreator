@@ -4,11 +4,15 @@ Feature: Create Skill
   so that students can select the skills they have
 
   Scenario: Admin goes to skills page
+    Given I have an account with name "User One" and email "admin@admin.com" and password "password1!"
+    Given I am logged in as "admin@admin.com" with "password1!"
     When I go to the skills page
     Then I click the button create skill
     Then I should see the create skill page
 
   Scenario: Admin creates a skill
+    Given I have an account with name "User One" and email "admin@admin.com" and password "password1!"
+    Given I am logged in as "admin@admin.com" with "password1!"
     When I go to the create skill page
     And I fill in "skill_name" with "Android"
     And I fill in "skill_description" with "Building Android Apps"
