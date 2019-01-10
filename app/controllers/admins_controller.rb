@@ -33,19 +33,17 @@ class AdminsController < ApplicationController
     if @current_user = Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
       if @current_user.update_attributes(admin_params_edit)
         flash[:notice] = "#{@current_user.email} -- #{@current_user.name} was successfully updated."
-        redirect_to :action => 'index'
       else
         flash[:notice] = "Failed to save update. Invalid Email."
-        redirect_to '/admin_account'
       end
     else
       flash[:notice] = "Incorrect Password"
-      redirect_to '/admin_account'
     end
+    redirect_to admin_account_path
   end
   
   def remove
-    @object_removing = Admin.find_by_id(params[:id])
+    @user_removing = Admin.find_by_id(params[:id])
     @current_user = current_user
   end
   
