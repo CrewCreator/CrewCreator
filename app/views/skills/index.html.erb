@@ -2,7 +2,7 @@
 <ol>
   <% @skills.each do |skill| %>
     <li>
-      <%= link_to skill.name, skill_path(skill) %> | <%= skill.description  %>
+      <%= link_to skill.name, edit_skill_path(skill) %> | <%= skill.description  %>
     </li>
   <% end %>
 </ol>

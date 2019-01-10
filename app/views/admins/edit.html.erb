@@ -1,6 +1,9 @@
 <h1><%=@current_user.name%>'s Account</h1>
 
 <%= form_for @current_user do |f| %>
+
+  <%= render "layouts/error", object: @current_user, as: 'object' %>
+
   <%= f.label "Full Name" %>
   <%= f.text_field :name %>
   <br/><br/>

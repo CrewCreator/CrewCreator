@@ -17,9 +17,12 @@ class SkillsController < ApplicationController
   end
 
   def create
-    @skill = Skill.create(skill_params)
-
-    redirect_to skills_path
+    @skill = Skill.new(skill_params)
+    if @skill.save
+      redirect_to skills_path
+    else
+      render 'new'
+    end
   end
 
   def show
@@ -32,9 +35,11 @@ class SkillsController < ApplicationController
 
   def update
     @skill = Skill.find(params[:id])
-    @skill.update(skill_params)
-
-    redirect_to skill_path(@skill)
+    if @skill.update_attributes(skill_params)
+      redirect_to skill_path(@skill)
+    else
+      render 'edit'
+    end
   end
 
   private
