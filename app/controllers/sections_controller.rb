@@ -25,6 +25,23 @@ class SectionsController < ApplicationController
     end
   end
   
+  def edit
+    id = params[:id]
+    @section = Section.find(id)
+  end
+  
+  def update
+    id = params[:id]
+    @section = Section.find(id)
+    if @section.update_attributes(section_params)
+      flash[:notice] = "Section #{@section.number} was successfully updated."
+      redirect_to section_projects_path(@section)
+    else
+      flash[:notice] = "Failed to save update. Check your inputs!"
+      render 'edit'
+    end
+  end
+  
   def remove 
     id = params[:id]
     @section = Section.find(id)
