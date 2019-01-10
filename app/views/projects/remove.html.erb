@@ -1,0 +1,43 @@
+<h1>Remove Project: <%= @project.name %></h1>
+<h2>Teams will be removed.</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Difficulty</th>
+      <th>Skills</th>
+      <th><%= pluralize(2,"Team") %></th>
+    </tr>
+  </thead>
+  <tr>
+    <td>
+      <%= @project.name %>
+    </td>
+    <td>
+      <%= @project.description %>
+    </td>
+    <td>
+      <%= @project.difficulty %>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <% @project.skills.each do |skill| %>
+            <%= skill.name %>
+          <% end %>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          List Teams
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</br></br>
+
+<%= render "layouts/confirm_destroy", object: @project, as: 'object'  %>

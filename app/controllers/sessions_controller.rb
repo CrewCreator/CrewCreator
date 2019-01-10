@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
   def create
     #Determine if admin or student or moderator
     user = Admin.find_by_email(params[:email])
-
     
     if user
       if user.authenticate(params[:password])
@@ -13,13 +12,16 @@ class SessionsController < ApplicationController
         redirect_to :controller => 'home', :action => 'index'
       else
         flash[:notice] = 'Failed to Log In! Email or password is invalid'
-        redirect_to login_path
+        redirect_to '/login'
       end
+    else
+      flash[:notice] = 'Failed to Log In! Email or password is invalid'
+      redirect_to '/login'
     end
   end
 
   def destroy
-    session.delete(:user_id)
-    redirect_to login_path
+    session[:user_id] = nil
+    redirect_to '/home'
   end
 end

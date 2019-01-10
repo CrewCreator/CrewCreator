@@ -1,0 +1,14 @@
+<%= form_for [@course, @section] do |form| %>
+
+  <%= render "layouts/error", object: @section, as: 'object' %>
+
+  <p>
+    <%= form.label :number %><br>
+    <%= form.number_field :number, in: 1...9999, :id => "number" %>
+  </p>
+  
+  <p>
+    <%= form.submit :id => "create" %>
+  </p>
+
+<% end %>

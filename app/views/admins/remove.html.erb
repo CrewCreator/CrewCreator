@@ -1,0 +1,15 @@
+<h1>Remove User: <%=@user_removing.name%></h1>
+
+<table border="1">
+  <tr>
+    <td>Name</td>
+    <td><%=@user_removing.name%></td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td><%=@user_removing.email%></td>
+  </tr>
+</table>
+</br></br>
+
+<%= render "layouts/confirm_destroy", object: @user_removing, as: 'object' %>

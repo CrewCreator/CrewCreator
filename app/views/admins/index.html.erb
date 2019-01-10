@@ -5,7 +5,9 @@
         <tr>
         <th>Admin Name</th>
         <th>Email</th>
-        <th>Hashed Password</th>
+        <% if is_admin_html %>
+          <th>Removal</th>
+        <%end%>
         </tr>
       </thead>
       <tbody>
@@ -13,7 +15,9 @@
           <tr>
             <td> <%= admin.name %> </td>
             <td> <%= admin.email %> </td>
-            <td> <%= admin.password %> </td>
+            <% if is_admin_html %>
+              <td><%= link_to "Remove #{admin.name}", remove_admin_path(admin), :id => admin.id, :method => :get %></td>
+            <%end%>
           </tr>
         <% end %>
       </tbody>

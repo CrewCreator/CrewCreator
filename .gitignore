@@ -28,3 +28,5 @@
 
 # Ignore code coverage generated files
 /coverage
+
+.idea/

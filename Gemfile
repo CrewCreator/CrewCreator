@@ -76,6 +76,8 @@ group :test do
   
   gem 'simplecov'
   gem 'simplecov-console'
+  
+  gem 'rails-controller-testing'
 end
 
 group :production do

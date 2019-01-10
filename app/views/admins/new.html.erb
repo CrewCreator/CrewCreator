@@ -1,19 +1,29 @@
-
 <h1>Create Account</h1>
 
+<h4>Guidelines:</h4>
+<ul>
+  <li>Email must be unique</li>
+  <li>Password must be a minimum of 8 characters</li>
+  <li>Password must contain a digit</li>
+  <li>Password must contain a symbol</li>
+</ul>
+<hr/>
 <%= form_for @admin, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+
+  <%= render "layouts/error", object: @admin, as: 'object' %>
+
   <%= f.label "Full Name" %>
   <%= f.text_field :name %>
-  
+  <br/><br/>
   <%= f.label "Email" %>
   <%= f.text_field :email %>
-  
+  <br/><br/>
   <%= f.label "Password" %>
-  <%= f.text_field :password %>
-  
+  <%= f.password_field :password %>
+  <br/><br/>
   <%= f.label "Confirm Password" %>
-  <%= f.text_field :password_confirmation %>
-  
+  <%= f.password_field :password_confirmation %>
+  <br/><br/>
   <%= f.submit "Create Account" %>
 <% end %>
 

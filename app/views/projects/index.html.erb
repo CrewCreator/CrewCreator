@@ -1,10 +1,19 @@
-<h1>Projects</h1>
+<h1>Projects for Section <%= @section.number %></h1>
+
+<% if is_admin_html %>
+<p>
+<%= link_to 'Edit Section' , edit_section_path(@section), :id => "edit_section_#{@section.number}" %>
+<%= link_to 'Delete Section' , remove_section_path(@section), :id => "remove_section_#{@section.number}" %>
+</p>
+<% end %>
 
 <table>
   <tr>
     <th>Name</th>
     <th>Description</th>
     <th>Difficulty</th>
+    <th><%= link_to 'Skills', skills_path %></th>
+    <th>Options</th>
   </tr>
   
   <% @projects.each do |project| %>
@@ -12,8 +21,24 @@
       <td><%= project.name %></td>
       <td><%= project.description %></td>
       <td><%= project.difficulty %></td>
+      <td>
+        <table>
+          <% project.skills.each do |skill| %>
+            <td><%= skill.name %></td>
+          <% end %>
+        </table>
+      </td>
+      <% if is_admin_html %>
+       <td>
+          <table>
+            <td><%= link_to 'Edit', edit_project_path(project) %></td> 
+            <td><%= link_to 'Delete', remove_project_path(project) %></td> 
+          </table>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 </table>
-
-<%= button_to "New Project", {:action => :new, :controller => :projects}, :method => :get, :id => "new_project"  %>
+<% if is_admin_html %>
+  <%= button_to "New Project", {:action => :new, :controller => :projects}, :method => :get, :id => "new_project"  %>
+<% end %>

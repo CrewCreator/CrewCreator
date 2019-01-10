@@ -10,7 +10,7 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-Given /^(?:|I )am (a |an )"(.*)"$/ do |user|
+Given /^(?:|I )am an admin$/ do |user|
   pending
   #if user == "Admin"
 end
@@ -29,4 +29,9 @@ Given /^(?:|I )am logged in as "(.*)" with "(.*)"$/ do |email, password|
   fill_in("Email", :with => email)
   fill_in("Password", :with => password)
   click_button("Login")
+end
+
+When /^(?:|I )confirm my password as "(.*)" with password "(.*)"$/ do |email, password|
+  fill_in("admin_password", :with => password)
+  click_button("confirm")
 end

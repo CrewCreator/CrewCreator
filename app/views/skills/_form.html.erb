@@ -1,0 +1,9 @@
+<%= form_for @skill do |form| %>
+
+  <%= render "layouts/error", object: @skill, as: 'object' %>
+  
+  <%= form.text_field :name, placeholder: "name", id: 'skill_name' %>
+  <%= form.text_field :description, placeholder: "Description of skill", id: 'skill_description' %>
+
+  <%= form.submit id: 'submit_skill' %>
+<% end %>
