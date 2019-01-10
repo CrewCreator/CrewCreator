@@ -7,6 +7,6 @@
   <%= f.label "Email" %>
   <%= f.text_field :email %>
 
-  <%= render "layouts/confirm_update" %>
+  <%= render "layouts/confirm_update", object: @current_user, as: 'object' %>
 
 <% end %>
