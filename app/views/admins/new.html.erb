@@ -9,6 +9,9 @@
 </ul>
 <hr/>
 <%= form_for @admin, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+
+  <%= render "layouts/error", object: @admin, as: 'object' %>
+
   <%= f.label "Full Name" %>
   <%= f.text_field :name %>
   <br/><br/>
