@@ -28,9 +28,7 @@ Scenario: Admin edits his admin profile's name and email
   And I fill in "admin_password" with "password1!"
   And I press "Update User One"
   Then I should be on the admin profile page
-  #pending "Cucumber doesn't call update correctly"
-  #Then I should see "New Name"
-  #Then I should see "new@email.com"
+  Then I should not see "Incorrect Password"
   
 Scenario: Admin edits his admin profile's name
   Given I have an account with name "User One" and email "admin@admin.com" and password "password1!"
@@ -40,9 +38,7 @@ Scenario: Admin edits his admin profile's name
   And I fill in "admin_password" with "password1!"
   And I press "Update User One"
   Then I should be on the admin profile page
-  #pending "Cucumber doesn't call update correctly"
-  #Then I should see "New Name"
-  #Then I should see "admin@admin.com"
+  Then I should not see "Incorrect Password"
   
 Scenario: Admin attempts edits his admin profile with wrong password
   Given I have an account with name "User One" and email "admin@admin.com" and password "password1!"
