@@ -38,7 +38,7 @@ class SectionsController < ApplicationController
       redirect_to section_projects_path(@section)
     else
       flash[:notice] = "Failed to save update. Check your inputs!"
-      redirect_to edit_section_path(@section)
+      render 'edit'
     end
   end
   

@@ -1,8 +1,3 @@
-<h1>Section <%=@section.name%> Details</h1>
+<h1>Update Section <%=@section.name%></h1>
 
-<%= form_for @section do |f| %>
-  <%= f.label "Section Number" %> <br>
-  <%= f.number_field :number %> <br>
-  <br>
-  <%= f.submit "Update Section" %>
-<% end %>
+<%= render 'form' %>
