@@ -31,7 +31,7 @@
             <td> 
               <table>
                 <tr>
-                <td> <%= link_to 'Add Section', new_course_section_path(course), :id => "add_section_to_#{course}" %> </td>
+                <td> <%= link_to 'Add Section', new_course_section_path(course), :id => "add_section_to_#{course.code}" %> </td>
                 <td> <%= link_to 'Edit', edit_course_path(course), :id => "edit_#{course}" %> </td>
                 </tr>
               </table>
