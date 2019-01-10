@@ -19,7 +19,16 @@ class SkillsController < ApplicationController
   def create
     @skill = Skill.new(skill_params)
     if @skill.save
-      redirect_to skills_path
+      if session[:form_values]
+        session[:form_values]['project']['skill_ids'].push(@skill.id)
+        if session[:return_path] == 'patch'
+          redirect_to edit_project_path(session[:project_id])
+        else
+          redirect_to new_section_project_path(session[:return_section])
+        end
+      else
+        redirect_to skills_path
+      end
     else
       render 'new'
     end

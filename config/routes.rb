@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :projects, except: [:show]
     end
   end
+    get 'sections/:id/remove', to: 'sections#remove', as: 'remove_section'
     get 'courses/:id/remove', to: 'courses#remove', as: 'remove_course'
     get 'projects/:id/remove', to: 'projects#remove', as: 'remove_project'
     
