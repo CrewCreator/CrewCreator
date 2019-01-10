@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :is_admin, only: [:new , :create]
+  before_action :is_admin, only: [:new , :create, :edit, :update, :remove, :destroy]
   before_action :find_section, only: [:index, :new, :create]
   
   def index
