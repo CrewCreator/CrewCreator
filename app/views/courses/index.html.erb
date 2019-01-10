@@ -42,5 +42,7 @@
         <% end %>
       </tbody>
     </table>
-    <%= button_to 'Create Course', {:action => :new, :controller => :courses}, :method => :get %>
+    <% if is_admin_html %>
+      <%= button_to 'Create Course', {:action => :new, :controller => :courses}, :method => :get %>
+    <% end %>
 </div>
