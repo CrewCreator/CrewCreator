@@ -1,5 +1,5 @@
 class Course < ApplicationRecord
-  has_many :sections
+  has_many :sections, dependent: :delete_all
   has_many :projects, through: :sections
   
   VALID_CODE_REGEX = /^[a-z]{3,4}-\d{3,4}$/i
