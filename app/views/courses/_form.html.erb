@@ -17,11 +17,15 @@
   <%= f.label "Description" %> <br>
   <%= f.text_area :description, rows: 10, cols: 50 %> <br>
   <br>
-  <% if params[:action] == "new" %>
+  <% if params[:action] == "new" or params[:action] == "create" %>
   <%= label("section_number", "Section Number") %> <br>
   <%= number_field_tag "section[number]", in: 1...9999 %>
   <br>
   <% end %>
   <br>
-  <%= f.submit "Save Course" %>
+  <% if params[:action] == "edit" %>
+    <%= render "layouts/confirm_update", object: @course, as: 'object' %>
+  <% else %>
+    <%= f.submit "Save Course" %>
+  <% end %>
 <% end %>

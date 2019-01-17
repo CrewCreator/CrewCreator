@@ -13,7 +13,9 @@
     <th>Description</th>
     <th>Difficulty</th>
     <th><%= link_to 'Skills', skills_path %></th>
-    <th>Options</th>
+    <% if is_admin_html %>
+      <th>Options</th>
+    <% end %>
   </tr>
   
   <% @projects.each do |project| %>
