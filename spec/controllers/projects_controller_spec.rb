@@ -59,18 +59,18 @@ RSpec.describe ProjectsController, type: :controller do
     end
   end
 
-  describe "POST #destroy" do
-    it "redirect to projects page" do
-      project = create(:project)
-      post :destroy, params: { id: project.id }
-      expect(response).to redirect_to(section_projects_path)
-    end
-  end
-  
   describe "POST #update" do
     it "redirect to projects page" do
       project = create(:project)
       post :update, params: {:id => project.id }
+      expect(response).to redirect_to(section_projects_path)
+    end
+  end
+  
+  describe "POST #destroy" do
+    it "redirect to projects page" do
+      project = create(:project)
+      post :destroy, params: { id: project.id }
       expect(response).to redirect_to(section_projects_path)
     end
   end
