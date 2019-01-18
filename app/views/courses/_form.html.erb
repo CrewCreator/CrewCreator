@@ -23,5 +23,9 @@
   <br>
   <% end %>
   <br>
-  <%= f.submit "Save Course" %>
+  <% if params[:action] == "edit" %>
+    <%= render "layouts/confirm_update", object: @course, as: 'object' %>
+  <% else %>
+    <%= f.submit "Save Course" %>
+  <% end %>
 <% end %>

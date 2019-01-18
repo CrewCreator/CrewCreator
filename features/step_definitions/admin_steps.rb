@@ -10,7 +10,7 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-Given /^(?:|I )am (a |an ) "(.*)"$/ do |user|
+Given /^(?:|I )am an admin$/ do |user|
   pending
   #if user == "Admin"
 end

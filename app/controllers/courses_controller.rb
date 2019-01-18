@@ -31,12 +31,17 @@ class CoursesController < ApplicationController
   def update
     id = params[:id]
     @course = Course.find(id)
-    if @course.update_attributes(course_params)
-      flash[:notice] = "#{@course.code} : #{@course.name} was successfully updated."
-      redirect_to :action => 'index'
+    if @current_user = Admin.find_by_id(session[:user_id]).try(:authenticate, params[:course][:password])
+      if @course.update_attributes(course_params)
+        flash[:notice] = "#{@course.code} : #{@course.name} was successfully updated."
+        redirect_to :action => 'index'
+      else
+        flash[:notice] = "Failed to save update. Check your inputs!"
+        redirect_to edit_course_path(@course)
+      end
     else
-      flash[:notice] = "Failed to save update. Check your inputs!"
-      redirect_to edit_course_path(@course)
+      flash[:notice] = "Incorrect Password!"
+      redirect_to :action => 'edit', :id => params[:id] , :method => :get
     end
   end
   
