@@ -59,6 +59,8 @@ group :development, :test do
   gem 'rerun', '>=0.10.0'
   
   gem 'database_cleaner'
+  
+  gem 'rubocop', require: false
 end
 
 group :development do
