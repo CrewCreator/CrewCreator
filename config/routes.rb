@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     
   resources:courses, shallow: true do
     resources :sections, shallow: true do
-      resources :projects, except: [:show]
+      resources :projects, shallow: true, except: [:show] do
+        resources :teams
+      end
     end
   end
     get 'sections/:id/remove', to: 'sections#remove', as: 'remove_section'
