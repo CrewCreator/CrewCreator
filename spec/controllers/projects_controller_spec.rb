@@ -4,6 +4,11 @@ RSpec.describe ProjectsController, type: :controller do
   before(:all) do
     @section = create(:section)
   end
+  
+  before(:each) do
+    admin = create(:admin)
+    login(admin)
+  end
 
   describe "GET #index" do
     it "renders index template" do
@@ -27,8 +32,8 @@ RSpec.describe ProjectsController, type: :controller do
       expect(response).to render_template("new")
     end
     
-    it "redirect to new project page" do
-      expect(response).to redirect_to(new_section_project_path)
+    it "assigns project to a new Project" do
+      expect(assigns(:project)).to be_a_new(Project)
     end
   end
   
@@ -42,8 +47,8 @@ RSpec.describe ProjectsController, type: :controller do
       expect(response).to render_template("edit")
     end
     
-    it "redirect to edit project page" do
-      expect(response).to redirect_to(edit_project_path)
+    it "status for edit project page" do
+      expect(response).to have_http_status(:success)
     end
     
     it "assigns @project" do
@@ -52,26 +57,40 @@ RSpec.describe ProjectsController, type: :controller do
   end
 
   describe "POST #create" do
-    it "redirect to projects page" do
+    it "redirect to projects page on success" do
       atr = attributes_for(:project)
       post :create, params: { section_id: @section.id, project: atr }
       expect(response).to redirect_to(section_projects_path)
     end
-  end
-
-  describe "POST #update" do
-    it "redirect to projects page" do
-      project = create(:project)
-      post :update, params: {:id => project.id }
-      expect(response).to redirect_to(section_projects_path)
+    
+    it "render to new project page on failure" do
+      atr = attributes_for(:project, name: nil)
+      post :create, params: { section_id: @section.id, project: atr }
+      expect(response).to render_template("new")
     end
   end
-  
-  describe "POST #destroy" do
+
+  describe "PUT #update" do
+    before(:each) do
+      @project = create(:project)
+    end
+    
     it "redirect to projects page" do
-      project = create(:project)
-      post :destroy, params: { id: project.id }
-      expect(response).to redirect_to(section_projects_path)
+      atr = attributes_for(:project)
+      put :update, params: { :id => @project.id, project: atr }
+      expect(response).to redirect_to(section_projects_path(@project.section.id))
+    end
+    
+    it "have status redirect" do
+      atr = attributes_for(:project)
+      put :update, params: { :id => @project.id, project: atr }
+      expect(response).to have_http_status(:redirect)
+    end
+    
+    it "render to edit project page on failure" do
+      atr = attributes_for(:project, name: nil)
+      put :update, params: { :id => @project.id, project: atr }
+      expect(response).to render_template("edit")
     end
   end
 
