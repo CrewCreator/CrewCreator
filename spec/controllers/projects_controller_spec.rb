@@ -68,6 +68,12 @@ RSpec.describe ProjectsController, type: :controller do
       post :create, params: { section_id: @section.id, project: atr }
       expect(response).to render_template("new")
     end
+    
+    it "redirect to new skill for add skill" do
+      atr = attributes_for(:project)
+      post :create, params: { section_id: @section.id, project: atr, commit: "Add Skill" }
+      expect(response).to redirect_to(new_skill_path)
+    end
   end
 
   describe "PUT #update" do
@@ -91,6 +97,12 @@ RSpec.describe ProjectsController, type: :controller do
       atr = attributes_for(:project, name: nil)
       put :update, params: { :id => @project.id, project: atr }
       expect(response).to render_template("edit")
+    end
+    
+    it "redirect to new skill for add skill" do
+      atr = attributes_for(:project)
+      put :update, params: { :id => @project.id, project: atr, commit: "Add Skill" }
+      expect(response).to redirect_to(new_skill_path)
     end
   end
 
