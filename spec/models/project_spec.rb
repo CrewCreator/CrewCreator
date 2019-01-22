@@ -1,9 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Project, :type => :model do
+  let(:course) { Course.new(name: "Anything", code: "any-1234", description: "Anything") }
+  let(:section) { Section.new(number: 501) }
   subject { 
     described_class.new(name: "Anything", description: "Anything", difficulty: 3,
-                        students_rated: 0, total_interest: 0) 
+                        students_rated: 0, total_interest: 0, section: section) 
   }
 
   describe "Associations" do
