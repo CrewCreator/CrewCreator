@@ -59,7 +59,6 @@ class ProjectsController < ApplicationController
     removed_project = Project.find_by_id(params[:admin][:id])
     if Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
       flash[:notice] = "#{removed_project.name} was successfully deleted."
-      #section = removed_project.section
       removed_project.destroy
       redirect_to section_projects_path(removed_project.section)
     else

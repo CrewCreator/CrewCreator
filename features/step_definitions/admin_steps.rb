@@ -10,9 +10,17 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-Given /^(?:|I )am an admin$/ do |user|
-  pending
-  #if user == "Admin"
+Given /^(?:|I )am logged in as an admin$/ do
+  visit("/createaccount")
+  fill_in("admin_name", :with => "admin")
+  fill_in("admin_email", :with => "admin@admin.com")
+  fill_in("admin_password", :with => "password1!")
+  fill_in("admin_password_confirmation", :with => "password1!")
+  click_button("Create Account")
+  visit("/sessions/new")
+  fill_in("Email", :with => "admin@admin.com")
+  fill_in("Password", :with => "password1!")
+  click_button("Login")
 end
 
 Given /^(?:|I )have an account with name "(.*)" and email "(.*)" and password "(.*)"$/ do |name, email, password|
@@ -29,6 +37,10 @@ Given /^(?:|I )am logged in as "(.*)" with "(.*)"$/ do |email, password|
   fill_in("Email", :with => email)
   fill_in("Password", :with => password)
   click_button("Login")
+end
+
+When /^(?:|I )enter my password as "(.*)"$/ do |password|
+  fill_in("admin_password", :with => password)
 end
 
 When /^(?:|I )confirm my password as "(.*)" with password "(.*)"$/ do |email, password|
