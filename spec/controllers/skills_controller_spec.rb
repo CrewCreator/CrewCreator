@@ -26,9 +26,10 @@ RSpec.describe SkillsController, type: :controller do
   end
 
   describe "GET #new" do
-    it "returns http success" do
+    it "renders new template" do
+      pending "Requires Admin login"
       get :new
-      expect(response).to have_http_status(:redirect)
+      expect(response).to render_template("new")
     end
   end
   

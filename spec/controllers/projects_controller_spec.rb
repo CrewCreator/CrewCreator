@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/spec_test_helper'
 
 RSpec.describe ProjectsController, type: :controller do
   before(:all) do
