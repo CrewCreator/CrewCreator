@@ -4,4 +4,8 @@ FactoryBot.define do
     description { "Anything" }
     sequence(:code) { |n| "test-12#{n}" }
   end
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> staging

@@ -30,6 +30,9 @@ module NavigationHelpers
       
     when /^the new course\s?page$/
       '/courses/new'
+      
+    when /^the remove course page for "(.*)"$/
+      remove_course_path(Course.find_by_code($1))
 
     when /^the login page$/
       '/login'

@@ -29,7 +29,8 @@ Given /^(?:|I )have a course with name "(.*)" and code "(.*)" and description "(
   
   if sections.size >= 1
     sections[1..sections.size].each do |section|
-      click_link "Add Section"
+      visit courses_path
+      click_link "add_section_to_#{code}"
       fill_in("number", :with => section)
       click_button "Create Section"
     end

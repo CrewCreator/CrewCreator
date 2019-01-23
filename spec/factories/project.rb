@@ -7,4 +7,8 @@ FactoryBot.define do
     total_interest { 0 }
     section
   end
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> staging
