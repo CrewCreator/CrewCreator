@@ -13,6 +13,7 @@
     <th>Description</th>
     <th>Difficulty</th>
     <th><%= link_to 'Skills', skills_path %></th>
+    <th>Teams</th>
     <% if is_admin_html %>
       <th>Options</th>
     <% end %>
@@ -23,6 +24,7 @@
       <td><%= project.name %></td>
       <td><%= project.description %></td>
       <td><%= project.difficulty %></td>
+      
       <td>
         <table>
           <% project.skills.each do |skill| %>
@@ -30,17 +32,38 @@
           <% end %>
         </table>
       </td>
+      
+      <td>
+        <table>
+          <th>Name</th>
+          <th>Version Control</th>
+          <th>Production Website</th>
+          <th>Management Tracker</th>
+          <% project.teams.each do |team| %>
+            <tr>
+              <td><%= link_to team.name, team_path(team) %></td>
+              <td><a href=<%= team.version_control_link %> target="_blank"><%= team.version_control_link %></a></td>
+              <td><a href=<%= team.production_link %> target="_blank"><%= team.production_link %></a></td>
+              <td><a href=<%= team.management_link %> target="_blank"><%= team.management_link %></a></td>
+            </tr>
+          <% end %>
+        </table>
+      </td>
+      
       <% if is_admin_html %>
        <td>
           <table>
+            <td><%= link_to 'Add Team', new_project_team_path(project) %></td> 
             <td><%= link_to 'Edit', edit_project_path(project) %></td> 
             <td><%= link_to 'Delete', remove_project_path(project) %></td> 
           </table>
         </td>
       <% end %>
+      
     </tr>
   <% end %>
 </table>
+
 <% if is_admin_html %>
   <%= button_to "New Project", {:action => :new, :controller => :projects}, :method => :get, :id => "new_project"  %>
 <% end %>

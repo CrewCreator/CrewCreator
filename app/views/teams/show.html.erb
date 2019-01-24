@@ -1,0 +1,15 @@
+<h1>Team: <%= @team.name %></h1>
+
+<ul>
+  <li><a href=<%= @team.version_control_link %> target="_blank">Version Control: <%= @team.version_control_link %></a></li>
+  <li><a href=<%= @team.production_link %> target="_blank">Production Website: <%= @team.production_link %></a></li>
+  <li><a href=<%= @team.management_link %> target="_blank">Management Tracker: <%= @team.management_link %></a></li>
+  <li>Scrum Location: <%= @team.scrum_location %></li>
+  <li>Scrum Time: <%= @team.scrum_time %></li>
+</ul>
+
+<% if is_admin_html %>
+  <%= link_to "Edit Team", edit_team_path(@team) %></td>
+  <%= link_to "Delete Team", remove_team_path(@team) %>
+<% end %>
+<%= link_to "Back", section_projects_path(@team.project.section) %>

@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  subject { 
+  let(:project) { Project.new(name: "Anything", description: "Anything", difficulty: 3,
+                    students_rated: 0, total_interest: 0) }
+  subject {
     described_class.new(name: "Anything", version_control_link: "Anything",
                         production_link: "Anything", management_link: "Anything",
-                        scrum_location: "Anything", scrum_time: Date.new) 
+                        scrum_location: "Anything", scrum_time: Date.new, project: project) 
   }
 
   describe "Associations" do

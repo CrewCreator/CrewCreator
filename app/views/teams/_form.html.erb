@@ -1,0 +1,39 @@
+<%= form_for [@project, @team] do |form| %>
+  
+  <%= render "layouts/error", object: @team, as: 'object' %>
+
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name, id: "name" %>
+  </p>
+  
+  <p>
+    <%= form.label :version_control_link %><br>
+    <%= form.text_field :version_control_link, id: "version_control_link" %>
+  </p>
+  
+  <p>
+    <%= form.label :production_link %><br>
+    <%= form.text_field :production_link, id: "production_link" %>
+  </p>
+  
+  <p>
+    <%= form.label :management_link %><br>
+    <%= form.text_field :management_link, id: "management_link" %>
+  </p>
+  
+  <p>
+    <%= form.label :scrum_location %><br>
+    <%= form.text_field :scrum_location, id: "scrum_location" %>
+  </p>
+  
+  <p>
+    <%= form.label :scrum_time %><br>
+    <%= form.datetime_select(:scrum_time) %>
+  </p>
+  
+  <p>
+    <%= form.submit id: "submit-team" %>
+  </p>
+
+<% end %>
