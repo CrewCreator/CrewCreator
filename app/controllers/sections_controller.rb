@@ -60,6 +60,6 @@ class SectionsController < ApplicationController
   end 
   
   private def section_params
-    params.require(:section).permit(:number)
+    params.require(:section).permit(:number, :semester, :year)
   end
 end
