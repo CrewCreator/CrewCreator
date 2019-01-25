@@ -1,5 +1,6 @@
 class Team < ApplicationRecord
   belongs_to :project
+  #has_and_belongs_to_many :students
   
   validates_presence_of :name, :version_control_link, :production_link,
                         :management_link, :scrum_location, :scrum_time

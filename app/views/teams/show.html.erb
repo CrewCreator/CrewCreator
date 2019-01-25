@@ -1,11 +1,27 @@
 <h1>Team: <%= @team.name %></h1>
 
 <ul>
-  <li><a href=<%= @team.version_control_link %> target="_blank">Version Control: <%= @team.version_control_link %></a></li>
-  <li><a href=<%= @team.production_link %> target="_blank">Production Website: <%= @team.production_link %></a></li>
-  <li><a href=<%= @team.management_link %> target="_blank">Management Tracker: <%= @team.management_link %></a></li>
-  <li>Scrum Location: <%= @team.scrum_location %></li>
-  <li>Scrum Time: <%= @team.scrum_time %></li>
+  <li>Version Control: 
+    <a href=<%= @team.version_control_link %> target="_blank">
+      <%= @team.version_control_link %>
+    </a>
+  </li>
+  <li>Production Website:
+    <a href=<%= @team.production_link %> target="_blank">
+      <%= @team.production_link %>
+    </a>
+  </li>
+  <li>Management Tracker:
+    <a href=<%= @team.management_link %> target="_blank">
+      <%= @team.management_link %>
+    </a>
+  </li>
+  <li>Scrum Location:
+    <%= @team.scrum_location %>
+  </li>
+  <li>Scrum Time:
+    <%= @team.scrum_time %>
+  </li>
 </ul>
 
 <% if is_admin_html %>

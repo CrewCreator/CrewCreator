@@ -1,0 +1,22 @@
+<h1>Teams for Section <%= @section.number %></h1>
+
+<table border="1">
+  <th>Name</th>
+  <th>Version Control</th>
+  <th>Production Website</th>
+  <th>Management Tracker</th>
+  <th>Scrum Location</th>
+  <th>Scrum Time</th>
+  <% @section.teams.each do |team| %>
+    <tr>
+      <td><%= link_to team.name, team_path(team) %></td>
+      <td><a href=<%= team.version_control_link %> target="_blank"><%= team.version_control_link %></a></td>
+      <td><a href=<%= team.production_link %> target="_blank"><%= team.production_link %></a></td>
+      <td><a href=<%= team.management_link %> target="_blank"><%= team.management_link %></a></td>
+      <td><%= team.scrum_location %></td>
+      <td><%= team.scrum_time %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "Back", section_projects_path %>

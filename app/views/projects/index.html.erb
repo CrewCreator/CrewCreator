@@ -13,7 +13,7 @@
     <th>Description</th>
     <th>Difficulty</th>
     <th><%= link_to 'Skills', skills_path %></th>
-    <th>Teams</th>
+    <th><%= link_to 'Teams', section_teams_path(@section) %></th>
     <% if is_admin_html %>
       <th>Options</th>
     <% end %>
@@ -35,10 +35,12 @@
       
       <td>
         <table>
-          <th>Name</th>
-          <th>Version Control</th>
-          <th>Production Website</th>
-          <th>Management Tracker</th>
+          <% unless project.teams.empty? %> 
+            <th>Name</th>
+            <th>Version Control</th>
+            <th>Production Website</th>
+            <th>Management Tracker</th>
+          <% end %>
           <% project.teams.each do |team| %>
             <tr>
               <td><%= link_to team.name, team_path(team) %></td>

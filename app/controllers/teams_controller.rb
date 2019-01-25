@@ -1,10 +1,12 @@
 class TeamsController < ApplicationController
   before_action :is_admin, only: [:new , :create, :remove, :destroy]
-  # need a is_student function for edit and update
-  before_action :find_project, only: [:index, :new, :create]
+  # is_user function for edit and update since studets can edit/update teams info
+  before_action :is_user, only: [:edit, :update]
+  before_action :find_project, only: [:new, :create]
   
   def index
-    @teams = Team.all
+    @section = Section.find(params[:section_id])
+    @teams = @section.teams
   end
   
   def show
@@ -50,7 +52,7 @@ class TeamsController < ApplicationController
       redirect_to section_projects_path(removed_team.project.section)
     else
       flash[:notice] = "Incorrect Password!"
-      redirect_to :action => 'remove', :id => params[:id] , :method => :get
+      redirect_to remove_team_path(removed_team)
     end
   end
   

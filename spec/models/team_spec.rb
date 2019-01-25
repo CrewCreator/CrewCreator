@@ -11,7 +11,7 @@ RSpec.describe Team, type: :model do
 
   describe "Associations" do
     it { should belong_to :project }
-    #it { should has_and_belongs_to_many :students }
+    #it { should have_and_belong_to_many :students }
   end
  
   describe "Validations" do
