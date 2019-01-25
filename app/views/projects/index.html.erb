@@ -55,7 +55,7 @@
       <% if is_admin_html %>
        <td>
           <table>
-            <td><%= link_to 'Add Team', new_project_team_path(project) %></td> 
+            <td><%= link_to 'Add Team', new_project_team_path(project), id: "add-team" %></td> 
             <td><%= link_to 'Edit', edit_project_path(project) %></td> 
             <td><%= link_to 'Delete', remove_project_path(project) %></td> 
           </table>

@@ -3,7 +3,11 @@
   <%= render "layouts/error", object: @team, as: 'object' %>
 
   <p>
-    <%= form.label :name %><br>
+    * - required fields
+  </p>
+
+  <p>
+    <%= form.label :name %>*<br>
     <%= form.text_field :name, id: "name" %>
   </p>
   
