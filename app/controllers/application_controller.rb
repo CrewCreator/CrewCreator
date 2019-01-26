@@ -29,4 +29,12 @@ class ApplicationController < ActionController::Base
         true
       end
     end
+    
+  helper_method :is_user
+    def is_user
+      if current_user.nil?
+        redirect_to :controller => 'sessions', :action => 'new'
+      end
+    end
+    
 end

@@ -63,9 +63,30 @@ module NavigationHelpers
       
     when /^the patch project page for project "(.*)"$/
       project_path(Project.find_by_name($1))
-      
+
     when /^the remove project page for project "(.*)"$/
       remove_project_path(Project.find_by_name($1))
+      
+    when /^the new team page for project "(.*)"$/
+      new_project_team_path(Project.find_by_name($1))
+      
+    when /^the teams page for project "(.*)"$/
+      "/projects/#{Project.find_by_name($1).id}/teams"
+      
+    when /^the edit team page for team "(.*)"$/
+      edit_team_path(Team.find_by_name($1))
+      
+    when /^the show team page for team "(.*)"$/
+      team_path(Team.find_by_name($1))
+      
+    when /^the patch team page for team "(.*)"$/
+      team_path(Team.find_by_name($1))
+      
+    when /^the remove team page for team "(.*)"$/
+      remove_team_path(Team.find_by_name($1))
+      
+    when /^the index team page for section "(.*)"$/
+      section_teams_path(Section.find_by_number($1))
 
     when /^the create skill\s?page$/
       '/skills/new'
