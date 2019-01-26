@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Admin, type: :model do
-  subject{Admin.new(name: "admin", email: "email@email.com", password: "password1!", password_confirmation: "password1!")}
+RSpec.describe Student, type: :model do
+  subject{Student.new(name: "student", email: "student@email.com", password: "password1!", password_confirmation: "password1!")}
   
-  it "is valid with valid attributes" do
+    it "is valid with valid attributes" do
     expect(subject).to be_valid
   end
   
@@ -60,18 +60,19 @@ RSpec.describe Admin, type: :model do
     expect(subject).to_not be_valid
   end
   
-  it "is not valid if another admin has same email" do
-    subject_two = Admin.new(name: "admin", email: "email@email.com", password: "password1!", password_confirmation: "password1!")
+  it "is not valid if email is taken by another student" do
+    subject_two = Student.new(name: "student", email: "student@email.com", password: "password1!", password_confirmation: "password1!")
     subject.save
     subject_two.save
     expect(subject_two).to_not be_valid
   end
   
-  it "not valid if email is taken by a student" do
-    student_with_same_email = Student.new(name: "student", email: "nonunique@email.com", password: "password1!", password_confirmation: "password1!")
-    student_with_same_email.save
+  it "not valid if email is taken by an admin" do
+    admin_with_same_email = Admin.new(name: "admin", email: "nonunique@email.com", password: "password1!", password_confirmation: "password1!")
+    admin_with_same_email.save
     subject.email = 'nonunique@email.com'
     subject.save
     expect(subject).to_not be_valid
   end
+  
 end
