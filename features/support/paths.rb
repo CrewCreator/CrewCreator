@@ -36,6 +36,8 @@ module NavigationHelpers
 
     when /^the login page$/
       '/login'
+    
+    when /^the new session\s?page$/
       '/sessions/new'
 
     when /^the section page for course "(.*)"$/

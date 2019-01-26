@@ -24,4 +24,4 @@ Feature: Admin removes course
     Given I am on the courses page
     And I have a course
     And I am on the remove course page for course "CSCE-431"
-    Then I should be on the login page
+    Then I should be on the new session page
