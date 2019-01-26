@@ -39,6 +39,10 @@ Given /^(?:|I )am logged in as "(.*)" with "(.*)"$/ do |email, password|
   click_button("Login")
 end
 
+When /^(?:|I )enter my password as "(.*)"$/ do |password|
+  fill_in("admin_password", :with => password)
+end
+
 When /^(?:|I )confirm my password as "(.*)" with password "(.*)"$/ do |email, password|
   fill_in("admin_password", :with => password)
   click_button("confirm")
