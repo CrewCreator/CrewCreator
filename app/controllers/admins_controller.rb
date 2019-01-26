@@ -20,8 +20,8 @@ class AdminsController < ApplicationController
         redirect_to  :controller => 'home', :action => 'index'
     else
       # This line overrides the default rendering behavior, which would have been to render the 'create' view.
-    flash[:notice] = "Email was taken or password did not meet specifications!"
-     redirect_to '/createaccount'
+      flash[:notice] = "Email was taken or password did not meet specifications!"
+      redirect_to '/createaccount'
     end
   end
   

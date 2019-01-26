@@ -24,7 +24,7 @@
   </li>
 </ul>
 
-<% if is_admin_html %>
+<% if is_user_html %>
   <%= link_to "Edit Team", edit_team_path(@team) %></td>
   <%= link_to "Delete Team", remove_team_path(@team) %>
 <% end %>
