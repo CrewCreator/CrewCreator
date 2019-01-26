@@ -115,7 +115,7 @@ RSpec.describe TeamsController, type: :controller do
       expect(response).to render_template("edit")
     end
   end
-  
+
   describe "GET #remove" do
     it "renders remove template" do
       @team = create(:team)
