@@ -1,0 +1,37 @@
+<h1>Remove Team: <%= @team.name %></h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Version Control</th>
+      <th>Production Website</th>
+      <th>Management Tracker</th>
+      <th>Scrum Location</th>
+      <th>Scrum Time</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>
+      <%= @team.name %>
+    </td>
+    <td>
+      <%= @team.version_control_link %>
+    </td>
+    <td>
+      <%= @team.production_link %>
+    </td>
+    <td>
+      <%= @team.management_link %>
+    </td>
+    <td>
+      <%= @team.scrum_location %>
+    </td>
+    <td>
+      <%= @team.scrum_time %>
+    </td>
+  </tr>
+</table>
+</br></br>
+
+<%= render "layouts/confirm_destroy", object: @team, as: 'object'  %>

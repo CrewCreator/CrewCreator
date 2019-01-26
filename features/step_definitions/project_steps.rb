@@ -19,3 +19,13 @@ Given /^(?:|I )have a project with name "(.*)" and description "(.*)" and diffic
   
   click_button "Save Project"
 end
+
+Given /^(?:|I )have a project for section "(.*)" with name "(.*)" and description "(.*)" and difficulty "(.*)"$/ do |section, name, description, difficulty|
+  visit section_projects_path(Section.find_by_number(section))
+  click_button "New Project"
+  fill_in("name", :with => name)
+  fill_in("description", :with => description)
+  select(difficulty, :from => "project_difficulty")
+  
+  click_button "Save Project"
+end

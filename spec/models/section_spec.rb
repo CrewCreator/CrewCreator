@@ -36,5 +36,6 @@ RSpec.describe Section, type: :model do
     it { should belong_to(:course).touch(:true).autosave(:true).validate(:true) }
     #it { should belong_to(:admin) }
     it { should have_many(:projects).dependent(:delete_all) }
+    it { should have_many(:teams).through(:projects) }
   end
 end
