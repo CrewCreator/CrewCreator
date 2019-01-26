@@ -3,8 +3,8 @@ require 'support/spec_test_helper'
 
 RSpec.describe TeamsController, type: :controller do
   before(:each) do
-    admin = create(:admin)
-    login(admin)
+    @admin = create(:admin)
+    login(@admin)
   end
   
   describe "GET #index" do
@@ -113,6 +113,33 @@ RSpec.describe TeamsController, type: :controller do
       atr = attributes_for(:team, name: nil)
       put :update, params: { id: @team.id, team: atr }
       expect(response).to render_template("edit")
+    end
+  end
+
+  describe "GET #remove" do
+    it "renders remove template" do
+      @team = create(:team)
+      get :remove, params: {id: @team.id}
+      expect(response).to render_template("remove")
+      expect(response).to have_http_status(:success)
+    end
+  end
+  
+  describe "POST #destroy" do
+    before(:each) do
+      @team = create(:team)
+    end
+    
+    it "expects http success" do
+      post :destroy, params: {id: @team.id, admin: {id: @admin.id, password: @admin.password}}
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(section_projects_path(@team.project.section))
+    end
+    
+    it "expects redirect to remove page with wrong password" do
+      post :destroy, params: {id: @team.id, admin: {id: @admin.id, password: "wrong_password"}}
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(remove_team_path)
     end
   end
 
