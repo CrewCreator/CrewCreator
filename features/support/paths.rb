@@ -31,6 +31,9 @@ module NavigationHelpers
     when /^the new course\s?page$/
       '/courses/new'
       
+    when /^the edit course page for course "(.*)"/
+      edit_course_path(Course.find_by_code($1).id)
+    
     when /^the remove course page for course "(.*)"/
       remove_course_path(Course.find_by_code($1).id)
 

@@ -37,11 +37,14 @@ Given /^(?:|I )have a course with name "(.*)" and code "(.*)" and description "(
   end
 end
 
+When /^(?:|I )update course "(.*)" with name "(.*)" and code "(.*)" and description "(.*)"$/ do |course, name, code, description|
+  Course.update(Course.find_by_code(course).id, name: name, code: code, description: description)
+end
+
 Given /^(?:|I )have a course$/ do
   
   if page.has_content?("Logged in as admin@admin.com.")
     flag = true
-    puts("Error")
   else
     flag = false
     visit("/createaccount")
