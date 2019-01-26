@@ -10,7 +10,7 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-Given /^(?:|I )am logged in as an admin$/ do
+Given /^(?:|I )am logged in as a admin$/ do
   visit("/createaccount")
   fill_in("admin_name", :with => "admin")
   fill_in("admin_email", :with => "admin@admin.com")
