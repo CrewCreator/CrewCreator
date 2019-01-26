@@ -78,6 +78,9 @@ module NavigationHelpers
       
     when /^the remove team page for team "(.*)"$/
       remove_team_path(Team.find_by_name($1))
+      
+    when /^the index team page for section "(.*)"$/
+      section_teams_path(Section.find_by_number($1))
 
     when /^the create skill\s?page$/
       '/skills/new'
