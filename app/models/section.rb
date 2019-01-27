@@ -4,6 +4,8 @@ class Section < ApplicationRecord
   has_many :projects, dependent: :delete_all
   has_many :teams, through: :projects
   #has_many :student, :moderator
+  has_and_belongs_to_many :emails
+  accepts_nested_attributes_for :emails, allow_destroy: true
   
   validates_presence_of :number
   

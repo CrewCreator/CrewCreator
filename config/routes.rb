@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get 'teams/:id/remove', to: 'teams#remove', as: 'remove_team'
     
     get 'sections/:section_id/teams', to: 'teams#index', as: 'section_teams'
+    get 'sections/:section_id/roster', to: 'sections#roster', as: 'section_roster'
     
   resources :admins, except: [:show]
     get 'createaccount', to: 'admins#new', as: 'createaccount'

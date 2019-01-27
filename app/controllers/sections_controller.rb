@@ -7,8 +7,7 @@ class SectionsController < ApplicationController
   end
   
   def show
-    id = params[:id]
-    @section = Section.find(id)
+    @section = Section.find(params[:id])
   end
   
   def index 
@@ -26,13 +25,12 @@ class SectionsController < ApplicationController
   end
   
   def edit
-    id = params[:id]
-    @section = Section.find(id)
+    @section = Section.find(params[:id])
   end
   
   def update
-    id = params[:id]
-    @section = Section.find(id)
+    @section = Section.find(params[:id])
+    puts "UPDATING SECTION: ", params
     if @section.update_attributes(section_params)
       flash[:notice] = "Section #{@section.number} was successfully updated."
       redirect_to section_projects_path(@section)
@@ -43,8 +41,7 @@ class SectionsController < ApplicationController
   end
   
   def remove 
-    id = params[:id]
-    @section = Section.find(id)
+    @section = Section.find(params[:id])
   end
   
   def destroy 
@@ -59,7 +56,12 @@ class SectionsController < ApplicationController
     end 
   end 
   
+  def roster
+    @section = Section.find(params[:section_id])
+    puts "ROSTER SECTION: ", @section.emails
+  end
+  
   private def section_params
-    params.require(:section).permit(:number)
+    params.require(:section).permit(:number, emails_attributes: [:id, :email, :_destroy])
   end
 end
