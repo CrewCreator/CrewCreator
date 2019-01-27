@@ -30,7 +30,6 @@ class SectionsController < ApplicationController
   
   def update
     @section = Section.find(params[:id])
-    puts "UPDATING SECTION: ", params
     if @section.update_attributes(section_params)
       flash[:notice] = "Section #{@section.number} was successfully updated."
       redirect_to section_projects_path(@section)
@@ -58,7 +57,20 @@ class SectionsController < ApplicationController
   
   def roster
     @section = Section.find(params[:section_id])
-    puts "ROSTER SECTION: ", @section.emails
+  end
+  
+  def update_roster
+    @section = Section.find(params[:section_id])
+    if params[:section].present?
+      if @section.update_attributes(section_params)
+        flash[:notice] = "Section #{@section.number} roster was successfully updated."
+        redirect_to section_projects_path(@section)
+      else
+        render 'roster'
+      end
+    else
+      redirect_to section_projects_path(@section)
+    end
   end
   
   private def section_params
