@@ -6,7 +6,7 @@ Feature: Admin removes course
   
 #happy paths
   Scenario: Admin removes a course
-    Given I am logged in as a admin
+    Given I am logged in as an admin
     And I have a course
     And I am on the remove course page for course "CSCE-431"
     When I confirm my password as "admin@admin.com" with password "password1!"

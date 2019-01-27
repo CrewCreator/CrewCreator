@@ -10,18 +10,9 @@ end
 World(WithinHelpers)
 
 Given /^(?:|I )have a project for section "(.*)" with default values and team with name "(.*)" and links "(.*)" and location "(.*)"$/ do |section, name, links, location|
-  visit section_projects_path(Section.find_by_number(section))
-  click_button "New Project"
-  fill_in("name", with: "proj-name")
-  fill_in("description", with: "proj-description")
-  select("4", from: "project_difficulty")
-  click_button "Save Project"
-  
-  visit new_project_team_path(Project.find_by_name("proj-name"))
-  fill_in("name", with: name)
-  fill_in("version_control_link", with: links)
-  fill_in("production_link", with: links)
-  fill_in("management_link", with: links)
-  fill_in("scrum_location", with: location)
-  click_button "Create Team"
+  section = Section.find_by_number(section)
+  project = section.projects.create(name: "proj-name", description: "proj-description", difficulty: "4", students_rated: "0", total_interest: "0")
+  project.save
+  project.teams.create(name: name, version_control_link: links, production_link: links, management_link: links, scrum_location: location).save
+  visit(section_projects_path(section))
 end

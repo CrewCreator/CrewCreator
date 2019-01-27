@@ -18,6 +18,9 @@ module NavigationHelpers
 
     when /^the create account\s?page$/
       '/createaccount'
+      
+    when /^the create admin page$/
+      '/admins/new'
     
     when /^the all admin accounts\s?page$/
       '/admins'

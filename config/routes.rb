@@ -23,10 +23,13 @@ Rails.application.routes.draw do
     get 'sections/:section_id/teams', to: 'teams#index', as: 'section_teams'
     
   resources :admins, except: [:show]
-    get 'createaccount', to: 'admins#new', as: 'createaccount'
+    #get 'createaccount', to: 'admins#new', as: 'createaccount'
     get 'admin_account', to: 'admins#edit', as:'admin_account'
     post 'admin_account', to: 'admins#update', as: 'update_admin'
     get 'admins/:id/remove', to: 'admins#remove', as: 'remove_admin'
+    
+  resources :students
+    get 'createaccount', to: 'students#new', as: 'createaccount'
     
   resources :sessions, only: [:new, :create, :destroy]
     get 'login', to: 'sessions#new', as: 'login'

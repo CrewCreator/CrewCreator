@@ -1,0 +1,18 @@
+<%= form_for @student do |f| %>
+
+  <%= render "layouts/error", object: @student, as: 'object' %>
+
+  <%= f.label "Full Name" %>
+  <%= f.text_field :name %>
+  <br/><br/>
+  <%= f.label "Email" %>
+  <%= f.text_field :email %>
+  <br/><br/>
+  <%= f.label "Password" %>
+  <%= f.password_field :password %>
+  <br/><br/>
+  <%= f.label "Confirm Password" %>
+  <%= f.password_field :password_confirmation %>
+  <br/><br/>
+  <%= f.submit "Create Account" %>
+<% end %>
