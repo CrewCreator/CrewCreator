@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
-  before_action :is_user, only: [:edit, :update, :remove, :destroy]
+  before_action :is_user, only: [:edit, :update]
+  before_action :is_admin, only: [:remove, :delete]
   
   def new
     @student = Student.new

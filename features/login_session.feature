@@ -7,7 +7,7 @@ Feature: user login
     When I am on the login page
     And I follow "Sign Up"
     Then I go to the create account page
-    And I should see "Create Account"
+    And I should see "Create Student Account"
     And I fill in "student_name" with "anything"
     And I fill in "student_email" with "any@thing.com"
     And I fill in "student_password" with "password1!"

@@ -13,7 +13,7 @@ Scenario: Admin creates an account
   Given I have an admin account
   Given I am logged in as "admin@admin.com" with "password1!"
   When I go to the create admin page
-  And I should see "Create Account"
+  And I should see "Create Admin Account"
   And I fill in "admin_name" with "anything"
   And I fill in "admin_email" with "any@thing.com"
   And I fill in "admin_password" with "password2@"

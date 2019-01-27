@@ -11,7 +11,7 @@ World(WithinHelpers)
 
 When /^(?:|I )create a course with name "(.*)" and code "(.*)" and description "(.*)" and section "(.*)"$/ do |name, code, description, section|
   course = Course.create(name: name, code: code, description: description)
-  course.sections.build(number: section)
+  course.sections.create(number: section).save
 end
 
 Given /^(?:|I )have a course with name "(.*)" and code "(.*)" and description "(.*)" and sections "(.*)"$/ do |name, code, description, sections|
