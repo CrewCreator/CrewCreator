@@ -90,4 +90,4 @@ Feature: Admin create course
     And I have a course with name "Anything" and code "this-123" and description "Anything" and sections "501 502"
     When I create a course with name "Anything" and code "this-123" and description "Anything" and section "503"
     Then I should be on the courses page
-    And I should not see "503"
+    And I should see "Code has already been taken"
