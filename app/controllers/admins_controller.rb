@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action :is_admin, only: [:edit, :update, :remove, :destroy]
+  before_action :is_admin, only: [:create, :new, :edit, :update, :remove, :destroy]
     
   def index
     @admins = Admin.all
@@ -17,7 +17,7 @@ class AdminsController < ApplicationController
       if !current_user
         session[:user_id] = @admin.id
       end
-        redirect_to  :controller => 'home', :action => 'index'
+      redirect_to  :controller => 'home', :action => 'index'
     else
       # This line overrides the default rendering behavior, which would have been to render the 'create' view.
       flash[:notice] = "Email was taken or password did not meet specifications!"

@@ -15,6 +15,7 @@ class StudentsController < ApplicationController
       redirect_to home_path
     else
       flash[:notice] = "Email was taken or password did not meet specifications!"
+      redirect_to '/createaccount'
     end
   end
   

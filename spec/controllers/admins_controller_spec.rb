@@ -3,7 +3,9 @@ require 'support/spec_test_helper'
 
 RSpec.describe AdminsController, type: :controller do
   
-  let(:admin) { FactoryBot.create(:admin) }
+  before(:all) do
+    @admin = create(:admin)
+  end
 
   describe "GET admin#index" do
       it "should list all the admins" do
@@ -19,8 +21,7 @@ RSpec.describe AdminsController, type: :controller do
       end
       
       it "should login and go to the edit page" do
-        admin = create(:admin)
-        login(admin)
+        login(@admin)
         get :edit
         expect(response).to render_template("edit")
       end
@@ -28,15 +29,13 @@ RSpec.describe AdminsController, type: :controller do
   
   describe "PUT admin#update" do
     it "should redirect to the user path on succesful save" do
-      admin = create(:admin)
-      login(admin)
+      login(@admin)
       post :update, :params => {:admin => {:name => 'New Admin', :password => 'password1!'}}
       expect(response).to redirect_to('/admin_account')
     end
   
     it "should render the edit screen again with errors if the model doesn't save" do
-      admin = create(:admin)
-      login(admin)
+      login(@admin)
       post :update, :params => {:admin => {:name => 'New Admin', :password => 'wrong_password'}}
       expect(response).to redirect_to('/admin_account')
     end
@@ -44,6 +43,7 @@ RSpec.describe AdminsController, type: :controller do
   
   describe "GET admin#new" do
     it "should go to the new page" do
+      login(@admin)
       get :new
       expect(response).to render_template("new")
     end
@@ -51,15 +51,13 @@ RSpec.describe AdminsController, type: :controller do
   
   describe "PUT admin#create" do
     it "should redirect to the user path on succesful save" do
-      admin = create(:admin)
-      login(admin)
+      login(@admin)
       post :create, :params => {:admin => {:name => 'New Admin', :email => 'email@email.com', :password => 'password1!', :password_confirmation => 'password1!'}}
       expect(response).to redirect_to('/home')
     end
   
     it "should render the new screen again with errors if the model doesn't save" do
-      admin = create(:admin)
-      login(admin)
+      login(@admin)
       post :create, :params => {:admin => {:name => 'New Admin',:email => 'bad email', :password => 'password1!', :password_confirmation => 'password1!'}}
       expect(response).to redirect_to('/createaccount')
     end

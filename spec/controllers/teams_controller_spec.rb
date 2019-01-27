@@ -131,13 +131,13 @@ RSpec.describe TeamsController, type: :controller do
     end
     
     it "expects http success" do
-      post :destroy, params: {id: @team.id, admin: {id: @admin.id, password: @admin.password}}
+      post :destroy, params: {id: @team.id, admin: {id: @team.id, password: @admin.password}}
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(section_projects_path(@team.project.section))
     end
     
     it "expects redirect to remove page with wrong password" do
-      post :destroy, params: {id: @team.id, admin: {id: @admin.id, password: "wrong_password"}}
+      post :destroy, params: {id: @team.id, admin: {id: @team.id, password: "wrong_password"}}
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(remove_team_path)
     end
