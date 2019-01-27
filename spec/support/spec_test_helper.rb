@@ -9,7 +9,9 @@ module SpecTestHelper
     if !user
       user = Student.find_by_email(user.email)
     end
-    session[:user_id] = user.id
+    if user
+      session[:user_id] = user.id
+    end
   end
 
   def current_user
