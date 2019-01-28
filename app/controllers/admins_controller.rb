@@ -16,6 +16,7 @@ class AdminsController < ApplicationController
       flash[:notice] = "#{@admin.email} -- #{@admin.name} was successfully created."
       if !current_user
         session[:user_id] = @admin.id
+        session[:is_admin] = true
       end
       redirect_to  :controller => 'home', :action => 'index'
     else
