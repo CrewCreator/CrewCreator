@@ -5,10 +5,10 @@ module SpecTestHelper
   end
 
   def login(user)
-    if user = Admin.find_by_email(user.email)
+    if Admin.find_by_email(user.email)
       session[:user_id] = user.id
       session[:is_admin] = true
-    elsif user = Student.find_by_email(user.email)
+    elsif Student.find_by_email(user.email)
       session[:user_id] = user.id
       session[:is_admin] = false
     end

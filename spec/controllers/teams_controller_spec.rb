@@ -94,6 +94,8 @@ RSpec.describe TeamsController, type: :controller do
 
   describe "PUT #update" do
     before(:each) do
+      @admin = create(:admin)
+      login(@admin)
       @team = create(:team)
     end
     

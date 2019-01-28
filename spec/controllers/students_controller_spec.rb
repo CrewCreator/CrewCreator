@@ -3,7 +3,7 @@ require 'support/spec_test_helper'
 
 RSpec.describe StudentsController, type: :controller do
   
-  before(:all) do
+  before(:each) do
     @student = create(:student)
     @admin = create(:admin)
   end
@@ -48,13 +48,13 @@ RSpec.describe StudentsController, type: :controller do
   
   describe "GET students#edit" do
       it "should redirect to log in since we are not logged in" do
-       get :edit
+       get :edit, params: { id: @student.id }
        expect(response).to redirect_to(new_session_path)
       end
       
       it "should login and go to the edit page" do
         login(@student)
-        get :edit
+        get :edit, params: { id: @student.id }
         expect(response).to render_template("edit")
       end
   end

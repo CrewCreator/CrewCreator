@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
     
   helper_method :is_user_html
     def is_user_html
-      if session[:is_admin] == true || current_user.nil?
+      if current_user.nil?
         false
       else
         true
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     
   helper_method :is_user
     def is_user
-      if session[:is_admin] == true || current_user.nil?
+      if current_user.nil?
         redirect_to :controller => 'sessions', :action => 'new'
       end
     end
