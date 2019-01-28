@@ -1,7 +1,7 @@
-<%= form_for object, url: {action: "edit"}, :method => :POST do |f| %>
+<%= form_for object, url: {action: "update"}, :method => :POST do |f| %>
   <%= f.hidden_field :id, value: object.id %>
   <%= f.label "Confirm Password" %>
-  <%= f.password_field :password %>
+  <%= f.password_field :password, id: "admin_password" %>
   
-  <%= f.submit "Update #{object.name}" %>
+  <%= f.submit "Update #{object.name}", id: "confirm" %>
 <% end %>

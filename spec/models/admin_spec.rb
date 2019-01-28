@@ -22,13 +22,8 @@ RSpec.describe Admin, type: :model do
     expect(subject).to_not be_valid
   end
   
-  it "is not valid if password is missing a digit" do
-    subject.password = "aaaaaaaaaaaaaaaa12345"
-    expect(subject).to_not be_valid
-  end
-  
   it "is not valid if password is missing a symbol" do
-    subject.password = "123456789"
+    subject.password = "aaaaaaaaaaaaaaaa12345"
     expect(subject).to_not be_valid
   end
   
@@ -47,13 +42,6 @@ RSpec.describe Admin, type: :model do
     expect(subject).to_not be_valid
   end
   
-  it "is not valid if duplicate emails" do
-    subject_two = Admin.new(name: "admin", email: "email@email.com", password: "password", password_confirmation: "password")
-    subject.save
-    subject_two.save
-    expect(subject_two).to_not be_valid
-  end
-  
   it "emails should be saved as lowecase" do
     mixed_case_email = "AsDfGh@GmAiL.CoM"
     subject.email = mixed_case_email
@@ -62,7 +50,7 @@ RSpec.describe Admin, type: :model do
   end
   
   it "password must match password_confirmation" do
-    subject.password = "newpassword"
+    subject.password = "newpassword3!"
     expect(subject).to_not be_valid
   end
   
@@ -72,7 +60,18 @@ RSpec.describe Admin, type: :model do
     expect(subject).to_not be_valid
   end
   
-  describe "Associations" do
-    #it { should have_many(:sections) }
+  it "is not valid if another admin has same email" do
+    subject_two = Admin.new(name: "admin", email: "email@email.com", password: "password1!", password_confirmation: "password1!")
+    subject.save
+    subject_two.save
+    expect(subject_two).to_not be_valid
+  end
+  
+  it "not valid if email is taken by a student" do
+    student_with_same_email = Student.new(name: "student", email: "nonunique@email.com", password: "password1!", password_confirmation: "password1!")
+    student_with_same_email.save
+    subject.email = 'nonunique@email.com'
+    subject.save
+    expect(subject).to_not be_valid
   end
 end

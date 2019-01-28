@@ -18,6 +18,9 @@ module NavigationHelpers
 
     when /^the create account\s?page$/
       '/createaccount'
+      
+    when /^the create admin page$/
+      '/admins/new'
     
     when /^the all admin accounts\s?page$/
       '/admins'
@@ -31,17 +34,23 @@ module NavigationHelpers
     when /^the new course\s?page$/
       '/courses/new'
       
-    when /^the remove course page for "(.*)"$/
-      remove_course_path(Course.find_by_code($1))
+    when /^the edit course page for course "(.*)"/
+      edit_course_path(Course.find_by_code($1).id)
+    
+    when /^the remove course page for course "(.*)"/
+      remove_course_path(Course.find_by_code($1).id)
 
     when /^the login page$/
       '/login'
+    
+    when /^the new session\s?page$/
+      '/sessions/new'
 
     when /^the section page for course "(.*)"$/
-      course_sections_path(Course.find_by_name($1).id)
+      course_sections_path(Course.find_by_code($1).id)
       
     when /^the new section page for course "(.*)"$/
-      new_course_section_path(Course.find_by_name($1))
+      new_course_section_path(Course.find_by_code($1))
       
     when /^the remove section page for section "(.*)"$/
       remove_section_path(Section.find_by_number($1))
@@ -57,10 +66,30 @@ module NavigationHelpers
       
     when /^the patch project page for project "(.*)"$/
       project_path(Project.find_by_name($1))
-      
-     
+
     when /^the remove project page for project "(.*)"$/
       remove_project_path(Project.find_by_name($1))
+      
+    when /^the new team page for project "(.*)"$/
+      new_project_team_path(Project.find_by_name($1))
+      
+    when /^the teams page for project "(.*)"$/
+      "/projects/#{Project.find_by_name($1).id}/teams"
+      
+    when /^the edit team page for team "(.*)"$/
+      edit_team_path(Team.find_by_name($1))
+      
+    when /^the show team page for team "(.*)"$/
+      team_path(Team.find_by_name($1))
+      
+    when /^the patch team page for team "(.*)"$/
+      team_path(Team.find_by_name($1))
+      
+    when /^the remove team page for team "(.*)"$/
+      remove_team_path(Team.find_by_name($1))
+      
+    when /^the index team page for section "(.*)"$/
+      section_teams_path(Section.find_by_number($1))
 
     when /^the create skill\s?page$/
       '/skills/new'
