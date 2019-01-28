@@ -1,3 +1,5 @@
 <h1><%=@student.name%>'s Account</h1>
 
 <%= render 'form' %>
+
+<%= link_to "Delete your account", remove_student_path(@student), :id => @student.id, :method => :get %>
