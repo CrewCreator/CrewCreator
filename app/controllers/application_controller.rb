@@ -7,10 +7,14 @@ class ApplicationController < ActionController::Base
         if session[:is_admin] == true
           if Admin.exists? (session[:user_id])
             @current_user ||= Admin.find(session[:user_id])
+          else
+            @current_user = nil
           end
         elsif session[:is_admin] == false
           if Student.exists? (session[:user_id])
             @current_user ||= Student.find(session[:user_id])
+          else
+            @current_user = nil
           end
         else
           @current_user = nil
