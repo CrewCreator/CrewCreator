@@ -2,7 +2,7 @@
 
 <%= form_for @section, url: {action: "update_roster"}, method: :patch do |form| %>
 
-  <%= render "layouts/error", object: @section, as: 'object' %>
+  <%= render 'layouts/error', object: @section, as: 'object' %>
 
   <%= form.fields_for :emails do |builder| %>
     <%= render 'email_fields', f: builder %>

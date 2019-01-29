@@ -65,7 +65,7 @@ class SectionsController < ApplicationController
       
       params[:section][:emails_attributes].each_pair do |id, email_atr| 
         email = Email.find_by_email(email_atr[:email])
-        if email && (email_atr[:_destroy] == "false")
+        if email && (email_atr[:_destroy] == 'false')
           @section.emails << email unless @section.emails.include?(email)
           params[:section][:emails_attributes].delete(id)
         end
