@@ -1,0 +1,31 @@
+<div id='main'>
+  <h1>All Students</h1>
+    <table>
+      <thead>
+        <tr>
+        <th>Student Name</th>
+        <th>Email</th>
+        <% if is_admin_html %>
+          <th>Edit</th>
+          <th>Remove</th>
+        <%end%>
+        </tr>
+      </thead>
+      <tbody>
+        <% @students.each do |student| %>
+          <tr>
+            <td> <%= student.name %> </td>
+            <td> <%= student.email %> </td>
+            <% if is_admin_html %>
+              <td> <%= link_to 'Edit', edit_student_path(student), :id => student.id %> </td>
+              <td><%= link_to "Remove #{student.name}", remove_student_path(student), :id => student.id, :method => :get %></td>
+            <%end%>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+
+<div id='create_student'>
+  <a href='/students/new'>Create student</a>
+</div> 

@@ -1,15 +1,17 @@
 require "rails_helper"
 
 RSpec.describe Project, :type => :model do
+  let(:course) { Course.new(name: "Anything", code: "any-1234", description: "Anything") }
+  let(:section) { Section.new(number: 501, course: course) }
   subject { 
     described_class.new(name: "Anything", description: "Anything", difficulty: 3,
-                        students_rated: 0, total_interest: 0) 
+                        students_rated: 0, total_interest: 0, section: section) 
   }
 
   describe "Associations" do
-    #it { should have_many :teams }
-    #it { should have_many :skills }
-    #it { should belongs_to :challenge }
+    it { should belong_to(:section).touch(:true).autosave(:true).validate(:true) }
+    it { should have_many(:teams).dependent(:delete_all) }
+    it { should have_and_belong_to_many :skills }
   end
  
   describe "Validations" do

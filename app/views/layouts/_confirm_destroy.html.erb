@@ -1,7 +1,7 @@
 <%= form_for current_user, url: {action: "destroy"}, :method => :DELETE do |f| %>
   <%= f.hidden_field :id, value: object.id %>
   <%= f.label "Confirm Password" %>
-  <%= f.password_field :password %>
+  <%= f.password_field :password, id: "admin_password"  %>
   
   <%= f.submit "Remove #{object.name}", id: "confirm" %>
 <% end %>

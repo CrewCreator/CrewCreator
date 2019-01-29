@@ -10,28 +10,38 @@ end
 World(WithinHelpers)
 
 When /^(?:|I )create a course with name "(.*)" and code "(.*)" and description "(.*)" and section "(.*)"$/ do |name, code, description, section|
-  visit new_course_path
-  fill_in("course_name", :with => name)
-  fill_in("course_code", :with => code)
-  fill_in("course_description", :with => description)
-  fill_in("section_number", :with => section)
-  click_button "Save Course"
+  visit(new_course_path)
+  fill_in("course_name", with: name)
+  fill_in("course_code", with: code)
+  fill_in("course_description", with: description)
+  fill_in("section[number]", with: section)
+  click_button("Save Course")
 end
 
 Given /^(?:|I )have a course with name "(.*)" and code "(.*)" and description "(.*)" and sections "(.*)"$/ do |name, code, description, sections|
   sections = sections.split(" ")
-  visit new_course_path
-  fill_in("course_name", :with => name)
-  fill_in("course_code", :with => code)
-  fill_in("course_description", :with => description)
-  fill_in("section_number", :with => sections[0])
-  click_button "Save Course"
-  
-  if sections.size >= 1
-    sections[1..sections.size].each do |section|
-      click_link "Add Section"
-      fill_in("number", :with => section)
-      click_button "Create Section"
+  course = Course.create(name: name, code: code, description: description)
+  course.save
+  if course
+    sections.each do |section|
+      course.sections.create(number: section).save
     end
   end
+  visit(courses_path)
+end
+
+When /^(?:|I )update course "(.*)" with name "(.*)" and code "(.*)" and description "(.*)"$/ do |course, name, code, description|	
+  Course.update(Course.find_by_code(course).id, name: name, code: code, description: description)
+end	
+
+Given /^(?:|I )have a course$/ do	
+
+  sections = '200 501 502'.split(" ")	
+  course = Course.create(name: "Software Engineering", code: "CSCE-431", description: "Anything")
+  course.save
+  
+  sections.each do |section|
+    course.sections.create(number: section).save
+  end
+  visit(courses_path)
 end

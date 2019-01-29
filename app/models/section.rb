@@ -2,6 +2,7 @@ class Section < ApplicationRecord
   belongs_to :course, touch: true, validate: true, autosave: true
   #belongs_to :admin
   has_many :projects, dependent: :delete_all
+  has_many :teams, through: :projects
   #has_many :student, :moderator
   
   validates_presence_of :number

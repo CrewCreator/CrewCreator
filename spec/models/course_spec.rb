@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Course, :type => :model do
-   subject {Course.new(name: "Anything", code: "Anything", description: "Anything")}
+  subject {Course.new(name: "Anything", code: "xyz-123", description: "Anything")}
   describe "Validations" do
     it 'is valid with valid attributes' do
       expect(subject).to be_valid
