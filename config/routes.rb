@@ -25,10 +25,14 @@ Rails.application.routes.draw do
     patch 'sections/:section_id/update_roster', to: 'sections#update_roster'
     
   resources :admins, except: [:show]
-    get 'createaccount', to: 'admins#new', as: 'createaccount'
     get 'admin_account', to: 'admins#edit', as:'admin_account'
     post 'admin_account', to: 'admins#update', as: 'update_admin'
     get 'admins/:id/remove', to: 'admins#remove', as: 'remove_admin'
+    
+  resources :students, except: [:show]
+    get 'createaccount', to: 'students#new', as: 'createaccount'
+    post 'students/:id', to: 'students#update', as: 'update_student'
+    get 'students/:id/remove', to: 'students#remove', as: 'remove_student'
     
   resources :sessions, only: [:new, :create, :destroy]
     get 'login', to: 'sessions#new', as: 'login'

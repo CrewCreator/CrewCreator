@@ -6,7 +6,7 @@ Feature: Admin edits course
   
 #happy paths
   Scenario: Admin updates all course feilds
-    Given I am logged in as a admin
+    Given I am logged in as an admin
     And I have a course
     When I update course "CSCE-431" with name "Software Engineering II" and code "CSCE-432" and description "Something"
     And I am on the courses page
@@ -16,7 +16,7 @@ Feature: Admin edits course
     
 #sad paths
   Scenario: Admin updates without name
-    Given I am logged in as a admin
+    Given I am logged in as an admin
     And I have a course
     When I update course "CSCE-431" with name "" and code "CSCE-432" and description "Something"
     And I am on the courses page

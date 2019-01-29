@@ -18,6 +18,9 @@ module NavigationHelpers
 
     when /^the create account\s?page$/
       '/createaccount'
+      
+    when /^the create admin page$/
+      '/admins/new'
     
     when /^the all admin accounts\s?page$/
       '/admins'
@@ -90,6 +93,9 @@ module NavigationHelpers
 
     when /^the create skill\s?page$/
       '/skills/new'
+      
+    when /^the student account page for student "(.*)"$/
+      edit_student_path(Student.find_by_id(Student.find_by_email($1).id))
       
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
