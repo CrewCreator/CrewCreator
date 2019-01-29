@@ -11,6 +11,8 @@ Feature: Admin creates a section
     Given I have a course with name "any-course" and code "code-123" and description "any-description" and sections "501"
     When I am on the new section page for course "code-123"
     And I fill in "number" with "1234"
+    And I choose "fall"
+    And I fill in "year" with "2018"
     When I press "Create"
     Then I should be on the course page
     
@@ -40,5 +42,7 @@ Feature: Admin creates a section
     When I follow "add_section_to_code-123"
     Then I should be on the new section page for course "code-123"
     And I fill in "number" with "1234"
+    And I choose "fall"
+    And I fill in "year" with "2018"
     When I press "Create" 
     Then I should be on the course page

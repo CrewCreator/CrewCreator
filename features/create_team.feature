@@ -6,7 +6,7 @@ Feature: Create Team
   Scenario: Admin create a team
     Given I have an admin account
     Given I am logged in as "admin@admin.com" with "password1!"
-    Given I have a course with name "any-course" and code "code-123" and description "any-description" and sections "501"
+    Given I have a course with name "any-course" and code "code-123" and description "any-description" and sections "501" with semester "Fall" and year "2018"
     Given I have a project for section "501" with name "project-name" and description "project-description" and difficulty "4"
     Given I am on the new team page for project "project-name"
     And I fill in "name" with "team-name"
