@@ -61,13 +61,23 @@ class SectionsController < ApplicationController
   
   def update_roster
     @section = Section.find(params[:section_id])
-    if params[:section].present?
+    if params[:section].present? && params[:section][:emails_attributes].present?
+      
+      params[:section][:emails_attributes].each_pair do |id, email_atr| 
+        email = Email.find_by_email(email_atr[:email])
+        if email && (email_atr[:_destroy] == "false")
+          @section.emails << email unless @section.emails.include?(email)
+          params[:section][:emails_attributes].delete(id)
+        end
+      end
+      
       if @section.update_attributes(section_params)
         flash[:notice] = "Section #{@section.number} roster was successfully updated."
         redirect_to section_projects_path(@section)
       else
         render 'roster'
       end
+      
     else
       redirect_to section_projects_path(@section)
     end
