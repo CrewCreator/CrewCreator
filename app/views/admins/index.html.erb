@@ -24,6 +24,8 @@
     </table>
 </div>
 
-<div id='create_admin'>
-  <a href='/createaccount'>Create Admin</a>
-</div> 
+<% if is_admin_html %>
+  <div id='create_admin'>
+    <a href='/createaccount'>Create Admin</a>
+  </div> 
+<% end %>
