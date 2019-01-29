@@ -58,5 +58,4 @@ RSpec.describe StudentsController, type: :controller do
         expect(response).to render_template("edit")
       end
   end
-
 end
