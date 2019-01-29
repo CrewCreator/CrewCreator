@@ -26,7 +26,7 @@ class StudentsController < ApplicationController
   
   def edit
     id = params[:id]
-    if id.to_i != session[:user_id].to_i && session[:is_admin] == false
+    if (id.to_i != session[:user_id].to_i && session[:is_admin] == false) || current_user == nil
       flash[:warning] = "You do not have admin privileges. Please log-in as an admin to continue."
       redirect_to new_session_path
     end
@@ -35,13 +35,13 @@ class StudentsController < ApplicationController
   
   def update
     id = params[:id]
-    if id.to_i != session[:user_id].to_i && session[:is_admin] == false
+    if (id.to_i != session[:user_id].to_i && session[:is_admin] == false) || current_user == nil
       flash[:warning] = "You do not have admin privileges. Please log-in as an admin to continue."
       redirect_to new_session_path
     end
     @student_updating = Student.find(id)
     
-    if @current_user = Admin.find_by_id(session[:user_id]).try(:authenticate, params[:student][:password])
+    if @current_user = Student.find_by_id(session[:user_id]).try(:authenticate, params[:student][:password]) || session[:is_admin] == true
       if @student_updating.update_attributes(student_params_edit)
         flash[:notice] = "#{@student_updating.email} -- #{@student_updating.name} was successfully updated."
         redirect_to edit_student_path
@@ -57,7 +57,7 @@ class StudentsController < ApplicationController
   
   def remove
     id = params[:id]
-    if id.to_i != session[:user_id].to_i && session[:is_admin] == false
+    if (id.to_i != session[:user_id].to_i && session[:is_admin] == false) || current_user == nil
       flash[:warning] = "You do not have admin privileges. Please log-in as an admin to continue."
       redirect_to new_session_path
     end
@@ -67,13 +67,13 @@ class StudentsController < ApplicationController
   
   def destroy
     id = params[:id]
-    if id.to_i != session[:user_id].to_i && session[:is_admin] == false
+    if (id.to_i != session[:user_id].to_i && session[:is_admin] == false) || current_user == nil
       flash[:warning] = "You do not have admin privileges. Please log-in as an admin to continue."
       redirect_to new_session_path
     end
     
     removed_user = Student.find_by_id(id)
-    if Student.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
+    if Student.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password]) || session[:is_admin] == true
       Student.find_by_id(id).destroy
       if session[:user_id] == id
         flash[:notice] = "#{@current_user.email} -- #{@current_user.name} was successfully deleted. This was your account."
