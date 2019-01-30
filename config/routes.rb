@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     get 'teams/:id/remove', to: 'teams#remove', as: 'remove_team'
     
     get 'sections/:section_id/teams', to: 'teams#index', as: 'section_teams'
+    get 'sections/:section_id/roster', to: 'sections#roster', as: 'section_roster'
+    patch 'sections/:section_id/update_roster', to: 'sections#update_roster'
     
   resources :admins, except: [:show]
     get 'admin_account', to: 'admins#edit', as:'admin_account'

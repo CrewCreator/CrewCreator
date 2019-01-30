@@ -1,0 +1,14 @@
+<h1>Roster for Course <%= @section.course.name %> Section <%= @section.number %></h1>
+
+<%= form_for @section, url: {action: "update_roster"}, method: :patch do |form| %>
+
+  <%= render 'layouts/error', object: @section, as: 'object' %>
+
+  <%= form.fields_for :emails do |builder| %>
+    <%= render 'email_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_fields "Add Student Email", form, :emails %><br/>
+  <br/>
+  <%= form.submit "Update Roster" %>
+  
+<% end %>
