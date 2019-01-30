@@ -60,6 +60,9 @@ module NavigationHelpers
       
     when /^the new project page for section "(.*)"$/
       new_section_project_path(Section.find_by_number($1))
+      
+    when /^the roster page for section "(.*)"$/
+      section_roster_path(Section.find_by_number($1))
 
     when /^the edit project page for project "(.*)"$/
       edit_project_path(Project.find_by_name($1))
