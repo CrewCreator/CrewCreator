@@ -34,8 +34,8 @@ RSpec.describe Section, type: :model do
   
   describe "Associations" do
     it { should belong_to(:course).touch(:true).autosave(:true).validate(:true) }
-    #it { should belong_to(:admin) }
     it { should have_many(:projects).dependent(:delete_all) }
     it { should have_many(:teams).through(:projects) }
+    it { should have_and_belong_to_many :students }
   end
 end
