@@ -1,5 +1,6 @@
 class SectionsController < ApplicationController
   before_action :is_admin, only: [:new , :create, :edit, :update, :remove, :destroy]
+  before_action :is_student, only: [:join]
   
   def new
     @course = Course.find(params[:course_id])
@@ -80,6 +81,16 @@ class SectionsController < ApplicationController
       
     else
       redirect_to section_projects_path(@section)
+    end
+  end
+  
+  def join
+    @section = Section.find(params[:section_id])
+    @student = current_user
+    if @section.emails.include?(@student.email)
+      puts "JOIN: ", true
+    else
+      puts "JOIN: ", false
     end
   end
   
