@@ -1,6 +1,6 @@
 class SectionsController < ApplicationController
-  before_action :is_admin, only: [:new , :create, :edit, :update, :remove, :destroy]
-  before_action :is_student, only: [:join]
+  before_action :is_admin, only: [:new , :create, :edit, :update, :remove, :destroy, :roster, :update_roster]
+  before_action :is_student, only: [:join, :leave]
   
   def new
     @course = Course.find(params[:course_id])
@@ -73,6 +73,8 @@ class SectionsController < ApplicationController
             # if the user changed email string then we need to remove old and insert new
             if email.email != email_atr[:email]
               @section.emails.delete(email)
+              # remove student from section if email changes
+              remove_student(email.email, @section)
               # need to check if the new email exists 
               existing_email = Email.find_by_email(email_atr[:email])
               if existing_email
@@ -84,17 +86,14 @@ class SectionsController < ApplicationController
             end
           else
             email = Email.find_by_email(email_atr[:email])
-            if email and (email_atr[:_destroy] == 'false')
+            if email
               @section.emails << email unless @section.emails.include?(email)
               params[:section][:emails_attributes].delete(index)
             end
           end
         else
           # remove student from section if their deleted from roster
-          student = Student.find_by_email(email_atr[:email])
-          if is_student_in_section(student, @section)
-            @section.students.delete(student)
-          end
+          remove_student(email_atr[:email], @section)
         end
       end
       
@@ -136,5 +135,12 @@ class SectionsController < ApplicationController
   
   private def section_params
     params.require(:section).permit(:number, emails_attributes: [:id, :email, :_destroy])
+  end
+  
+  private def remove_student(email, section)
+    student = Student.find_by_email(email)
+    if student and is_student_in_section(student, section)
+      section.students.delete(student)
+    end
   end
 end
