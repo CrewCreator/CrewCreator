@@ -8,9 +8,16 @@
 </p>
 <% end %>
 
-<% if is_student_html %>
+<% if is_student_html && !is_student_in_section(current_user, @section) %>
 <p>
-<%= link_to 'Join Section' , section_join_path(@section), method: :post, id: "roster_section_#{@section.number}" %>
+<%= link_to 'Join Section' , section_join_path(@section), method: :post, id: "join_section_#{@section.number}" %>
+</p>
+<% end %>
+
+<% if is_student_in_section(current_user, @section) %>
+<p>
+  Currently registered
+  <%= link_to 'Leave Section' , section_leave_path(@section), method: :patch, id: "leave_section_#{@section.number}" %>
 </p>
 <% end %>
 
