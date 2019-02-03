@@ -11,6 +11,7 @@ Feature: Join a section
     And I am on the projects page for section "501"
     When I follow "Join Section"
     Then I should see "You've successfully joined section 501"
+    And I should see "Currently registered"
     And I should be on the projects page for section "501"
 
   Scenario: Student attempts to join a section that they don't belong to

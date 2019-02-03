@@ -66,14 +66,15 @@ class SectionsController < ApplicationController
     if params[:section].present? and params[:section][:emails_attributes].present?
       
       params[:section][:emails_attributes].each_pair do |index, email_atr| 
-        # email already in roster if id is there and we're not removing it
+        # we're not removing the email
         if email_atr[:_destroy] == 'false'
-          if email_atr[:id].present? #and (email_atr[:_destroy] == 'false')
+          # email already in roster if id is present
+          if email_atr[:id].present?
             email = Email.find_by_id(email_atr[:id])
-            # if the user changed email string then we need to remove old and insert new
+            # if the user changed email string then we need update emails
             if email.email != email_atr[:email]
+              # remove email and student from section if email changes
               @section.emails.delete(email)
-              # remove student from section if email changes
               remove_student(email.email, @section)
               # need to check if the new email exists 
               existing_email = Email.find_by_email(email_atr[:email])
@@ -92,7 +93,6 @@ class SectionsController < ApplicationController
             end
           end
         else
-          # remove student from section if their deleted from roster
           remove_student(email_atr[:email], @section)
         end
       end
