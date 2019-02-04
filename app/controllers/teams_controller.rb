@@ -22,6 +22,7 @@ class TeamsController < ApplicationController
   end
   
   def create
+    handle_add_students(student_params)
     @team = @project.teams.build(team_params)
     if @team.save
       redirect_to section_projects_path(section_id: @project.section)
@@ -32,6 +33,7 @@ class TeamsController < ApplicationController
   
   def update
     @team = Team.find(params[:id])
+    handle_add_students(student_params)
     if @team.update_attributes(team_params)
       flash[:notice] = "#{@team.name} was successfully updated."
       redirect_to team_path
@@ -58,7 +60,32 @@ class TeamsController < ApplicationController
   
   private def team_params
     params.require(:team).permit(:name, :version_control_link,
-      :production_link, :management_link, :scrum_location, :scrum_time)
+      :production_link, :management_link, :scrum_location, :scrum_time, student_ids: [])
+  end
+  
+  private def student_params
+    params.require(:team).permit(student_ids: [])
+  end
+  
+  private def handle_add_students(ids)
+    update = []
+    ids[:student_ids].each do |id|
+      email = Email.find_by_id(id)
+      if email
+        student = Student.find_by_email(email.email)
+        if student
+          puts "found student"
+          update << student.id
+        else
+          puts "didnt find student"
+        end
+      end
+    end
+    params[:team][:student_ids] = []
+    update.each do |id|
+      params[:team][:student_ids] << id
+    end
+    puts params
   end
   
   private def find_project

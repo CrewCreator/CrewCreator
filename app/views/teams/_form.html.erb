@@ -11,6 +11,28 @@
     <%= form.text_field :name, id: "name" %>
   </p>
   
+  <% if @team and @team.students.size > 0 %>
+    <p>
+      Current Students <br>
+      <ul>
+      <% @team.students.each do |student| %>
+      <li>
+      <%= student.name %> (<%= student.email %>)
+      </li>
+      <% end %>
+      </ul>
+    </p>
+  <% end %>
+  
+  <p>
+    <%= form.label "Add Students" %><br>
+    <% if params[:action] == "new" or params[:action] == "create" %>
+    <%= form.collection_check_boxes :student_ids, @project.section.emails, :id, :email %>
+    <% else %>
+    <%= form.collection_check_boxes :student_ids, @team.project.section.emails, :id, :email %>
+    <% end %>
+  </p>
+  
   <p>
     <%= form.label :version_control_link %><br>
     <%= form.text_field :version_control_link, id: "version_control_link" %>
