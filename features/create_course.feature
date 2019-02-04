@@ -23,13 +23,15 @@ Feature: Admin create course
     And I fill in "course_name" with "any name"
     And I fill in "course_code" with "code-123"
     And I fill in "course_description" with "any description"
-    And I fill in "section_number" with "300"
+    And I fill in "section_number" with "200"
+    And I choose "semester_Spring"
+    And I fill in "section_year" with "2018"
     And I press "Save Course"
     Then I should see "successfully"
     And I should see "any name"
     And I should see "code-123"
     And I should see "any description"
-    And I should see "300"
+    And I should see "200"
     And I should be on the courses page
 
 #sad paths
@@ -40,6 +42,8 @@ Feature: Admin create course
     And I fill in "course_name" with "any name"
     And I fill in "course_description" with "any description"
     And I fill in "section_number" with "300"
+    And I choose "semester_Spring"
+    And I fill in "section_year" with "2018"
     And I press "Save Course"
     Then I should see "Code can't be blank"
     
@@ -50,6 +54,8 @@ Feature: Admin create course
     And I fill in "course_code" with "code-123"
     And I fill in "course_description" with "any description"
     And I fill in "section_number" with "300"
+    And I choose "semester_Spring"
+    And I fill in "section_year" with "2018"
     And I press "Save Course"
     Then I should see "Name can't be blank"
     
@@ -60,6 +66,8 @@ Feature: Admin create course
     And I fill in "course_name" with "any name"
     And I fill in "course_code" with "code-123"
     And I fill in "section_number" with "300"
+    And I choose "semester_Spring"
+    And I fill in "section_year" with "2018"
     And I press "Save Course"
     Then I should see "Description can't be blank"
     

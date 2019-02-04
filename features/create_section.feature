@@ -10,7 +10,7 @@ Feature: Admin creates a section
     Given I am logged in as "admin@admin.com" with "password1!"
     Given I have a course with name "any-course" and code "code-123" and description "any-description" and sections "501"
     When I am on the new section page for course "code-123"
-    And I fill in "number" with "1234"
+    And I fill in "number" with "201"
     And I choose "fall"
     And I fill in "year" with "2018"
     When I press "Create"
@@ -41,7 +41,7 @@ Feature: Admin creates a section
     When I am on the course page
     When I follow "add_section_to_code-123"
     Then I should be on the new section page for course "code-123"
-    And I fill in "number" with "1234"
+    And I fill in "number" with "201"
     And I choose "fall"
     And I fill in "year" with "2018"
     When I press "Create" 
