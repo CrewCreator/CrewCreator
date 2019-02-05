@@ -56,4 +56,24 @@ class ApplicationController < ActionController::Base
       end
     end
     
+  helper_method :is_student
+    def is_student
+      if session[:is_admin] == true || current_user.nil?
+        redirect_to :controller => 'sessions', :action => 'new'
+      end
+    end
+    
+  helper_method :is_student_html
+    def is_student_html
+      if session[:is_admin] == true || current_user.nil?
+        false
+      else
+        true
+      end
+    end
+
+  helper_method :is_student_in_section
+    def is_student_in_section(student, section)
+      return section.students.include?(student)
+    end
 end

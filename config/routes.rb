@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     get 'sections/:section_id/teams', to: 'teams#index', as: 'section_teams'
     get 'sections/:section_id/roster', to: 'sections#roster', as: 'section_roster'
     patch 'sections/:section_id/update_roster', to: 'sections#update_roster'
+    post 'sections/:section_id/join', to: 'sections#join', as: 'section_join'
+    patch 'sections/:section_id/leave', to: 'sections#leave', as: 'section_leave'
     
   resources :admins, except: [:show]
     get 'admin_account', to: 'admins#edit', as:'admin_account'
