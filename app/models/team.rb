@@ -1,6 +1,6 @@
 class Team < ApplicationRecord
   belongs_to :project
-  #has_and_belongs_to_many :students
+  has_and_belongs_to_many :students
   
   validates_presence_of :name
   

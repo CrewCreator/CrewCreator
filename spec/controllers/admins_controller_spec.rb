@@ -16,13 +16,13 @@ RSpec.describe AdminsController, type: :controller do
   
   describe "GET admin#edit" do
       it "should redirect to log in since we are not logged in" do
-        get :edit
+        get :edit, params: { id: @admin.id }
        expect(response).to redirect_to(new_session_path)
       end
       
       it "should login and go to the edit page" do
         login(@admin)
-        get :edit
+        get :edit, params: { id: @admin.id }
         expect(response).to render_template("edit")
       end
   end

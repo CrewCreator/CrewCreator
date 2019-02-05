@@ -3,8 +3,28 @@ require 'support/spec_test_helper'
 
 RSpec.describe StudentsController, type: :controller do
   
-  before(:all) do
+  before(:each) do
     @student = create(:student)
+    @admin = create(:admin)
+  end
+  
+  describe "GET student#index" do
+      it "should redirect to login" do
+        get :index
+        expect(response).to redirect_to(new_session_path)
+      end
+      
+      it "should redirect to login since we are not an admin" do
+        login(@student)
+        get :index
+        expect(response).to redirect_to(new_session_path)
+      end
+      
+      it "you should be able to view all students since you are an admin" do
+        login(@admin)
+        get :index
+        expect(response).to render_template("index")
+      end
   end
   
   describe "GET student#new" do
@@ -25,5 +45,17 @@ RSpec.describe StudentsController, type: :controller do
       expect(response).to redirect_to('/createaccount')
     end
   end
-
+  
+  describe "GET students#edit" do
+      it "should redirect to log in since we are not logged in" do
+       get :edit, params: { id: @student.id }
+       expect(response).to redirect_to(new_session_path)
+      end
+      
+      it "should login and go to the edit page" do
+        login(@student)
+        get :edit, params: { id: @student.id }
+        expect(response).to render_template("edit")
+      end
+  end
 end

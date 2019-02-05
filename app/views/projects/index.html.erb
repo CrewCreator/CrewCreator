@@ -2,8 +2,22 @@
 
 <% if is_admin_html %>
 <p>
-<%= link_to 'Edit Section' , edit_section_path(@section), :id => "edit_section_#{@section.number}" %>
-<%= link_to 'Delete Section' , remove_section_path(@section), :id => "remove_section_#{@section.number}" %>
+<%= link_to 'Edit Section' , edit_section_path(@section), id: "edit_section_#{@section.number}" %>
+<%= link_to 'Delete Section' , remove_section_path(@section), id: "remove_section_#{@section.number}" %>
+<%= link_to 'Adjust Roster' , section_roster_path(@section), id: "roster_section_#{@section.number}" %>
+</p>
+<% end %>
+
+<% if is_student_html && !is_student_in_section(current_user, @section) %>
+<p>
+<%= link_to 'Join Section' , section_join_path(@section), method: :post, id: "join_section_#{@section.number}" %>
+</p>
+<% end %>
+
+<% if is_student_in_section(current_user, @section) %>
+<p>
+  Currently registered
+  <%= link_to 'Leave Section' , section_leave_path(@section), method: :patch, id: "leave_section_#{@section.number}" %>
 </p>
 <% end %>
 

@@ -1,10 +1,6 @@
 class Student < ApplicationRecord
-    
-    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-    PASSWORD_FORMAT = /\A
-                      (?=.*\d)           # Must contain a digit
-                      (?=.*[[:^alnum:]]) # Must contain a symbol
-                    /x
+    has_and_belongs_to_many :sections
+    has_and_belongs_to_many :teams
     
     before_save {email.downcase!}
     
@@ -17,8 +13,6 @@ class Student < ApplicationRecord
     
     validates_format_of :email, :with => VALID_EMAIL_REGEX, :on => :create
     validates_format_of :email, :with => VALID_EMAIL_REGEX, :on => :update
-    
-    validates_uniqueness_of :email
     
     has_secure_password
     validates_length_of :password , minimum: 8
