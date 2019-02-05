@@ -41,3 +41,5 @@
 </br></br>
 
 <%= render "layouts/confirm_destroy", object: @project, as: 'object'  %>
+
+<%= link_to 'Cancel', section_projects_path(@project.section), id: 'cancel' %>
