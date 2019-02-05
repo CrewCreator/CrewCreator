@@ -9,7 +9,7 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-Given /^(?:|I )sections "(.*)" roster has emails "(.*)" and "(.*)"$/ do |number, email1, email2|
+Given /^(?:|The )section "(.*)" roster has emails "(.*)" and "(.*)"$/ do |number, email1, email2|
   section = Section.find_by_number(number)
   section.emails << Email.create(email: email1)
   section.emails << Email.create(email: email2)
