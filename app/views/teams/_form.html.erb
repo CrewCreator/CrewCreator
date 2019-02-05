@@ -27,9 +27,10 @@
   <p>
     <%= form.label "Add Students" %><br>
     <% if params[:action] == "new" or params[:action] == "create" %>
-    <%= form.collection_check_boxes :student_ids, @project.section.emails, :id, :email %>
+    <%= form.collection_check_boxes :student_ids, @project.section.emails, :id, :email, checked: false %>
     <% else %>
-    <%= form.collection_check_boxes :student_ids, @team.project.section.emails, :id, :email %>
+    <%= @team.project.section.emails.size %>
+    <%= form.collection_check_boxes :student_ids, @team.project.section.emails, :id, :email, checked: false %>
     <% end %>
   </p>
   

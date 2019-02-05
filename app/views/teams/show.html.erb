@@ -1,5 +1,12 @@
 <h1>Team: <%= @team.name %></h1>
+<h3>Members:</h3>
+<ul>
+  <% @team.students.each do |student| %>
+  <li> <%= student.name %> (<%= student.email %>)</li>
+  <% end %>
+</ul>
 
+<h3>Info:</h3>
 <ul>
   <li>Version Control: 
     <a href=<%= @team.version_control_link %> target="_blank">
