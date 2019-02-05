@@ -45,4 +45,5 @@
     <% if is_admin_html %>
       <%= button_to 'Create Course', {:action => :new, :controller => :courses}, :method => :get %>
     <% end %>
+    <%= link_to 'Back', home_path, id: 'back' %>
 </div>
