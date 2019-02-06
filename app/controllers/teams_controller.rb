@@ -1,7 +1,5 @@
 class TeamsController < ApplicationController
   before_action :is_admin, only: [:new , :create, :remove, :destroy]
-  # is_user function for edit and update since studets can edit/update teams info
-  before_action :is_user, only: [:edit, :update]
   before_action :find_project, only: [:new, :create]
   
   def index
@@ -19,10 +17,12 @@ class TeamsController < ApplicationController
   
   def edit
     @team = Team.find(params[:id])
+    is_admin_or_student_on_team(@team)
   end
   
   def create
     @team = @project.teams.build(team_params)
+    is_admin_or_student_on_team(@team)
     if @team.save
       redirect_to section_projects_path(section_id: @project.section)
     else
@@ -67,5 +67,11 @@ class TeamsController < ApplicationController
   
   private def find_project
     @project = Project.find(params[:project_id])
+  end
+  
+  private def is_admin_or_student_on_team(team)
+    unless is_student_on_team(current_user, team) || is_admin_html
+      redirect_to new_session_path
+    end
   end
 end

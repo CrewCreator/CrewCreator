@@ -1,9 +1,14 @@
 <h1>Team: <%= @team.name %></h1>
+
 <h3>Members:</h3>
 <ul>
+<% if @team.students.empty? %>
+  <li>No team members</li>
+<% else %>
   <% @team.students.each do |student| %>
-  <li> <%= student.name %> (<%= student.email %>)</li>
+    <li> <%= student.name %> (<%= student.email %>)</li>
   <% end %>
+<% end %>
 </ul>
 
 <h3>Info:</h3>
@@ -31,7 +36,7 @@
   </li>
 </ul>
 
-<% if is_user_html %>
+<% if is_admin_html || is_student_on_team(current_user, @team) %>
   <%= link_to "Edit Team", edit_team_path(@team) %></td>
 <% end %>
 <%if is_admin_html %>

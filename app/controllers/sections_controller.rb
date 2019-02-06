@@ -128,7 +128,6 @@ class SectionsController < ApplicationController
       flash[:notice] = "You've successfully left section #{@section.number} for the course #{@section.course.name}."
       @section.students.delete(@student)
       remove_student_from_teams(@student)
-        
     else
       flash[:notice] = "Sorry, you weren't enrolled in section #{@section.number} for the course #{@section.course.name}."
     end
