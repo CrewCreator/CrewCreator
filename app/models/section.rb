@@ -14,7 +14,7 @@ class Section < ApplicationRecord
   
   validates_inclusion_of :number, :year, in: 1..9999
   
-  validates_uniqueness_of :number, :scope => [:semester, :year]
+  validates_uniqueness_of :number, :scope => [:course, :semester, :year]
   
   def method_missing(m, *args, &block)
     if m.to_s=="name"

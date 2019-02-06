@@ -16,6 +16,8 @@ Feature: user login
     Then I should be on the home page
     
   Scenario: I look at the list of admins
+    Given I have an admin account
+    Given I am logged in as "admin@admin.com" with "password1!"
     When I am on the home page
     And I follow "View Admins"
     Then I should see "All Admins"
