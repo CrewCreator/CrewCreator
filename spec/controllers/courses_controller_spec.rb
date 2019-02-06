@@ -39,14 +39,6 @@ describe CoursesController, type: :controller do
     end
   end
   
-  describe "GET #show" do
-    it "renders show template" do
-      pending "Show not implemented"
-      get :show, :id => "1"
-      expect(response).to render_template("courses/1")
-    end
-  end
-  
   describe "GET #edit" do
     it "renders edit template" do
       get :edit, :params => {:id => "1"}
