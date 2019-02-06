@@ -24,14 +24,16 @@
     </p>
   <% end %>
   
-  <p>
-    <%= form.label "Add/Remove Students" %><br>
-    <% if params[:action] == "new" or params[:action] == "create" %>
-    <%= form.collection_check_boxes :student_ids, @project.section.students, :id, :email, checked: false %>
-    <% else %>
-    <%= form.collection_check_boxes :student_ids, @team.project.section.students, :id, :email %>
-    <% end %>
-  </p>
+  <% if is_admin_html %>
+    <p>
+      <%= form.label "Add/Remove Students" %><br>
+      <% if params[:action] == "new" or params[:action] == "create" %>
+      <%= form.collection_check_boxes :student_ids, @project.section.students, :id, :email, checked: false %>
+      <% else %>
+      <%= form.collection_check_boxes :student_ids, @team.project.section.students, :id, :email %>
+      <% end %>
+    </p>
+  <% end %>
   
   <p>
     <%= form.label :version_control_link %><br>
