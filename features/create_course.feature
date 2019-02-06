@@ -79,7 +79,7 @@ Feature: Admin create course
     And I fill in "course_code" with "code-123"
     And I fill in "course_description" with "any description"
     And I press "Save Course"
-    Then I should see "Sections is invalid"
+    Then I should see "Sections number is not a number"
     
   Scenario: Admin create a course with a bad section
     Given I have an admin account
@@ -90,7 +90,7 @@ Feature: Admin create course
     And I fill in "course_description" with "any description"
     And I fill in "section_number" with "-1"
     And I press "Save Course"
-    Then I should see "Sections is invalid"
+    Then I should see "Sections number is not included in the list"
     
   Scenario: Admin creates a course with a repeated code
     Given I have an admin account
