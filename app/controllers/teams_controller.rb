@@ -22,7 +22,6 @@ class TeamsController < ApplicationController
   
   def create
     @team = @project.teams.build(team_params)
-    is_admin_or_student_on_team(@team)
     if @team.save
       redirect_to section_projects_path(section_id: @project.section)
     else
@@ -32,6 +31,7 @@ class TeamsController < ApplicationController
   
   def update
     @team = Team.find(params[:id])
+    is_admin_or_student_on_team(@team)
     if @team.update_attributes(team_params)
       flash[:notice] = "#{@team.name} was successfully updated."
       redirect_to team_path
