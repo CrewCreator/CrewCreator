@@ -22,7 +22,7 @@
               <table>
                 <tr>
                 <% course.sections.each do |section| %>
-                  <td> <%= link_to section.number, section_projects_path(section) %> </td>
+                  <td> <%= link_to "#{section.number} #{section.semester}-#{section.year}", section_projects_path(section) %> </td>
                 <% end %>
                 </tr>
               </table>

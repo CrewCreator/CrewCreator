@@ -18,9 +18,19 @@
   <%= f.text_area :description, rows: 10, cols: 50 %> <br>
   <br>
   <% if params[:action] == "new" or params[:action] == "create" %>
-  <%= label("section_number", "Section Number") %> <br>
-  <%= number_field_tag "section[number]", in: 1...9999 %>
-  <br>
+    <%= label("section_number", "Section Number") %> <br>
+    <%= number_field_tag "section[number]", in: 1...9999 %>
+    <br>
+    
+    <br><%= label("section_semester", "Section Semester") %>
+    <br><%= radio_button_tag "section[semester]", "Spring", true %> Spring
+    <br><%= radio_button_tag "section[semester]", "Summer" %> Summer
+    <br><%= radio_button_tag "section[semester]", "Fall" %> Fall 
+    <br><%= radio_button_tag "section[semester]", "Winter" %> Winter
+    
+    <br><br><%= label("section_year", "Section Year") %> <br>
+    <%= number_field_tag "section[year]", in: 1...9999 %>
+    <br>
   <% end %>
   <br>
   <% if params[:action] == "edit" %>

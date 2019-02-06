@@ -7,13 +7,13 @@ class Section < ApplicationRecord
   has_and_belongs_to_many :emails
   accepts_nested_attributes_for :emails, allow_destroy: true
   
-  validates_presence_of :number
+  validates_presence_of :number, :semester, :year
   
-  validates_numericality_of :number, only_integer: true
+  validates_numericality_of :number, :year, only_integer: true
   
-  validates_inclusion_of :number, in: 1..9999
+  validates_inclusion_of :number, :year, in: 1..9999
   
-  #validates_uniqueness_of :number
+  validates_uniqueness_of :number, :scope => [:semester, :year]
   
   def method_missing(m, *args, &block)
     if m.to_s=="name"

@@ -15,6 +15,8 @@ When /^(?:|I )create a course with name "(.*)" and code "(.*)" and description "
   fill_in("course_code", with: code)
   fill_in("course_description", with: description)
   fill_in("section[number]", with: section)
+  choose("section_semester_Spring")
+  fill_in("section[year]", with: "2018")
   click_button("Save Course")
 end
 
@@ -24,7 +26,7 @@ Given /^(?:|I )have a course with name "(.*)" and code "(.*)" and description "(
   course.save
   if course
     sections.each do |section|
-      course.sections.create(number: section).save
+      course.sections.create(number: section, semester: "Spring", year: "2018").save
     end
   end
   visit(courses_path)
@@ -41,7 +43,7 @@ Given /^(?:|I )have a course$/ do
   course.save
   
   sections.each do |section|
-    course.sections.create(number: section).save
+    course.sections.create(number: section, semester: "Spring", year: "2018").save
   end
   visit(courses_path)
 end

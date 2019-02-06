@@ -28,13 +28,13 @@ describe CoursesController, type: :controller do
   
   describe "POST #create" do
     it "expects http redirect on success" do
-      get :create, :params => {:course => {:code => "xxx-123", :name => "Anything", :description => "Anything"}, :section => {:number => "501"}}
+      get :create, :params => {:course => {:code => "xxx-123", :name => "Anything", :description => "Anything"}, :section => {:number => "501", :semester => "Fall", :year => "2019"}}
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(courses_path)
     end
     
     it "rerenders page on failure" do
-      get :create, :params => {:course => {:code => "BadCode", :name => "Anything", :description => "Anything"}, :section => {:number => "501"}}
+      get :create, :params => {:course => {:code => "BadCode", :name => "Anything", :description => "Anything"}, :section => {:number => "501", :semester => "Fall", :year => "2019"}}
       expect(response).to have_http_status(:success)
     end
   end

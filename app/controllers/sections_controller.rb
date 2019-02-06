@@ -134,7 +134,7 @@ class SectionsController < ApplicationController
   end
   
   private def section_params
-    params.require(:section).permit(:number, emails_attributes: [:id, :email, :_destroy])
+    params.require(:section).permit(:number, :semester, :year, emails_attributes: [:id, :email, :_destroy])
   end
   
   private def remove_student(email, section)
