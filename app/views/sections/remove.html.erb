@@ -23,3 +23,5 @@
 <br></br>
 
 <%= render "layouts/confirm_destroy", object: @section, as: 'object' %>
+<br/>
+<%= link_to 'Cancel', section_projects_path(@section), id: 'cancel' %>

@@ -1,3 +1,5 @@
 <h1>Update Section <%=@section.name%></h1>
 
 <%= render 'form' %>
+
+<%= link_to 'Cancel', section_projects_path(@section), id: 'cancel' %>

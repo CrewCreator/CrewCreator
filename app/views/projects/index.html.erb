@@ -83,3 +83,4 @@
 <% if is_admin_html %>
   <%= button_to "New Project", {:action => :new, :controller => :projects}, :method => :get, :id => "new_project"  %>
 <% end %>
+<%= link_to 'Back', courses_path, id: 'back' %>
