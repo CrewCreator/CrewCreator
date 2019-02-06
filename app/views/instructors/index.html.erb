@@ -1,0 +1,31 @@
+<div id='main'>
+  <h1>All Instructors</h1>
+    <table>
+      <thead>
+        <tr>
+        <th>Instructor Name</th>
+        <th>Email</th>
+        <% if is_admin_html %>
+          <th>Edit</th>
+          <th>Remove</th>
+        <%end%>
+        </tr>
+      </thead>
+      <tbody>
+        <% @instructors.each do |instructor| %>
+          <tr>
+            <td> <%= instructor.name %> </td>
+            <td> <%= instructor.email %> </td>
+            <% if is_admin_html %>
+              <td> <%= link_to 'Edit', edit_instructor_path(instructor), id: instructor.id %> </td>
+              <td><%= link_to "Remove #{instructor.name}", remove_instructor_path(instructor), id: instructor.id, method: :get %></td>
+            <%end%>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+
+<div id='create_instructor'>
+  <a href='/instructors/new'>Create instructor</a>
+</div> 

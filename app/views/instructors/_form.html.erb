@@ -1,0 +1,22 @@
+<%= form_for @instructor do |f| %>
+
+  <%= render 'layouts/error', object: @instructor, as: 'object' %>
+  
+  <%= f.label "Full Name" %>
+  <%= f.text_field :name %> <br>
+  
+  <%= f.label "Email" %>
+  <%= f.text_field :email %> <br>
+
+  <% if params[:action] == "edit" %>
+    <%= render "layouts/confirm_update", object: @instructor, as: 'object' %>
+  <% else %>
+    <%= f.label "Password" %>
+    <%= f.password_field :password %>
+    <br/>
+    <%= f.label "Confirm Password" %>
+    <%= f.password_field :password_confirmation %>
+    <br/><br/>
+    <%= f.submit "Create Account" %>
+  <% end %>
+<% end %>

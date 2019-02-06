@@ -6,7 +6,6 @@ class AdminsController < ApplicationController
   end
   
   def new
-     # default: render 'new' template
      @admin = Admin.new
   end
   
@@ -18,7 +17,7 @@ class AdminsController < ApplicationController
         session[:user_id] = @admin.id
         session[:is_admin] = true
       end
-      redirect_to  :controller => 'home', :action => 'index'
+      redirect_to controller: 'home', action: 'index'
     else
       # This line overrides the default rendering behavior, which would have been to render the 'create' view.
       flash[:notice] = "Email was taken or password did not meet specifications!"
