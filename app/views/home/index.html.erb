@@ -2,20 +2,22 @@
 
 <p> Welcome to Crew Creator</p>
 
-<% if is_admin_html %>
+<% if is_user_html %>
   <% Section.order(year: :desc).distinct.pluck(:year).each do |year| %>
-    <%= year %>
-    <div class='section-year'>
-      <% Section.where(year: year).order(semester: :desc, number: :asc).each do |section| %>
-        <div class='section-info' style='display: inline-block'>
-          <%= section.course.name %> <%= section.number %> <%= section.semester %> <%= section.year %>
+    <% Section.semesters.reverse!.each do |semester| %>
+    
+      <% if Section.where(year: year, semester: semester).any? %>
+        <div class='semester-year'>
+          <%= semester %> <%= year %> <br/>
+          <% Section.where(year: year, semester: semester).order(number: :asc).each do |section| %>
+            <div class='section-info' style='display: inline-block'>
+              <%= section.course.name %> <%= link_to "#{section.number} #{section.semester}-#{section.year}", section_projects_path(section) %>
+            </div>
+          <% end %>
         </div>
+        <br/>
       <% end %>
-      <br/>
-    </div>
+      
+    <% end %>
   <% end %>
-<% end %>
-
-<% if is_student_html %>
-
 <% end %>

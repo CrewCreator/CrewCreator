@@ -23,4 +23,8 @@ class Section < ApplicationRecord
     end
   end 
   
+  def Section.semesters
+    ['Spring', 'Summer', 'Fall', 'Winter']
+  end
+  
 end
