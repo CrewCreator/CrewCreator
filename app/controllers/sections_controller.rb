@@ -127,6 +127,7 @@ class SectionsController < ApplicationController
     if is_student_in_section(@student, @section)
       flash[:notice] = "You've successfully left section #{@section.number} for the course #{@section.course.name}."
       @section.students.delete(@student)
+      remove_student_from_teams(@student)
     else
       flash[:notice] = "Sorry, you weren't enrolled in section #{@section.number} for the course #{@section.course.name}."
     end
@@ -139,8 +140,15 @@ class SectionsController < ApplicationController
   
   private def remove_student(email, section)
     student = Student.find_by_email(email)
-    if student and is_student_in_section(student, section)
+    if student
       section.students.delete(student)
+      remove_student_from_teams(student)
+    end
+  end
+  
+  private def remove_student_from_teams(student)
+    @section.teams.each do |team|
+      team.students.delete(student)
     end
   end
 end

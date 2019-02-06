@@ -76,4 +76,9 @@ class ApplicationController < ActionController::Base
     def is_student_in_section(student, section)
       return section.students.include?(student)
     end
+    
+  helper_method :is_student_on_team
+    def is_student_on_team(student, team)
+      return team.students.include?(student)
+    end
 end

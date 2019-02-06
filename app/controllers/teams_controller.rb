@@ -1,7 +1,5 @@
 class TeamsController < ApplicationController
   before_action :is_admin, only: [:new , :create, :remove, :destroy]
-  # is_user function for edit and update since studets can edit/update teams info
-  before_action :is_user, only: [:edit, :update]
   before_action :find_project, only: [:new, :create]
   
   def index
@@ -19,6 +17,7 @@ class TeamsController < ApplicationController
   
   def edit
     @team = Team.find(params[:id])
+    is_admin_or_student_on_team(@team)
   end
   
   def create
@@ -32,6 +31,7 @@ class TeamsController < ApplicationController
   
   def update
     @team = Team.find(params[:id])
+    is_admin_or_student_on_team(@team)
     if @team.update_attributes(team_params)
       flash[:notice] = "#{@team.name} was successfully updated."
       redirect_to team_path
@@ -58,10 +58,20 @@ class TeamsController < ApplicationController
   
   private def team_params
     params.require(:team).permit(:name, :version_control_link,
-      :production_link, :management_link, :scrum_location, :scrum_time)
+      :production_link, :management_link, :scrum_location, :scrum_time, student_ids: [])
+  end
+  
+  private def student_params
+    params.require(:team).permit(student_ids: [])
   end
   
   private def find_project
     @project = Project.find(params[:project_id])
+  end
+  
+  private def is_admin_or_student_on_team(team)
+    unless is_student_on_team(current_user, team) || is_admin_html
+      redirect_to new_session_path
+    end
   end
 end
