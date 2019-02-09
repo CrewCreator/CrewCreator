@@ -2,34 +2,14 @@
 
 <p> Welcome to Crew Creator</p>
 
-<% if is_admin_html %>
-  <% Section.order(year: :desc).distinct.pluck(:year).each do |year| %>
+<% if is_user_html %>
+  <% @sections.order(year: :desc).distinct.pluck(:year).each do |year| %>
     <% Section.semesters.reverse!.each do |semester| %>
     
-      <% if Section.where(year: year, semester: semester).any? %>
+      <% if @sections.where(year: year, semester: semester).any? %>
         <div class='semester-year'>
           <%= semester %> <%= year %> <br/>
-          <% Section.where(year: year, semester: semester).order(number: :asc).each do |section| %>
-            <div class='section-info' style='display: inline-block'>
-              <%= section.course.name %> <%= link_to "#{section.number} #{section.semester}-#{section.year}", section_projects_path(section) %>
-            </div>
-          <% end %>
-        </div>
-        <br/>
-      <% end %>
-      
-    <% end %>
-  <% end %>
-<% end %>
-
-<% if is_student_html %>
-  <% current_user.sections.order(year: :desc).distinct.pluck(:year).each do |year| %>
-    <% Section.semesters.reverse!.each do |semester| %>
-    
-      <% if current_user.sections.where(year: year, semester: semester).any? %>
-        <div class='semester-year'>
-          <%= semester %> <%= year %> <br/>
-          <% current_user.sections.where(year: year, semester: semester).order(number: :asc).each do |section| %>
+          <% @sections.where(year: year, semester: semester).order(number: :asc).each do |section| %>
             <div class='section-info' style='display: inline-block'>
               <%= section.course.name %> <%= link_to "#{section.number} #{section.semester}-#{section.year}", section_projects_path(section) %>
             </div>
