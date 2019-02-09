@@ -22,9 +22,18 @@ class Section < ApplicationRecord
       super
     end
   end 
+
+  scope :by_priority, -> { order(order_by_case) }
   
   def Section.semesters
     ['Spring', 'Summer', 'Fall', 'Winter']
   end
   
+  def self.order_by_case
+    ret = "CASE"
+    Section.semesters.reverse!.each_with_index do |s, i|
+      ret << " WHEN semester = '#{s}' THEN #{i}"
+    end
+    ret << " END"
+  end
 end
