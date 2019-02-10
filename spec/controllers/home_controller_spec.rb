@@ -26,11 +26,4 @@ RSpec.describe HomeController, type: :controller do
     end
   end
   
-  #describe "helper methods" do
-  #  it "get years in sections" do
-  #    section = create(:section)
-  #    get_years should eq(section.year)
-  #  end
-  #end
-
 end
