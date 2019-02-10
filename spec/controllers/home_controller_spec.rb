@@ -25,5 +25,12 @@ RSpec.describe HomeController, type: :controller do
       expect(assigns(:sections)).to eq([section])
     end
   end
+  
+  #describe "helper methods" do
+  #  it "get years in sections" do
+  #    section = create(:section)
+  #    get_years should eq(section.year)
+  #  end
+  #end
 
 end
