@@ -1,13 +1,23 @@
-<h1> List of skills </h1>
-<ol>
-  <% @skills.each do |skill| %>
-    <li>
-      <%= link_to skill.name, edit_skill_path(skill) %> | <%= skill.description  %>
-    </li>
+
+<h1 class="ml-5 mt-5 mb-5">
+  <span class="display-4 d-inline-block">All Skills</span>
+  <% if is_admin_html %>
+    <%= button_to 'Add Skill', new_skill_path, method: 'get', :class => "btn btn-success" %>
   <% end %>
-</ol>
+</h1>
 
-
-<% if is_admin_html %>
-  <%= button_to 'Add a New Skill', new_skill_path, method: 'get'%>
-<% end %>
+<div class="container">
+  <div class="jumbotron">
+    <% @skills.each do |skill| %>
+      <div class="card d-inline-block ml-4 mt-4" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= skill.name %></h5>
+          <p class="card-text text-muted"><%= skill.description %></p>
+          <% if is_admin_html %>
+            <%= link_to "Edit Skill", edit_skill_path(skill) , :class => "btn btn-warning" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

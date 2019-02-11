@@ -17,9 +17,9 @@ class StudentsController < ApplicationController
         session[:user_id] = @student.id
         session[:is_admin] = false
       end
-      redirect_to home_path
+      redirect_to students_path
     else
-      flash[:notice] = "Email was taken or password did not meet specifications!"
+      flash[:warning] = "Email was taken or password did not meet specifications!"
       redirect_to '/createaccount'
     end
   end
@@ -46,11 +46,11 @@ class StudentsController < ApplicationController
         flash[:notice] = "#{@student_updating.email} -- #{@student_updating.name} was successfully updated."
         redirect_to edit_student_path
       else
-        flash[:notice] = "Failed to save update. Invalid Email."
+        flash[:warning] = "Failed to save update. Invalid Email."
         redirect_to :action => 'edit', :id => params[:student][:id] , :method => :get
       end
     else
-      flash[:notice] = "Incorrect Password"
+      flash[:warning] = "Incorrect Password"
       redirect_to :action => 'edit', :id => params[:student][:id] , :method => :get
     end
   end
@@ -84,7 +84,7 @@ class StudentsController < ApplicationController
         redirect_to  :controller => 'home', :action => 'index'
       end
     else
-      flash[:notice] = "Incorrect Password!"
+      flash[:warning] = "Incorrect Password!"
       redirect_to :action => 'remove', :id => id , :method => :get
     end
   end

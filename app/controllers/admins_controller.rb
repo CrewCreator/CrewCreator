@@ -18,11 +18,11 @@ class AdminsController < ApplicationController
         session[:user_id] = @admin.id
         session[:is_admin] = true
       end
-      redirect_to  :controller => 'home', :action => 'index'
+       redirect_to '/admins'
     else
       # This line overrides the default rendering behavior, which would have been to render the 'create' view.
-      flash[:notice] = "Email was taken or password did not meet specifications!"
-      redirect_to '/createaccount'
+      flash[:warning] = "Email was taken or password did not meet specifications!"
+      redirect_to '/admins/new'
     end
   end
   
@@ -35,10 +35,10 @@ class AdminsController < ApplicationController
       if @current_user.update_attributes(admin_params_edit)
         flash[:notice] = "#{@current_user.email} -- #{@current_user.name} was successfully updated."
       else
-        flash[:notice] = "Failed to save update. Invalid Email."
+        flash[:warning] = "Failed to save update. Invalid Email."
       end
     else
-      flash[:notice] = "Incorrect Password"
+      flash[:warning] = "Incorrect Password"
     end
     redirect_to admin_account_path
   end
@@ -55,13 +55,13 @@ class AdminsController < ApplicationController
       if session[:user_id] == params[:admin][:id]
         flash[:notice] = "#{@current_user.email} -- #{@current_user.name} was successfully deleted. This was your account."
         session[:user_id] = nil
-        redirect_to '/createaccount'
+        redirect_to '/admins/new'
       else
         flash[:notice] = "#{removed_user.email} -- #{removed_user.name} was successfully deleted."
-        redirect_to  :controller => 'home', :action => 'index'
+        redirect_to '/admins'
       end
     else
-      flash[:notice] = "Incorrect Password!"
+      flash[:warning] = "Incorrect Password!"
       redirect_to :action => 'remove', :id => params[:admin][:id] , :method => :get
     end
   end

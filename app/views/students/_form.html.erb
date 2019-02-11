@@ -1,22 +1,26 @@
-<%= form_for @student do |f| %>
+<%= link_to 'Cancel', students_path, id: 'cancel' , :class => "btn btn-danger mt-3 ml-5"%>
 
-  <%= render 'layouts/error', object: @student, as: 'object' %>
+<div class="jumbotron w-50 mx-auto">
+  <%= form_for @student do |f| %>
   
-  <%= f.label "Full Name" %>
-  <%= f.text_field :name %> <br>
+    <%= render 'layouts/error', object: @student, as: 'object' %>
+    
+    <%= label_tag :name %>
+    <%= f.text_field :name , :placeholder => "Name" ,  :class => "form-control"  %>
+    
+    <%= label_tag :email , nil , :class => "mt-4" %>
+    <%= f.text_field :email , :placeholder => "Unique Email" ,  :class => "form-control" %>
   
-  <%= f.label "Email" %>
-  <%= f.text_field :email %> <br>
+    <% if params[:action] == "edit" %>
+      <%= render "layouts/confirm_update", object: @student, as: 'object' %>
+    <% else %>
+      <%= label_tag :password , nil , :class => "mt-4"%>
+      <%= f.password_field :password, :placeholder => "Must contain a digit and a symbol and be >= 8 char" , :class => "form-control" %>
+      
+      <%= f.label "Confirm Password" , nil , :class => "mt-4"%>
+      <%= f.password_field :password_confirmation , :placeholder => "Re-Enter Password" , :class => "form-control" %>
 
-  <% if params[:action] == "edit" %>
-    <%= render "layouts/confirm_update", object: @student, as: 'object' %>
-  <% else %>
-    <%= f.label "Password" %>
-    <%= f.password_field :password %>
-    <br/>
-    <%= f.label "Confirm Password" %>
-    <%= f.password_field :password_confirmation %>
-    <br/><br/>
-    <%= f.submit "Create Account" %>
+      <%= f.submit "Create Account", :class => "btn btn-primary mt-4" %>
+    <% end %>
   <% end %>
-<% end %>
+</div>

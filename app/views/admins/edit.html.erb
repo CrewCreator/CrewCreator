@@ -1,15 +1,15 @@
-<h1><%=@current_user.name%>'s Account</h1>
+<h1 class="display-4 mt-5 ml-5"><%=@current_user.name%> Details</h1>
 
-<%= form_for @current_user do |f| %>
-
-  <%= render "layouts/error", object: @current_user, as: 'object' %>
-
-  <%= f.label "Full Name" %>
-  <%= f.text_field :name %>
-  <br/><br/>
-  <%= f.label "Email" %>
-  <%= f.text_field :email %>
-
-  <%= render "layouts/confirm_update", object: @current_user, as: 'object' %>
-
-<% end %>
+<div class='jumbotron w-50 mx-auto mt-4'>
+  <%= form_for @current_user do |f| %>
+    <%= render "layouts/error", object: @current_user, as: 'object' %>
+  
+    <%= label_tag :name %>
+    <%= f.text_field :name , :class => "form-control" %>
+    
+    <%= label_tag :email , nil, :class => "mt-4" %>
+    <%= f.text_field :email , :class => "form-control" %>
+  
+    <%= render "layouts/confirm_update", object: @current_user, as: 'object' %>
+  <% end %>
+</div>

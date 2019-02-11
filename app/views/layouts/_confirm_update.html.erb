@@ -1,7 +1,8 @@
 <%= form_for object, url: {action: "update"}, :method => :POST do |f| %>
   <%= f.hidden_field :id, value: object.id %>
-  <%= f.label "Confirm Password" %>
-  <%= f.password_field :password, id: "admin_password" %>
   
-  <%= f.submit "Update #{object.name}", id: "confirm" %>
+  <%= f.label "Confirm Password" , :class => "mt-4"%>
+  <%= f.password_field :password, id: "admin_password" , placeholder: "Your Password", :class => " form-control" %>
+  
+  <%= f.submit "Update #{object.name}", id: "confirm" , :class => "btn btn-primary mt-4" %>
 <% end %>
