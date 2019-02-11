@@ -1,67 +1,52 @@
-<%= form_for [@project, @team] do |form| %>
-  
-  <%= render "layouts/error", object: @team, as: 'object' %>
 
-  <p>
-    * - required fields
-  </p>
+<div class='jumbotron w-50 mx-auto'>
+  <%= form_for [@project, @team] do |form| %>
+    <%= render "layouts/error", object: @team, as: 'object' %>
+  
+      <%= label_tag :name %> *
+      <%= form.text_field :name, id: "name", placeholder: "Gold Team", :class => " form-control" %>
 
-  <p>
-    <%= form.label :name %>*<br>
-    <%= form.text_field :name, id: "name" %>
-  </p>
-  
-  <% if @team and @team.students.size > 0 %>
-    <p>
-      Current Students <br>
-      <ul>
-      <% @team.students.each do |student| %>
-      <li>
-      <%= student.name %> (<%= student.email %>)
-      </li>
-      <% end %>
-      </ul>
-    </p>
-  <% end %>
-  
-  <% if is_admin_html %>
-    <p>
-      <%= form.label "Add/Remove Students" %><br>
+    <% if @team and @team.students.size > 0 %>
+      <p>
+        Current Students <br>
+        <ul>
+        <% @team.students.each do |student| %>
+        <li>
+        <%= student.name %> (<%= student.email %>)
+        </li>
+        <% end %>
+        </ul>
+      </p>
+    <% end %>
+    
+    <% if is_admin_html %>
       <% if params[:action] == "new" or params[:action] == "create" %>
-      <%= form.collection_check_boxes :student_ids, @project.section.students, :id, :email, checked: false %>
+        <br><%= form.label "Add/Remove Students" %><br>
+        <%= form.collection_check_boxes :student_ids, @project.section.students, :id, :email, checked: false %>
       <% else %>
-      <%= form.collection_check_boxes :student_ids, @team.project.section.students, :id, :email %>
+        <br><%= form.label "Add/Remove Students" %><br>
+        <%= form.collection_check_boxes :student_ids, @team.project.section.students, :id, :email %>
       <% end %>
-    </p>
-  <% end %>
-  
-  <p>
-    <%= form.label :version_control_link %><br>
-    <%= form.text_field :version_control_link, id: "version_control_link" %>
-  </p>
-  
-  <p>
-    <%= form.label :production_link %><br>
-    <%= form.text_field :production_link, id: "production_link" %>
-  </p>
-  
-  <p>
-    <%= form.label :management_link %><br>
-    <%= form.text_field :management_link, id: "management_link" %>
-  </p>
-  
-  <p>
-    <%= form.label :scrum_location %><br>
-    <%= form.text_field :scrum_location, id: "scrum_location" %>
-  </p>
-  
-  <p>
-    <%= form.label :scrum_time %><br>
-    <%= form.datetime_select(:scrum_time) %>
-  </p>
-  
-  <p>
-    <%= form.submit id: "submit-team" %>
-  </p>
+    <% end %>
 
-<% end %>
+    <%= label_tag :version_control_link , nil , :class => "mt-4" %>
+    <%= form.text_field :version_control_link, id: "version_control_link", placeholder: "https://github.tamu.edu/", :class => " form-control" %>
+  
+    <%= label_tag :production_link , nil , :class => "mt-4" %>
+    <%= form.text_field :production_link, id: "production_link", placeholder: "https://dashboard.heroku.com/", :class => " form-control" %>
+  
+    <%= label_tag :management_link , nil , :class => "mt-4" %>
+    <%= form.text_field :management_link, id: "management_link", placeholder: "https://www.pivotaltracker.com/dashboard", :class => " form-control" %>
+  
+    <%= label_tag :scrum_location , nil , :class => "mt-4" %>
+    <%= form.text_field :scrum_location, id: "scrum_location", placeholder: "Zachry 423A", :class => " form-control" %>
+  
+    <%= label_tag :scrum_time , nil , :class => "mt-4" %>
+    <br>
+    <%= form.datetime_select(:scrum_time) %>
+    
+    <br><br>
+    
+    <%= form.submit id: "submit-team" , :class => "btn btn-primary" %>
+  <% end %>
+</div>

@@ -51,7 +51,7 @@ class TeamsController < ApplicationController
       removed_team.destroy
       redirect_to section_projects_path(removed_team.project.section)
     else
-      flash[:notice] = "Incorrect Password!"
+      flash[:warning] = "Incorrect Password!"
       redirect_to remove_team_path(removed_team)
     end
   end

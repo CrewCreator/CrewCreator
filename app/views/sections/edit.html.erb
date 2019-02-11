@@ -1,5 +1,5 @@
-<h1>Update Section <%=@section.name%></h1>
+<h1 class="display-4 mt-4 ml-5">Update Section: <%= @section.number %> - <%= @section.semester %> <%= @section.year %></h1>
+
+<%= link_to 'Cancel', section_projects_path(@section), id: 'cancel', :class => "btn btn-danger ml-5"%>
 
 <%= render 'form' %>
-
-<%= link_to 'Cancel', section_projects_path(@section), id: 'cancel' %>

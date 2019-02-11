@@ -1,5 +1,7 @@
-<h1>Edit Team</h1>
+<h1 class="display-4 mt-5 ml-5 d-inline">Edit Team: <%= @team.name%></h1>
+<p class="text-muted d-inline mt-5">* - required fields</p>
+<br>
+
+<%= link_to 'Cancel', team_path(@team), id: 'cancel' , :class => "btn btn-danger mt-3 ml-5"%>
 
 <%= render 'form' %>
-
-<%= link_to 'Cancel', team_path(@team), id: 'cancel' %>
