@@ -41,7 +41,7 @@ describe CoursesController, type: :controller do
   
   describe "GET #edit" do
     it "renders edit template" do
-      get :edit, :params => {:id => "1"}
+      get :edit, params: {id: "1"}
       expect(response).to render_template("courses/edit")
     end
   end

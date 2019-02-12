@@ -13,11 +13,7 @@ class InstructorsController < ApplicationController
     @instructor = Instructor.new(instructor_params_create)
     if @instructor.save
       flash[:notice] = "#{@instructor.email} -- #{@instructor.name} was successfully created."
-      if !current_user
-        session[:user_id] = @instructor.id
-        session[:user] = "instructor"
-      end
-      redirect_to home_path
+      redirect_to instructors_path
     else
       flash[:notice] = "Email was taken or password did not meet specifications!"
       redirect_to '/instructors/new'
@@ -26,7 +22,7 @@ class InstructorsController < ApplicationController
   
   def edit
     id = params[:id]
-    if (id.to_i != session[:user_id].to_i && session[:user] != "admin") || current_user == nil
+    if (id.to_i != session[:user_id].to_i && session[:user] == "instructor") || current_user == nil || (session[:user] != "admin" && session[:user] != "instructor")
       flash[:warning] = "You do not have admin privileges. Please log-in as an admin to continue."
       redirect_to new_session_path
     end
@@ -35,7 +31,7 @@ class InstructorsController < ApplicationController
   
   def update
     id = params[:id]
-    if (id.to_i != session[:user_id].to_i && session[:user] != "admin") || current_user == nil
+    if (id.to_i != session[:user_id].to_i && session[:user] == "instructor") || current_user == nil || (session[:user] != "admin" && session[:user] != "instructor")
       flash[:warning] = "You do not have admin privileges. Please log-in as an admin to continue."
       redirect_to new_session_path
     end
