@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action :is_admin, only: [:create, :new, :edit, :update, :remove, :destroy]
+  before_action :is_admin, only: [:index, :create, :new, :edit, :update, :remove, :destroy]
     
   def index
     @admins = Admin.all

@@ -1,6 +1,6 @@
 Feature: Create Admin
-  As a admin
-  I want to be able to create an admin,
+  As a admin,
+  I want to be able to create an admin
   so that additional admins can setup and run courses
 
 Scenario: Admin sees the account page
@@ -20,6 +20,8 @@ Scenario: Admin creates an account
   And I fill in "admin_password_confirmation" with "password2@"
   And I press "Create Account"
   Then I should be on the home page
-  #check to make sure admin account was created
+  And I should see "any@thing.com"
   
-#add random user can't make an admin account
+Scenario: Not logged in user tries to make an admin account
+  When I go to the create admin page
+  Then I should be on the new session page

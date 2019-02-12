@@ -28,6 +28,12 @@ module NavigationHelpers
     when /^the admin profile\s?page$/
       '/admin_account'
       
+    when /^the instructor profile page for "(.*)"$/
+      edit_instructor_path(Instructor.find_by_email($1).id)
+      
+    when /^the all instructors page$/
+      instructors_path
+      
     when /^the course\s?page$/
       '/courses'
       

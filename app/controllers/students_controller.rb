@@ -41,7 +41,7 @@ class StudentsController < ApplicationController
     end
     @student_updating = Student.find(id)
     
-    if @current_user = Student.find_by_id(session[:user_id]).try(:authenticate, params[:student][:password]) || session[:user] == "admin"
+    if @current_user = Student.find_by_id(session[:user_id]).try(:authenticate, params[:student][:password]) || (session[:user] == "admin" && Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password]))
       if @student_updating.update_attributes(student_params_edit)
         flash[:notice] = "#{@student_updating.email} -- #{@student_updating.name} was successfully updated."
         redirect_to edit_student_path

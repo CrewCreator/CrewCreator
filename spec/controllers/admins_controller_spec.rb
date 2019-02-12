@@ -9,6 +9,7 @@ RSpec.describe AdminsController, type: :controller do
 
   describe "GET admin#index" do
       it "should list all the admins" do
+        login(@admin)
         get :index
         expect(response).to render_template("index")
       end

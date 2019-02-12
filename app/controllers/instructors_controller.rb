@@ -1,5 +1,5 @@
 class InstructorsController < ApplicationController
-  before_action :is_admin, only: [:create, :new, :remove, :destroy]
+  before_action :is_admin, only: [:index, :create, :new, :remove, :destroy]
     
   def index
     @instructors = Instructor.all
@@ -10,7 +10,7 @@ class InstructorsController < ApplicationController
   end
   
  def create
-    @instructor = Instructor.new(student_params_create)
+    @instructor = Instructor.new(instructor_params_create)
     if @instructor.save
       flash[:notice] = "#{@instructor.email} -- #{@instructor.name} was successfully created."
       if !current_user
@@ -20,7 +20,7 @@ class InstructorsController < ApplicationController
       redirect_to home_path
     else
       flash[:notice] = "Email was taken or password did not meet specifications!"
-      redirect_to '/createaccount'
+      redirect_to '/instructors/new'
     end
   end
   
@@ -30,7 +30,7 @@ class InstructorsController < ApplicationController
       flash[:warning] = "You do not have admin privileges. Please log-in as an admin to continue."
       redirect_to new_session_path
     end
-    @student = Instructor.find(id)
+    @instructor = Instructor.find(id)
   end
   
   def update
@@ -39,19 +39,19 @@ class InstructorsController < ApplicationController
       flash[:warning] = "You do not have admin privileges. Please log-in as an admin to continue."
       redirect_to new_session_path
     end
-    @student_updating = Instructor.find(id)
+    @instructor_updating = Instructor.find(id)
     
-    if @current_user = Instructor.find_by_id(session[:user_id]).try(:authenticate, params[:student][:password]) || session[:user] == "admin"
-      if @student_updating.update_attributes(student_params_edit)
-        flash[:notice] = "#{@student_updating.email} -- #{@student_updating.name} was successfully updated."
-        redirect_to edit_student_path
+    if @current_user = Instructor.find_by_id(session[:user_id]).try(:authenticate, params[:instructor][:password]) || session[:user] == "admin"
+      if @instructor_updating.update_attributes(instructor_params_edit)
+        flash[:notice] = "#{@instructor_updating.email} -- #{@instructor_updating.name} was successfully updated."
+        redirect_to edit_instructor_path
       else
         flash[:notice] = "Failed to save update. Invalid Email."
-        redirect_to :action => 'edit', :id => params[:student][:id] , :method => :get
+        redirect_to :action => 'edit', :id => params[:instructor][:id] , :method => :get
       end
     else
       flash[:notice] = "Incorrect Password"
-      redirect_to :action => 'edit', :id => params[:student][:id] , :method => :get
+      redirect_to :action => 'edit', :id => params[:instructor][:id] , :method => :get
     end
   end
   
@@ -73,7 +73,7 @@ class InstructorsController < ApplicationController
     end
     
     removed_user = Instructor.find_by_id(id)
-    if Instructor.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password]) || session[:user] == "admin"
+    if Instructor.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password]) || (session[:user] == "admin" && Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password]))
       Instructor.find_by_id(id).destroy
       if session[:user_id] == id
         flash[:notice] = "#{@current_user.email} -- #{@current_user.name} was successfully deleted. This was your account."

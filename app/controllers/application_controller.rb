@@ -16,6 +16,12 @@ class ApplicationController < ActionController::Base
           else
             @current_user = nil
           end
+        elsif session[:user] == "instructor"
+          if Instructor.exists? (session[:user_id])
+            @current_user ||= Instructor.find(session[:user_id])
+          else
+            @current_user = nil
+          end
         else
           @current_user = nil
         end
