@@ -22,28 +22,29 @@
         <%= link_to 'Sign Up', createaccount_path %> |
       <% end %>
       <% if is_admin_html %>
-        <%= link_to 'My Account', '/admin_account', :id => current_user.id, :method => :get %> |
+        <%= link_to 'My Account', '/admin_account', id: current_user.id, method: :get %> |
       <%end%>
       <% if is_user_html && !is_admin_html %>
-        <%= link_to 'My Student Account', "/students/#{current_user.id}/edit", :method => :get %> |
+        <%= link_to 'My Student Account', "/students/#{current_user.id}/edit", method: :get %> |
       <%end%>
-      <%= link_to 'View Courses', {:action => :index, :controller => :courses}, :method => :get %> |
-      <%= link_to 'View Admins', {:action => :index, :controller => :admins}, :method => :get %> |
+      <%= link_to 'View Courses', courses_path %> |
       <% if is_admin_html %>
-        <%= link_to 'View Students', {:action => :index, :controller => :students}, :method => :get %> |
+        <%= link_to 'View Admins', admins_path %> |
+        <%= link_to 'View Students', students_path %> |
+        <%= link_to 'View Skills', skills_path %> |
       <% end %>
-      <%= link_to 'View Skills', {:action => :index, :controller => :skills}, :method => :get %> |
+      <%= link_to 'Home', home_path %>
     </nav>
     
     <% if flash[:notice] %>
       <br/>
-      <div class="notice"><%= flash[:notice] %></div>
+      <div class='notice'><%= flash[:notice] %></div>
     <%elsif flash[:warning] %>
       <br/>
-      <div class="warning"><%= flash[:warning] %></div>
+      <div class='warning'><%= flash[:warning] %></div>
     <%elsif flash[:alert] %>
       <br/>
-      <div class="alert"><%= flash[:alert] %></div>
+      <div class='alert'><%= flash[:alert] %></div>
     <% end %>
   <%= yield %>
   </body>

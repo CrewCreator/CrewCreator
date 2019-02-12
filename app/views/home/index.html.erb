@@ -1,6 +1,23 @@
 <h1>CrewCreator</h1>
-<br\>
-<br\>
-<br\>
 
 <p> Welcome to Crew Creator</p>
+
+<% if is_user_html %>
+  <% get_years.each do |year| %>
+    <% get_semesters.each do |semester| %>
+    
+      <% if does_year_semester_exist(year, semester) %>
+        <div class='semester-year'>
+          <%= semester %> <%= year %> <br/>
+          <% get_sections(year, semester).each do |section| %>
+            <div class='section-info' style='display: inline-block'>
+              <%= section.course.name %> <%= link_to "#{section.number} #{section.semester}-#{section.year}", section_projects_path(section) %>
+            </div>
+          <% end %>
+        </div>
+        <br/>
+      <% end %>
+      
+    <% end %>
+  <% end %>
+<% end %>
