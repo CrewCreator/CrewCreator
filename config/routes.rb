@@ -32,7 +32,8 @@ Rails.application.routes.draw do
     get 'admins/:id/remove', to: 'admins#remove', as: 'remove_admin'
     
   resources :instructors
-  
+    get 'instructors/:id/remove', to: 'instructors#remove', as: 'remove_instructor'
+    
   resources :students, except: [:show]
     get 'createaccount', to: 'students#new', as: 'createaccount'
     post 'students/:id', to: 'students#update', as: 'update_student'
