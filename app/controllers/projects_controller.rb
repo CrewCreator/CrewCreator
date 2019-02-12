@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :is_admin, only: [:new , :create, :edit, :update, :remove, :destroy]
+  before_action :admin_access, only: [:new , :create, :edit, :update, :remove, :destroy]
   before_action :find_section, only: [:index, :new, :create]
   
   def index
@@ -56,8 +56,18 @@ class ProjectsController < ApplicationController
   end
   
   def destroy
-    removed_project = Project.find_by_id(params[:admin][:id])
-    if Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
+    if session[:user] == "admin"
+      removed_project = Project.find_by_id(params[:admin][:id])
+      check = Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
+    elsif session[:user] == "instructor"
+      removed_project = Project.find_by_id(params[:instructor][:id])
+      check = Instructor.find_by_id(session[:user_id]).try(:authenticate, params[:instructor][:password])
+    else
+      flash[:warning] = "Unauthorized action"
+      redirect_to home_path
+    end
+    
+    if check
       flash[:notice] = "#{removed_project.name} was successfully deleted."
       removed_project.destroy
       redirect_to section_projects_path(removed_project.section)
@@ -72,7 +82,16 @@ class ProjectsController < ApplicationController
   end
   
   private def find_section
-    @section = Section.find(params[:section_id])
+    if is_instructor_html
+      @section = Instructor.find_by_id(session[:user_id]).sections.find_by_id(params[:section_id])
+      if @section == nil
+        flash[:warning] = "Unauthorized action"
+        redirect_to new_session_path
+      end
+    else
+      @section = Section.find(params[:section_id])
+    end
+    return @section
   end
   
   #Handles intercept and paramater save for adding a skill

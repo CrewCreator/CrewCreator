@@ -36,10 +36,10 @@
   </li>
 </ul>
 
-<% if is_admin_html || is_student_on_team(current_user, @team) %>
+<% if admin_access_html || is_student_on_team(current_user, @team) %>
   <%= link_to "Edit Team", edit_team_path(@team) %></td>
 <% end %>
-<%if is_admin_html %>
+<%if admin_access_html %>
   <%= link_to "Delete Team", remove_team_path(@team) %>
 <% end %>
 <%= link_to 'Back', section_projects_path(@team.project.section), id: 'back' %>

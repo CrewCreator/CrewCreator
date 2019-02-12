@@ -7,7 +7,7 @@
         <th>Course Name</th>
         <th>Description</th>
         <th>Section(s)</th>
-        <% if is_admin_html %>
+        <% if admin_access_html %>
         <th>Options</th>
         <% end %>
         </tr>
@@ -27,13 +27,15 @@
                 </tr>
               </table>
             </td>
-            <% if is_admin_html %>
+            <% if admin_access_html %>
             <td> 
               <table>
                 <tr>
-                <td> <%= link_to 'Add Section', new_course_section_path(course), :id => "add_section_to_#{course.code}" %> </td>
-                <td> <%= link_to 'Edit', edit_course_path(course), :id => "edit_#{course.code}" %> </td>
-                <td> <%= link_to 'Delete', remove_course_path(course), :id => "delete_#{course.code}", :method => :get %> </td>
+                <td> <%= link_to 'Add Section', new_course_section_path(course), id: "add_section_to_#{course.code}" %> </td>
+                <% if is_admin_html %>
+                <td> <%= link_to 'Edit', edit_course_path(course), id: "edit_#{course.code}" %> </td>
+                <td> <%= link_to 'Delete', remove_course_path(course), id: "delete_#{course.code}", method: :get %> </td>
+                <% end %>
                 </tr>
               </table>
             </td>
@@ -43,7 +45,7 @@
       </tbody>
     </table>
     <% if is_admin_html %>
-      <%= button_to 'Create Course', {:action => :new, :controller => :courses}, :method => :get %>
+      <%= button_to 'Create Course', {action: :new, controller: :courses}, method: :get %>
     <% end %>
     <%= link_to 'Back', home_path, id: 'back' %>
 </div>

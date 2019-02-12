@@ -11,6 +11,7 @@ end
 World(WithinHelpers)
 
 Given /^(?:|I )am logged in as an admin$/ do
+  visit('/logout')
   Admin.create(name: "admin", email: "admin@admin.com", password: "password1!")
   visit("/sessions/new")
   fill_in("Email", with: "admin@admin.com")
@@ -27,6 +28,7 @@ Given /^(?:|I )have an admin account with name "(.*)" and email "(.*)" and passw
 end
 
 Given /^(?:|I )am logged in as "(.*)" with "(.*)"$/ do |email, password|
+  visit('/logout')
   visit("/sessions/new")
   fill_in("Email", :with => email)
   fill_in("Password", :with => password)

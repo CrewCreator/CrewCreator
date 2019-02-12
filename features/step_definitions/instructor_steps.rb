@@ -1,4 +1,5 @@
 Given /^(?:|I )am logged in as an instructor$/ do
+  visit('/logout')
   Instructor.create(name: "Prof", email: "prof@email.com", password: "password1!")
   visit("/sessions/new")
   fill_in("Email", with: "prof@email.com")

@@ -49,8 +49,17 @@ class SectionsController < ApplicationController
   end
   
   def destroy 
-    @section = find_section(params[:id])
-    if Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
+    if session[:user] == "admin"
+      @section = find_section(params[:id])
+      check = Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
+    elsif session[:user] == "instructor"
+      @section = find_section(params[:id])
+      check = Instructor.find_by_id(session[:user_id]).try(:authenticate, params[:instructor][:password])
+    else
+      flash[:warning] = "Unauthorized action"
+      redirect_to home_path
+    end
+    if check
       flash[:notice] = "#{@section.number} was successfully deleted."
       @section.destroy
       redirect_to courses_path
@@ -160,10 +169,12 @@ class SectionsController < ApplicationController
     if is_instructor_html
       @section = Instructor.find_by_id(session[:user_id]).sections.find_by_id(id)
       if @section == nil
+        flash[:warning] = "Unauthorized action"
         redirect_to new_session_path
       end
     else
       @section = Section.find(id)
     end
+    return @section
   end
 end
