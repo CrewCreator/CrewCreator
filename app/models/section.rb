@@ -1,6 +1,5 @@
 class Section < ApplicationRecord
   belongs_to :course, touch: true, validate: true, autosave: true
-  #belongs_to :admin
   has_many :projects, dependent: :delete_all
   has_many :teams, through: :projects
   has_and_belongs_to_many :students

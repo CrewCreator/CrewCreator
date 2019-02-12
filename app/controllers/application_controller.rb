@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
     def current_user
       if session[:user_id]
         if session[:user] == "admin"
-          puts session[:user]
           if Admin.exists? (session[:user_id])
             @current_user ||= Admin.find(session[:user_id])
           else
@@ -25,6 +24,22 @@ class ApplicationController < ActionController::Base
       end
     end
     
+  helper_method :admin_access_html
+    def admin_access_html
+      if is_admin_html || is_instructor_html
+        true
+      else
+        false
+      end
+    end
+    
+  helper_method :admin_access
+    def admin_access
+      if !is_admin_html && !is_instructor_html
+        redirect_to new_session_path
+      end
+    end
+  
   helper_method :is_admin
     def is_admin
       if session[:user] != "admin" || current_user.nil?

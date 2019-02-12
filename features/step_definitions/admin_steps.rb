@@ -13,8 +13,8 @@ World(WithinHelpers)
 Given /^(?:|I )am logged in as an admin$/ do
   Admin.create(name: "admin", email: "admin@admin.com", password: "password1!")
   visit("/sessions/new")
-  fill_in("Email", :with => "admin@admin.com")
-  fill_in("Password", :with => "password1!")
+  fill_in("Email", with: "admin@admin.com")
+  fill_in("Password", with: "password1!")
   click_button("Login")
 end
 

@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     if user = Admin.find_by_email(params[:email])
       if user.authenticate(params[:password])
         session[:user_id] = user.id
-        session[:user] = :admin
+        session[:user] = "admin"
         redirect_to controller: 'home', action: 'index'
       else
         flash[:notice] = "Failed to Log In! Password is invalid"
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     elsif user = Student.find_by_email(params[:email])
       if user.authenticate(params[:password])
         session[:user_id] = user.id
-        session[:user] = :student
+        session[:user] = "student"
         redirect_to controller: 'home', action: 'index'
       else
         flash[:notice] = "Failed to Log In! Password is invalid"
@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
     elsif user = Instructor.find_by_email(params[:email])
       if user.authenticate(params[:password])
         session[:user_id] = user.id
-        session[:user] = :instructor
+        session[:user] = "instructor"
         redirect_to controller: 'home', action: 'index'
       else
         flash[:notice] = "Failed to Log In! Password is invalid"

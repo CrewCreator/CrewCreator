@@ -1,5 +1,5 @@
 class SectionsController < ApplicationController
-  before_action :is_admin, only: [:new , :create, :edit, :update, :remove, :destroy, :roster, :update_roster]
+  before_action :admin_access, only: [:new, :create, :edit, :update, :remove, :destroy, :roster, :update_roster]
   before_action :is_student, only: [:join, :leave]
   
   def new
@@ -8,7 +8,7 @@ class SectionsController < ApplicationController
   end
   
   def show
-    @section = Section.find(params[:id])
+    @section = find_section(params[:id])
   end
   
   def index 
@@ -19,6 +19,10 @@ class SectionsController < ApplicationController
     @course = Course.find(params[:course_id])
     @section = @course.sections.build(section_params)
     if @section.save
+      if is_instructor_html
+        user = Instructor.find_by_id(session[:user_id])
+        user.sections << @section
+      end
       redirect_to courses_path
     else
       render 'new'
@@ -26,11 +30,11 @@ class SectionsController < ApplicationController
   end
   
   def edit
-    @section = Section.find(params[:id])
+    @section = find_section(params[:id])
   end
   
   def update
-    @section = Section.find(params[:id])
+    @section = find_section(params[:id])
     if @section.update_attributes(section_params)
       flash[:notice] = "Section #{@section.number} was successfully updated."
       redirect_to section_projects_path(@section)
@@ -41,14 +45,14 @@ class SectionsController < ApplicationController
   end
   
   def remove 
-    @section = Section.find(params[:id])
+    @section = find_section(params[:id])
   end
   
   def destroy 
-    removed_section = Section.find_by_id(params[:admin][:id])
+    @section = find_section(params[:id])
     if Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
-      flash[:notice] = "#{removed_section.number} was successfully deleted."
-      removed_section.destroy
+      flash[:notice] = "#{@section.number} was successfully deleted."
+      @section.destroy
       redirect_to courses_path
     else
       flash[:notice] = "Incorrect Password!"
@@ -57,11 +61,11 @@ class SectionsController < ApplicationController
   end 
   
   def roster
-    @section = Section.find(params[:section_id])
+    @section = find_section(params[:section_id])
   end
   
   def update_roster
-    @section = Section.find(params[:section_id])
+    @section = find_section(params[:section_id])
     # does any roster updating need to happen?
     if params[:section].present? and params[:section][:emails_attributes].present?
       
@@ -149,6 +153,17 @@ class SectionsController < ApplicationController
   private def remove_student_from_teams(student)
     @section.teams.each do |team|
       team.students.delete(student)
+    end
+  end
+  
+  private def find_section(id)
+    if is_instructor_html
+      @section = Instructor.find_by_id(session[:user_id]).sections.find_by_id(id)
+      if @section == nil
+        redirect_to new_session_path
+      end
+    else
+      @section = Section.find(id)
     end
   end
 end

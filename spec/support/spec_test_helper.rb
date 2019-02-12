@@ -7,18 +7,23 @@ module SpecTestHelper
   def login(user)
     if Admin.find_by_email(user.email)
       session[:user_id] = user.id
-      session[:is_admin] = true
+      session[:user] = "admin"
     elsif Student.find_by_email(user.email)
       session[:user_id] = user.id
-      session[:is_admin] = false
+      session[:user] = "student"
+    elsif Instructor.find_by_email(user.email)
+      session[:user_id] = user.id
+      session[:user] = "instructor"
     end
   end
 
   def current_user
-    if session[:is_admin] == true
+    if session[:user] == "admin"
       user = Admin.find(session[:user_id])
-    elsif session[:is_admin] == false
+    elsif session[:user] == "student"
       user = Student.find(session[:user_id])
+    elsif session[:user] == "instructor"
+      user = Instructor.find(session[:user_id])
     end
     return user
   end
