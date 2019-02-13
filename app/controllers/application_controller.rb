@@ -30,6 +30,15 @@ class ApplicationController < ActionController::Base
       end
     end
     
+  helper_method :has_section_html
+    def has_section_html(id)
+      if is_instructor_html && current_user.sections.find_by_id(id) || is_admin_html
+        true
+      else
+        false
+      end
+    end
+  
   helper_method :super_access_html
     def super_access_html
       if is_admin_html || is_instructor_html
