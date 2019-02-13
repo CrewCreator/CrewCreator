@@ -7,5 +7,9 @@ class HomeController < ApplicationController
     if is_student_html
       @sections = current_user.sections
     end
+    
+    if is_instructor_html
+      @sections = current_user.sections
+    end
   end
 end
