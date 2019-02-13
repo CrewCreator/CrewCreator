@@ -9,7 +9,7 @@ Feature: Admin create course
     Given I have an admin account
     Given I am logged in as "admin@admin.com" with "password1!"
     When I am on the courses page
-    And I press "Create Course"
+    And I press "Add Course"
     Then I should be on the new course page
     And I should see "Name"
     And I should see "Code"

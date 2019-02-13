@@ -17,7 +17,7 @@ class StudentsController < ApplicationController
         session[:user_id] = @student.id
         session[:is_admin] = false
       end
-      redirect_to students_path
+      redirect_to '/home'
     else
       flash[:warning] = "Email was taken or password did not meet specifications!"
       redirect_to '/createaccount'

@@ -19,12 +19,12 @@ When(/^I go create a skill$/) do
   visit "skills/new"
 end
 
-Then(/^I click the button create skill$/) do
-  click_button("Add a New Skill")
+Then(/^I click the button add skill$/) do
+  click_button("Add Skill")
 end
 
 Then(/^I should see the create skill page$/) do
-  expect(page).to have_content("Create a Skill")
+  expect(page).to have_content("Add Skill")
 end
 
 
