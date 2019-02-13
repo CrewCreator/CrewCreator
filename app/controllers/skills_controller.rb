@@ -1,5 +1,5 @@
 class SkillsController < ApplicationController
-  before_action :is_admin, only: [:new , :create, :edit, :update, :remove, :destroy]
+  before_action :super_access, only: [:new , :create, :edit, :update, :remove, :destroy]
   
   def index
     @skills = Skill.all

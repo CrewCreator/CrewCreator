@@ -24,12 +24,16 @@
       <% if is_admin_html %>
         <%= link_to 'My Account', '/admin_account', id: current_user.id, method: :get %> |
       <%end%>
-      <% if is_user_html && !is_admin_html %>
-        <%= link_to 'My Student Account', "/students/#{current_user.id}/edit", method: :get %> |
+      <% if is_instructor_html %>
+        <%= link_to 'My Account', edit_instructor_path(id: current_user.id) %> |
+      <%end%>
+      <% if is_student_html %>
+        <%= link_to 'My Student Account', edit_student_path(current_user.id) %> |
       <%end%>
       <%= link_to 'View Courses', courses_path %> |
       <% if is_admin_html %>
         <%= link_to 'View Admins', admins_path %> |
+        <%= link_to 'View Instructors', instructors_path %> |
         <%= link_to 'View Students', students_path %> |
         <%= link_to 'View Skills', skills_path %> |
       <% end %>

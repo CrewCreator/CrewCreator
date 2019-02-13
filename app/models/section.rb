@@ -1,9 +1,9 @@
 class Section < ApplicationRecord
   belongs_to :course, touch: true, validate: true, autosave: true
-  #belongs_to :admin
   has_many :projects, dependent: :delete_all
   has_many :teams, through: :projects
   has_and_belongs_to_many :students
+  has_and_belongs_to_many :instructors
   has_and_belongs_to_many :emails
   accepts_nested_attributes_for :emails, allow_destroy: true
   

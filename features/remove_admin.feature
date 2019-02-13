@@ -35,7 +35,7 @@ Feature: Remove Admin
     When I am on the all admin accounts page
     Then I should not see "Remove"
   
-  Scenario: Admin attempts edits his admin profile with wrong password
+  Scenario: Admin attempts to remove an admin with wrong password
     Given I have an admin account with name "User One" and email "admin1@admin.com" and password "password1!"
     Given I have an admin account with name "User Two" and email "admin2@admin.com" and password "password1!"
     Given I am logged in as "admin1@admin.com" with "password1!"

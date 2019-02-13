@@ -1,6 +1,11 @@
 module HomeHelper
   def get_years
-    @sections.order(year: :desc).distinct.pluck(:year)
+    if @sections
+      @sections.order(year: :desc).distinct.pluck(:year)
+    else
+      @sections = Section.all
+      @sections.order(year: :desc).distinct.pluck(:year)
+    end
   end
   
   def get_semesters

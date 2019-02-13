@@ -17,8 +17,8 @@
             <td> <%= student.name %> </td>
             <td> <%= student.email %> </td>
             <% if is_admin_html %>
-              <td> <%= link_to 'Edit', edit_student_path(student), :id => student.id %> </td>
-              <td><%= link_to "Remove #{student.name}", remove_student_path(student), :id => student.id, :method => :get %></td>
+              <td> <%= link_to 'Edit', edit_student_path(student), id: student.id %> </td>
+              <td><%= link_to "Remove #{student.name}", remove_student_path(student), id: student.id, method: :get %></td>
             <%end%>
           </tr>
         <% end %>
