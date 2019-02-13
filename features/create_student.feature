@@ -24,11 +24,11 @@ Feature: Create Student
     And I fill in "student_password_confirmation" with "password1!"
     And press "Create Account"
     Then I should be on the home page
-    And I should see "Logged in as new@email.com"
+    And I should see "new@email.com"
     
   Scenario: Student with account logs in
     Given I have a student account
     And I am logged in as "student@email.com" with "password1!"
     When I am on the course page
-    Then I should see "Logged in as student@email.com"
+    Then I should see "student@email.com"
     And I should not see "Options"

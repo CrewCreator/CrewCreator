@@ -7,7 +7,7 @@ Scenario: Admin sees the account page
   Given I have an admin account
   Given I am logged in as "admin@admin.com" with "password1!"
   When I am on the home page
-  Then I should see "Logged in as admin@admin.com"
+  Then I should see "admin@admin.com"
 
 Scenario: Admin creates an account
   Given I have an admin account
@@ -19,7 +19,6 @@ Scenario: Admin creates an account
   And I fill in "admin_password" with "password2@"
   And I fill in "admin_password_confirmation" with "password2@"
   And I press "Create Account"
-  Then I should be on the home page
-  #check to make sure admin account was created
-  
+  Then I should be on the all admins account page
+
 #add random user can't make an admin account
