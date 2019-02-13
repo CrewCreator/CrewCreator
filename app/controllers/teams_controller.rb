@@ -88,7 +88,7 @@ class TeamsController < ApplicationController
   end
   
   private def is_admin_or_student_on_team(team)
-    unless is_student_on_team(current_user, team) || is_admin_html
+    unless is_student_on_team(current_user, team) || super_access_html
       redirect_to new_session_path
     end
   end
