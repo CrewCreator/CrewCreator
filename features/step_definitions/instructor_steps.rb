@@ -14,3 +14,13 @@ end
 Given /^(?:|I )have an instructor account with name "(.*)" and email "(.*)" and password "(.*)"$/ do |name, email, password|
   Instructor.create(name: name, email: email, password: password)
 end
+
+Given /^Instructor "(.*)" has made section "(.*)" for course "(.*)"$/ do |email, number, code|
+  course = Course.find_by_code(code)
+  instructor = Instructor.find_by_email(email)
+  if course == nil
+    course = Course.create!(name: "Default", code: code, description: "anything")
+  end
+  section = course.sections.create!(number: number, year: "2019", semester: "Spring")
+  instructor.sections << section
+end
