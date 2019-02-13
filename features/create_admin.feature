@@ -19,6 +19,6 @@ Scenario: Admin creates an account
   And I fill in "admin_password" with "password2@"
   And I fill in "admin_password_confirmation" with "password2@"
   And I press "Create Account"
-  Then I should be on the all admins account page
+  Then I should be on the all admin accounts page
 
 #add random user can't make an admin account
