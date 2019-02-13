@@ -20,8 +20,8 @@ Feature: Remove Instructor
     Then I should see "prof@email.com"
     And I fill in "admin_password" with "password1!"
     And I press "Remove Prof"
-    Then I am on the all instructors page
-    Then I should not see "Prof"
+    And I should be on the all instructors page
+    Then I should see "successfully deleted"
   
   Scenario: Non-Authenticated user attempts to view the remove admin buttons
     When I am on the all instructors page

@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   before_action :is_admin, only: [:index]
+  before_action :me_student, only: [:edit, :update, :remove, :destroy]
   
   def index
     @students = Student.all
@@ -26,19 +27,11 @@ class StudentsController < ApplicationController
   
   def edit
     id = params[:id]
-    if (id.to_i != session[:user_id].to_i && session[:user] != "admin") || current_user == nil
-      flash[:warning] = "You do not have admin privileges. Please log-in as an admin to continue."
-      redirect_to new_session_path
-    end
     @student = Student.find(id)
   end
   
   def update
     id = params[:id]
-    if (id.to_i != session[:user_id].to_i && session[:user] != "admin") || current_user == nil
-      flash[:warning] = "You do not have admin privileges. Please log-in as an admin to continue."
-      redirect_to new_session_path
-    end
     @student_updating = Student.find(id)
     
     if @current_user = Student.find_by_id(session[:user_id]).try(:authenticate, params[:student][:password]) || (session[:user] == "admin" && Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password]))
@@ -57,20 +50,12 @@ class StudentsController < ApplicationController
   
   def remove
     id = params[:id]
-    if (id.to_i != session[:user_id].to_i && session[:user] != "admin") || current_user == nil
-      flash[:warning] = "You do not have admin privileges. Please log-in as an admin to continue."
-      redirect_to new_session_path
-    end
     @user_removing = Student.find_by_id(id)
     @current_user = current_user
   end
   
   def destroy
     id = params[:id]
-    if (id.to_i != session[:user_id].to_i && session[:user] != "admin") || current_user == nil
-      flash[:warning] = "You do not have admin privileges. Please log-in as an admin to continue."
-      redirect_to new_session_path
-    end
     
     removed_user = Student.find_by_id(id)
     if Student.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password]) || session[:user] == "admin"
@@ -86,6 +71,13 @@ class StudentsController < ApplicationController
     else
       flash[:notice] = "Incorrect Password!"
       redirect_to :action => 'remove', :id => id , :method => :get
+    end
+  end
+  
+  private def me_student(id=params[:id])
+    if (id.to_i != session[:user_id].to_i && session[:user] != "admin") || current_user == nil
+      flash[:warning] = "Unauthorized action"
+      redirect_to new_session_path
     end
   end
   

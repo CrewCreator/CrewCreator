@@ -1,5 +1,5 @@
 class SectionsController < ApplicationController
-  before_action :admin_access, only: [:new, :create, :edit, :update, :remove, :destroy, :roster, :update_roster]
+  before_action :super_access, only: [:new, :create, :edit, :update, :remove, :destroy, :roster, :update_roster]
   before_action :is_student, only: [:join, :leave]
   
   def new
@@ -8,7 +8,7 @@ class SectionsController < ApplicationController
   end
   
   def show
-    @section = find_section(params[:id])
+    @section = Section.find_by_id(params[:id])
   end
   
   def index 

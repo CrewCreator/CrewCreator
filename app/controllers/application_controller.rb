@@ -30,8 +30,8 @@ class ApplicationController < ActionController::Base
       end
     end
     
-  helper_method :admin_access_html
-    def admin_access_html
+  helper_method :super_access_html
+    def super_access_html
       if is_admin_html || is_instructor_html
         true
       else
@@ -39,8 +39,8 @@ class ApplicationController < ActionController::Base
       end
     end
     
-  helper_method :admin_access
-    def admin_access
+  helper_method :super_access
+    def super_access
       if !is_admin_html && !is_instructor_html
         redirect_to new_session_path
       end

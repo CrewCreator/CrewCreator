@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :admin_access, only: [:new , :create, :remove, :destroy]
+  before_action :super_access, only: [:new , :create, :remove, :destroy]
   before_action :find_project, only: [:new, :create]
   
   def index

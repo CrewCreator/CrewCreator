@@ -28,13 +28,13 @@ describe CoursesController, type: :controller do
   
   describe "POST #create" do
     it "expects http redirect on success" do
-      get :create, :params => {:course => {:code => "xxx-123", :name => "Anything", :description => "Anything"}, :section => {:number => "501", :semester => "Fall", :year => "2019"}}
+      get :create, params: {course: {code: "xxx-123", name: "Anything", description: "Anything"}, section: {number: "501", semester: "Fall", year: "2019"}}
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(courses_path)
     end
     
     it "rerenders page on failure" do
-      get :create, :params => {:course => {:code => "BadCode", :name => "Anything", :description => "Anything"}, :section => {:number => "501", :semester => "Fall", :year => "2019"}}
+      get :create, params: {course: {code: "BadCode", name: "Anything", description: "Anything"}, section: {number: "501", semester: "Fall", year: "2019"}}
       expect(response).to have_http_status(:success)
     end
   end
@@ -48,14 +48,14 @@ describe CoursesController, type: :controller do
   
   describe "POST #update" do
     it "expects http redirect on success" do
-      post :update, :params => {:course => {:code => "CSCE-431", :name => "Software Engineering", :description => "Making software great again!"}, :id => "1"}
+      post :update, params: {course: {code: "CSCE-431", name: "Software Engineering", description: "Making software great again!"}, id: "1"}
       expect(response).to have_http_status(:redirect)
     end
   end
   
   describe "GET #remove" do
     it "renders remove template" do
-      get :remove, :params => {:id => "1"}
+      get :remove, params: {id: "1"}
       #expect(response).to render_template("remove")
       expect(response).to have_http_status(:success)
     end
@@ -63,7 +63,7 @@ describe CoursesController, type: :controller do
   
   describe "POST #destroy" do
     it "expects http success" do
-      post :destroy, :params => {:id => "1", :admin => {:id => "1"}}
+      post :destroy, params: {id: "1", admin: {id: "1"}}
       expect(response).to have_http_status(:redirect)
     end
   end

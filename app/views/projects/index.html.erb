@@ -1,6 +1,6 @@
 <h1>Projects for Section <%= @section.number %> - <%= @section.semester %> <%= @section.year %> </h1>
 
-<% if admin_access_html %>
+<% if super_access_html %>
 <p>
 <%= link_to 'Edit Section' , edit_section_path(@section), id: "edit_section_#{@section.number}" %>
 <%= link_to 'Delete Section' , remove_section_path(@section), id: "remove_section_#{@section.number}" %>
@@ -28,7 +28,7 @@
     <th>Difficulty</th>
     <th><%= link_to 'Skills', skills_path %></th>
     <th><%= link_to 'Teams', section_teams_path(@section) %></th>
-    <% if is_admin_html %>
+    <% if super_access_html %>
       <th>Options</th>
     <% end %>
   </tr>
@@ -66,7 +66,7 @@
         </table>
       </td>
       
-      <% if admin_access_html %>
+      <% if super_access_html %>
        <td>
           <table>
             <td><%= link_to 'Add Team', new_project_team_path(project), id: "add-team" %></td> 
@@ -80,7 +80,7 @@
   <% end %>
 </table>
 
-<% if admin_access_html %>
+<% if super_access_html %>
   <%= button_to "New Project", {:action => :new, :controller => :projects}, :method => :get, :id => "new_project"  %>
 <% end %>
 <%= link_to 'Back', courses_path, id: 'back' %>

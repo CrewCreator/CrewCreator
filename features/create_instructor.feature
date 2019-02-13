@@ -22,6 +22,6 @@ Feature: Create Instructor
     And I fill in "instructor_password" with "password2@"
     And I fill in "instructor_password_confirmation" with "password2@"
     And I press "Create Account"
-    Then I should be on the home page
+    Then I should be on the instructors page
     And I should see "any@thing.com"
   

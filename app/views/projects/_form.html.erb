@@ -4,23 +4,23 @@
 
   <p>
     <%= form.label :name %><br>
-    <%= form.text_field :name, :id =>"name" %>
+    <%= form.text_field :name, id: "name" %>
   </p>
   
   <p>
     <%= form.label :description %><br>
-    <%= form.text_area :description, :id => "description" %>
+    <%= form.text_area :description, id: "description" %>
   </p>
   
   <p>
     <%= form.label :difficulty %><br>
-    <%= form.select :difficulty, Project.difficulties, :id => "difficulty" %>
+    <%= form.select :difficulty, Project.difficulties, id: "difficulty" %>
   </p>
   
   <p>
     <%= form.label :skills %><br>
     <%= form.collection_check_boxes :skill_ids, Skill.all, :id, :name %> 
-    <%= form.submit 'Add Skill', :controller => 'projects', :action => 'handle_add_skills' %>
+    <%= form.submit 'Add Skill', controller: 'projects', action: 'handle_add_skills' %>
   </p>
   
   <p>

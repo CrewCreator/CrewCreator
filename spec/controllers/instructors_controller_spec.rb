@@ -73,4 +73,110 @@ RSpec.describe InstructorsController, type: :controller do
       expect(response).to redirect_to(new_session_path)
     end
   end
+  
+  describe "POST instructor#update" do
+    it "should redirect for different instructor" do
+      other = create(:instructor)
+      login(other)
+      post :update, params: {id: "1", instructor: {name: "Any", email: "any@any.com", password: "password1!"}}
+      expect(response).to redirect_to(new_session_path)
+    end
+    it "should redirect for other user" do
+      post :update, params: {id: "1", instructor: {name: "Any", email: "any@any.com", password: "password1!"}}
+      expect(response).to redirect_to(new_session_path)
+    end
+    it "should let admins update with correct password and edits" do
+      login(@admin)
+      post :update, params: {id: "1", instructor: {name: "Any", email: "any@any.com", password: "password1!"}}
+      expect(response).to redirect_to(instructors_path)
+    end
+    it "should not let admins update with incorrect password and edits" do
+      login(@admin)
+      post :update, params: {id: "1", instructor: {name: "Any", email: "any@any.com", password: "bad_password!"}}
+      expect(response).to redirect_to(edit_instructor_path("1"))
+      post :update, params: {id: "1", instructor: {name: "Any", email: "bad_email", password: "password1!"}}
+      expect(response).to redirect_to(edit_instructor_path(1))
+      post :update, params: {id: "1", instructor: {name: "", email: "any@any.com", password: "password1!"}}
+      expect(response).to redirect_to(edit_instructor_path(1))
+    end
+    it "should let same instructor update with correct password and edits"  do
+      login(@instructor)
+      post :update, params: {id: "1", instructor: {name: "Any", email: "any@any.com", password: "password1!"}}
+      expect(response).to redirect_to(edit_instructor_path(1))
+    end
+    it "should not let same instructor update with incorrect password and edits" do
+      login(@instructor)
+      post :update, params: {id: "1", instructor: {name: "Any", email: "any@any.com", password: "bad_password!"}}
+      expect(response).to redirect_to(edit_instructor_path(1))
+      post :update, params: {id: "1", instructor: {name: "Any", email: "bad_email", password: "password1!"}}
+      expect(response).to redirect_to(edit_instructor_path(1))
+      post :update, params: {id: "1", instructor: {name: "", email: "any@any.com", password: "password1!"}}
+      expect(response).to redirect_to(edit_instructor_path(1))
+    end
+  end
+  
+  describe "GET instructor#remove" do
+    it "should render for admin" do
+      login(@admin)
+      get :remove, params: {id: "1"}
+      expect(response).to render_template("remove")
+    end
+    it "should render for instructor's account" do
+      login(@instructor)
+      get :remove, params: {id: "1"}
+      expect(response).to render_template("remove")
+    end
+    it "should redirect for different instructor" do
+      other = create(:instructor)
+      login(other)
+      get :remove, params: {id: "1"}
+      expect(response).to redirect_to(new_session_path)
+    end
+    it "should redirect for other users" do
+      get :remove, params: {id: "1"}
+      expect(response).to redirect_to(new_session_path)
+      
+      other = create(:student)
+      login(other)
+      get :remove, params: {id: "1"}
+      expect(response).to redirect_to(new_session_path)
+    end
+  end
+  
+  describe "POST instructor#destroy" do
+    it "should not delete instructor is user does not have admin access" do
+      other = create(:student)
+      post :destroy, params: {id: "1", instructor: {id: "1", password: "password1!"}}
+      expect(response).to redirect_to(new_session_path)
+      login(other)
+      post :destroy, params: {id: "1", instructor: {id: "1", password: "password1!"}}
+      expect(response).to redirect_to(new_session_path)
+    end
+    it "should delete instructor if user is an admin with correct password" do
+      login(@admin)
+      post :destroy, params: {id: "1", instructor: {id: "1", password: "password1!"}}
+      expect(response).to redirect_to(instructors_path)
+    end
+    it "should not delete instructor if user is an admin with incorrect password" do
+      login(@admin)
+      post :destroy, params: {id: "1", instructor: {id: "1", password: "bad_password!"}}
+      expect(response).to redirect_to(remove_instructor_path("1"))
+    end
+    it "should delete instructor if user is that instructor with correct password" do
+      login(@instructor)
+      post :destroy, params: {id: "1", instructor: {id: "1", password: "password1!"}}
+      expect(response).to redirect_to(home_path)
+    end
+    it "should not delete instructor if user is that instructor with incorrect password" do
+      login(@instructor)
+      post :destroy, params: {id: "1", instructor: {id: "1", password: "bad_password!"}}
+      expect(response).to redirect_to(remove_instructor_path("1"))
+    end
+    it "should not delete instructor if user is an instructor but not the same instructor" do
+      other = create(:instructor)
+      login(other)
+      post :destroy, params: {id: "1", instructor: {id: "1", password: "bad_password!"}}
+      expect(response).to redirect_to(new_session_path)
+    end
+  end
 end

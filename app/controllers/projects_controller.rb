@@ -1,8 +1,10 @@
 class ProjectsController < ApplicationController
-  before_action :admin_access, only: [:new , :create, :edit, :update, :remove, :destroy]
-  before_action :find_section, only: [:index, :new, :create]
+  before_action :super_access, only: [:new, :create, :edit, :update, :remove, :destroy]
+  before_action :find_section, only: [:new, :create]
+  before_action :find_project, only: [:edit, :update, :remove, :destroy]
   
   def index
+    @section = Section.find_by_id(params[:section_id])
     @projects = @section.projects
   end
   
@@ -15,10 +17,9 @@ class ProjectsController < ApplicationController
   end
   
   def edit
+    @project = find_project
     if session[:form_values]
       @project = prepare_project(Project.find(params[:id]))
-    else
-      @project = Project.find(params[:id])
     end
   end
   
@@ -41,7 +42,7 @@ class ProjectsController < ApplicationController
     if params[:commit] == "Add Skill"
       handle_add_skill
     else
-      @project = Project.find(params[:id])
+      @project = find_project
       if @project.update_attributes(project_params)
         flash[:notice] = "#{@project.name} was successfully updated."
         redirect_to section_projects_path(@project.section)
@@ -52,7 +53,7 @@ class ProjectsController < ApplicationController
   end
   
   def remove
-    @project = Project.find_by_id(params[:id])
+    @project = find_project
   end
   
   def destroy
@@ -60,11 +61,11 @@ class ProjectsController < ApplicationController
       removed_project = Project.find_by_id(params[:admin][:id])
       check = Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
     elsif session[:user] == "instructor"
-      removed_project = Project.find_by_id(params[:instructor][:id])
+      removed_project = find_project(params[:instructor][:id])
       check = Instructor.find_by_id(session[:user_id]).try(:authenticate, params[:instructor][:password])
     else
       flash[:warning] = "Unauthorized action"
-      redirect_to home_path
+      redirect_to new_session_path
     end
     
     if check
@@ -82,16 +83,31 @@ class ProjectsController < ApplicationController
   end
   
   private def find_section
+    id = params[:section_id]
+  
     if is_instructor_html
-      @section = Instructor.find_by_id(session[:user_id]).sections.find_by_id(params[:section_id])
+      @section = Instructor.find_by_id(session[:user_id]).sections.find_by_id(id)
       if @section == nil
         flash[:warning] = "Unauthorized action"
         redirect_to new_session_path
       end
     else
-      @section = Section.find(params[:section_id])
+      @section = Section.find(id)
     end
     return @section
+  end
+  
+  private def find_project(id=params[:id])
+    if is_instructor_html
+      @project = Project.find_by_id(id)
+      if Instructor.find_by_id(session[:user_id]).sections.find_by_id(@project.section.id) == nil
+        flash[:warning] = "Unauthorized action"
+        redirect_to new_session_path
+      end
+    else
+      @project = Project.find_by_id(id)
+    end
+    return @project
   end
   
   #Handles intercept and paramater save for adding a skill

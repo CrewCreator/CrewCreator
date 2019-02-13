@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         session[:user] = "admin"
         redirect_to controller: 'home', action: 'index'
       else
-        flash[:notice] = "Failed to Log In! Password is invalid"
+        flash[:notice] = "Failed to Log In!"
         redirect_to '/login'
       end
     elsif user = Student.find_by_email(params[:email])
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
         session[:user] = "student"
         redirect_to controller: 'home', action: 'index'
       else
-        flash[:notice] = "Failed to Log In! Password is invalid"
+        flash[:notice] = "Failed to Log In!"
         redirect_to '/login'
       end
     elsif user = Instructor.find_by_email(params[:email])
@@ -30,11 +30,11 @@ class SessionsController < ApplicationController
         session[:user] = "instructor"
         redirect_to controller: 'home', action: 'index'
       else
-        flash[:notice] = "Failed to Log In! Password is invalid"
+        flash[:notice] = "Failed to Log In!"
         redirect_to '/login'
       end
     else
-      flash[:notice] = "Failed to Log In! Account not found"
+      flash[:notice] = "Failed to Log In!"
       redirect_to '/login'
     end
   end
