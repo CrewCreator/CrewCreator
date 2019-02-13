@@ -9,13 +9,13 @@ Feature: Edit Admin
     When I am on the admin profile page
     Then I should see "admin"
     When I am on the admin profile page
-    Then I should see "admin's Account"
+    Then I should see "admin Details"
     
   Scenario: Admin sees his admin profile
     Given I have an admin account
     Given I am logged in as "admin@admin.com" with "password1!"
     When I am on the admin profile page
-    Then I should see "admin's Account"
+    Then I should see "admin Details"
     Then I should see "admin"
     Then I should see "admin@admin.com"
   
