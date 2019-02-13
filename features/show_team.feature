@@ -1,4 +1,4 @@
-Feature: Remove a Team
+Feature: Show a Team
   As an admin
   I want to view information about a team
   so that I can track progress of teams
@@ -19,8 +19,6 @@ Feature: Remove a Team
     Given I am logged in as "admin@admin.com" with "password1!"
     Given I have a course with name "any-course" and code "code-123" and description "any-description" and sections "501"
     Given I have a project for section "501" with default values and team with name "team-name" and links "http://anything.com" and location "any"
-    Given I should be on the projects page for section "501"
-    When I follow "Teams"
-    Then I should be on the index team page for section "501"
+    When I am on the index team page for section "501"
     And I should see "team-name"
     And I should see "Teams for Section"

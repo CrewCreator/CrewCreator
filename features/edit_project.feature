@@ -52,7 +52,7 @@ Feature: Edit a Project
     And I should see "4"
     And I should see "Skills"
     And I should see "any-skill"
-    And I should see "prohibited this project from being saved"
+    And I should see "prohibited this form from being saved"
     And I should be on the patch project page for project "any-project-name"
     
   Scenario: Admin adds a skill while editing a project
@@ -69,7 +69,7 @@ Feature: Edit a Project
     And I should see "4"
     And I should see "any-skill"
     Then I press "Add Skill"
-    Then I should see the create skill page
+    Then I should see "Add Skill"
     And I fill in "skill_name" with "new skill"
     And I fill in "skill_description" with "new skill description"
     Then I press "Create Skill"
