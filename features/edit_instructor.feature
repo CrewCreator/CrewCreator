@@ -7,7 +7,7 @@ Feature: Edit Instructor
     Given I have an instructor account
     Given I am logged in as "prof@email.com" with "password1!"
     When I am on the instructor profile page for "prof@email.com"
-    Then I should see "Prof's Account"
+    Then I should see "Prof's Details"
     Then I should see "Prof"
     Then I should see "prof@email.com"
   

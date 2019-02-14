@@ -17,7 +17,7 @@ class InstructorsController < ApplicationController
       flash[:notice] = "#{@instructor.email} -- #{@instructor.name} was successfully created."
       redirect_to instructors_path
     else
-      flash[:notice] = "Email was taken or password did not meet specifications!"
+      flash[:warning] = "Email was taken or password did not meet specifications!"
       redirect_to '/instructors/new'
     end
   end
@@ -40,11 +40,11 @@ class InstructorsController < ApplicationController
           redirect_to edit_instructor_path(id)
         end
       else
-        flash[:notice] = "Failed to save update. Invalid Email."
+        flash[:warning] = "Failed to save update. Invalid Email."
         redirect_to edit_instructor_path(id)
       end
     else
-      flash[:notice] = "Incorrect Password"
+      flash[:warning] = "Incorrect Password"
       redirect_to edit_instructor_path(id)
     end
   end
@@ -81,7 +81,7 @@ class InstructorsController < ApplicationController
         redirect_to instructors_path
       end
     else
-      flash[:notice] = "Incorrect Password!"
+      flash[:warning] = "Incorrect Password!"
       redirect_to remove_instructor_path(id)
     end
   end

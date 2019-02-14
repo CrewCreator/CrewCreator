@@ -1,5 +1,7 @@
-<h1><%=@instructor.name%>'s Account</h1>
+<h1 class="display-4 mt-5 ml-5"><%=@instructor.name%>'s Details</h1>
+
+<%= link_to 'Back', instructors_path, id: 'cancel' , :class => "btn btn-danger mt-3 ml-5"%>
+
+<%= link_to 'Delete Account', remove_instructor_path(@instructor), id: @instructor.id, method: :get , :class => "btn btn-danger mt-3 ml-2"%>
 
 <%= render 'form' %>
-
-<%= link_to "Delete your account", remove_instructor_path(@instructor), id: @instructor.id, method: :get %>

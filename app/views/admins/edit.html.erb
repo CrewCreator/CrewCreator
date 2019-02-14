@@ -1,5 +1,7 @@
 <h1 class="display-4 mt-5 ml-5"><%=@current_user.name%> Details</h1>
 
+<%= link_to 'Back', home_path, id: 'cancel' , :class => "btn btn-danger mt-3 ml-5"%>
+
 <div class='jumbotron w-50 mx-auto mt-4'>
   <%= form_for @current_user do |f| %>
     <%= render "layouts/error", object: @current_user, as: 'object' %>
