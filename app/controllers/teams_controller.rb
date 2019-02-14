@@ -29,8 +29,15 @@ class TeamsController < ApplicationController
   end
   
   def create
-    @team = @project.teams.build(team_params)
+    @team = @project.teams.build(team_create_params)
     if @team.save
+      students = params[:team][:student_ids]
+      students.each do |id|
+        student = Student.find_by_id(id)
+        if student
+          @team.students << student
+        end
+      end
       redirect_to section_projects_path(section_id: @project.section)
     else
       render 'new'
@@ -72,6 +79,11 @@ class TeamsController < ApplicationController
       flash[:warning] = "Incorrect Password!"
       redirect_to remove_team_path(removed_team)
     end
+  end
+  
+  private def team_create_params
+    params.require(:team).permit(:name, :version_control_link,
+      :production_link, :management_link, :scrum_location, :scrum_time)
   end
   
   private def team_params

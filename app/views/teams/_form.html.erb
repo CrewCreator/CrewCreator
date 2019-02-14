@@ -17,14 +17,9 @@
         </ul>
     <% end %>
     
-    <% if is_admin_html %>
-      <% if params[:action] == "new" or params[:action] == "create" %>
-        <br><%= form.label "Add/Remove Students" %><br>
-        <%= form.collection_check_boxes :student_ids, @project.section.students, :id, :email, checked: false %>
-      <% else %>
-        <br><%= form.label "Add/Remove Students" %><br>
-        <%= form.collection_check_boxes :student_ids, @team.project.section.students, :id, :email %>
-      <% end %>
+    <% if super_access_html %>
+      <br><%= form.label "Add/Remove Students" %><br>
+      <%= form.collection_check_boxes :student_ids, @project.section.students, :id, :email%>
     <% end %>
 
     <br>
