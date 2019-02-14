@@ -6,17 +6,14 @@ class CoursesController < ApplicationController
   end
   
   def new
-      @course = Course.new
-      @section = Section.new
+    @course = Course.new
   end
   
   def create
     @course = Course.new(course_params)
-    @section = @course.sections.build(section_params)
     
-    #autosave forced section to be saved
     if @course.save
-      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created with section #{params[:section][:number]}"
+      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created!"
       redirect_to courses_path
     else
       render new_course_path
@@ -64,9 +61,5 @@ class CoursesController < ApplicationController
   
   private def course_params 
     params.require(:course).permit(:name, :code, :description)
-  end
-  
-  private def section_params
-    params.require(:section).permit(:number, :semester, :year)
   end
 end
