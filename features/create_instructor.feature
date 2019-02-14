@@ -15,7 +15,7 @@ Feature: Create Instructor
     Given I am logged in as an admin
     And I am on the home page
     When I follow "View Instructors"
-    And follow "Create instructor"
+    And follow "Create Instructor"
     And I should see "Create Instructor Account"
     And I fill in "instructor_name" with "anything"
     And I fill in "instructor_email" with "any@thing.com"
