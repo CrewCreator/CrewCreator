@@ -16,7 +16,7 @@ class CoursesController < ApplicationController
     
     #autosave forced section to be saved
     if @course.save
-      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created with sections#{params[:section][:number]}"
+      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created with section #{params[:section][:number]}"
       redirect_to courses_path
     else
       render new_course_path

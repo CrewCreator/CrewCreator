@@ -28,6 +28,12 @@ module NavigationHelpers
     when /^the admin profile\s?page$/
       '/admin_account'
       
+    when /^the instructor profile page for "(.*)"$/
+      edit_instructor_path(Instructor.find_by_email($1).id)
+      
+    when /^the all instructors page$/
+      instructors_path
+      
     when /^the course\s?page$/
       '/courses'
       
@@ -57,6 +63,9 @@ module NavigationHelpers
       
     when /^the projects page for section "(.*)"$/
       section_projects_path(Section.find_by_number($1))
+      
+    when /^the projects page for section number "(.*)" semester "(.*)" year "(.*)"$/
+      section_projects_path(Section.find_by(number: $1, semester: $2, year: $3))
       
     when /^the new project page for section "(.*)"$/
       new_section_project_path(Section.find_by_number($1))

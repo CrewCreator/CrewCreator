@@ -33,28 +33,40 @@
             </li>
           <%end%>
           
-          <% if is_user_html && !is_admin_html %>
+          <% if is_student_html %>
             <li class="nav-item">
               <%= link_to 'My Student Account', "/students/#{current_user.id}/edit", :method => :get, :class => "nav-link" %>
             </li>
           <%end%>
           
+          <% if is_instructor_html %>
+            <li class="nav-item">
+              <%= link_to 'My Account', edit_instructor_path(id: current_user.id), :class => "nav-link" %>
+            </li>
+          <%end%>
+      
           <li class="nav-item">
             <%= link_to 'View Courses', {:action => :index, :controller => :courses}, :method => :get , :class => "nav-link"%>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'View Admins', {:action => :index, :controller => :admins}, :method => :get , :class => "nav-link"%>
           </li>
           
           <% if is_admin_html %>
             <li class="nav-item">
               <%= link_to 'View Students', {:action => :index, :controller => :students}, :method => :get , :class => "nav-link"%>
             </li>
+            
+            <li class="nav-item">
+              <%= link_to 'View Admins', {:action => :index, :controller => :admins}, :method => :get , :class => "nav-link"%>
+            </li>
+            
+            <li class="nav-item">
+              <%= link_to 'View Instructors', {:action => :index, :controller => :instructors}, :method => :get , :class => "nav-link"%>
+            </li>
+            
+            <li class="nav-item">
+              <%= link_to 'View Skills', {:action => :index, :controller => :skills}, :method => :get , :class => "nav-link"%>
+            </li>
           <% end %>
           
-          <li class="nav-item">
-            <%= link_to 'View Skills', {:action => :index, :controller => :skills}, :method => :get , :class => "nav-link"%>
-          </li>
         </ul>
         <% if current_user %>
           <ul class="navbar-nav ml-auto">
@@ -80,7 +92,6 @@
         <%= flash[:alert] %>
       </div>
     <% end %>
-    
     
   <%= yield %>
   

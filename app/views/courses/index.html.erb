@@ -25,7 +25,7 @@
         </div>
         
         <div class="card-footer text-center">
-          <% if is_admin_html %>
+          <% if super_access_html %>
             <%= link_to 'Add Section', new_course_section_path(course), :id => "add_section_to_#{course.code}" , :class => "btn btn-warning" %>
             <%= link_to 'Edit', edit_course_path(course), :id => "edit_#{course.code}" , :class => "btn btn-warning" %>
             <%= link_to 'Delete', remove_course_path(course), :id => "delete_#{course.code}", :method => :get , :class => "btn btn-warning" %>

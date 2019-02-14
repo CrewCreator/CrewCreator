@@ -1,9 +1,9 @@
 <br>
 <h1 class="display-4 mt-5 ml-5 d-inline">Team: <%=@team.name%></h1>
-<% if is_admin_html || is_student_on_team(current_user, @team) %>
+<% if super_access_html || is_student_on_team(current_user, @team) %>
   <%= link_to 'Edit Team' , edit_team_path(@team), :class=>"btn btn-danger float-right mt-5 mr-5"%>
 <% end %>
-<% if is_admin_html %>
+<% if super_access_html %>
     <%= link_to "Delete Team", remove_team_path(@team), :class=>"btn btn-danger float-right mt-5 mr-5" %>
 <% end %>
 

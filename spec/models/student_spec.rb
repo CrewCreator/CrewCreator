@@ -80,6 +80,14 @@ RSpec.describe Student, type: :model do
       subject.save
       expect(subject).to_not be_valid
     end
+    
+    it "not valid if email is taken by a instructor" do
+      instructor_with_same_email = Instructor.new(name: "Prof", email: "nonunique@email.com", password: "password1!", password_confirmation: "password1!")
+      instructor_with_same_email.save
+      subject.email = 'nonunique@email.com'
+      subject.save
+      expect(subject).to_not be_valid
+    end
   end
   
 end

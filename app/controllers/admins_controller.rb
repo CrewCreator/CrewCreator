@@ -1,12 +1,11 @@
 class AdminsController < ApplicationController
-  before_action :is_admin, only: [:create, :new, :edit, :update, :remove, :destroy]
+  before_action :is_admin, only: [:index, :create, :new, :edit, :update, :remove, :destroy]
     
   def index
     @admins = Admin.all
   end
   
   def new
-     # default: render 'new' template
      @admin = Admin.new
   end
   
@@ -18,7 +17,7 @@ class AdminsController < ApplicationController
         session[:user_id] = @admin.id
         session[:is_admin] = true
       end
-       redirect_to '/admins'
+      redirect_to '/admins'
     else
       # This line overrides the default rendering behavior, which would have been to render the 'create' view.
       flash[:warning] = "Email was taken or password did not meet specifications!"

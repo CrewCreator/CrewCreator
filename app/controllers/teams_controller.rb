@@ -1,9 +1,17 @@
 class TeamsController < ApplicationController
-  before_action :is_admin, only: [:new , :create, :remove, :destroy]
+  before_action :super_access, only: [:new , :create, :remove, :destroy]
   before_action :find_project, only: [:new, :create]
   
   def index
-    @section = Section.find(params[:section_id])
+    if is_instructor_html
+      @section = Instructor.find_by_id(session[:user_id]).sections.find_by_id(params[:section_id])
+      if @section == nil
+        flash[:warning] = "Unauthorized action"
+        redirect_to new_session_path
+      end
+    else
+      @section = Section.find(params[:section_id])
+    end
     @teams = @section.teams
   end
   
@@ -45,8 +53,18 @@ class TeamsController < ApplicationController
   end
   
   def destroy
-    removed_team = Team.find_by_id(params[:admin][:id])
-    if Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
+    if session[:user] == "admin"
+      removed_team = Team.find_by_id(params[:admin][:id])
+      check = Admin.find_by_id(session[:user_id]).try(:authenticate, params[:admin][:password])
+    elsif session[:user] == "instructor"
+      removed_team = Team.find_by_id(params[:instructor][:id])
+      check = Instructor.find_by_id(session[:user_id]).try(:authenticate, params[:instructor][:password])
+    else
+      flash[:warning] = "Unauthorized action"
+      redirect_to home_path
+    end
+    
+    if check
       flash[:notice] = "#{removed_team.name} was successfully deleted."
       removed_team.destroy
       redirect_to section_projects_path(removed_team.project.section)
@@ -70,7 +88,7 @@ class TeamsController < ApplicationController
   end
   
   private def is_admin_or_student_on_team(team)
-    unless is_student_on_team(current_user, team) || is_admin_html
+    unless is_student_on_team(current_user, team) || super_access_html
       redirect_to new_session_path
     end
   end

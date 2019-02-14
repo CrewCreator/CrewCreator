@@ -1,5 +1,3 @@
-# feature/create_section.feature
-
 Feature: Admin creates a section
   As an Admin
   I want to create a section 
