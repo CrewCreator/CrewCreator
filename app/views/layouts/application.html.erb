@@ -27,6 +27,10 @@
               </li>
           <% end %>
           
+          <li class="nav-item">
+              <%= link_to 'Home', '/home', :method => :get , :class => "navbar-brand"%>
+          </li>
+            
           <% if is_admin_html %>
             <li class="nav-item">
               <%= link_to 'My Account', '/admin_account', :id => current_user.id, :method => :get , :class => "nav-link"%>
