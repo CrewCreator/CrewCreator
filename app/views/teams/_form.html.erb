@@ -7,16 +7,14 @@
       <%= form.text_field :name, id: "name", placeholder: "Gold Team", :class => " form-control" %>
 
     <% if @team and @team.students.size > 0 %>
-      <p>
         Current Students <br>
         <ul>
-        <% @team.students.each do |student| %>
-        <li>
-        <%= student.name %> (<%= student.email %>)
-        </li>
-        <% end %>
+          <% @team.students.each do |student| %>
+          <li>
+            <%= student.name %> (<%= student.email %>)
+          </li>
+          <% end %>
         </ul>
-      </p>
     <% end %>
     
     <% if is_admin_html %>
@@ -29,6 +27,7 @@
       <% end %>
     <% end %>
 
+    <br>
     <%= label_tag :version_control_link , nil , :class => "mt-4" %>
     <%= form.text_field :version_control_link, id: "version_control_link", placeholder: "https://github.tamu.edu/", :class => " form-control" %>
   
