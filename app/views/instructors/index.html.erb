@@ -1,31 +1,31 @@
-<div id='main'>
-  <h1>All Instructors</h1>
-    <table>
-      <thead>
-        <tr>
-        <th>Instructor Name</th>
-        <th>Email</th>
-        <% if is_admin_html %>
-          <th>Edit</th>
-          <th>Remove</th>
-        <%end%>
-        </tr>
-      </thead>
-      <tbody>
-        <% @instructors.each do |instructor| %>
-          <tr>
-            <td> <%= instructor.name %> </td>
-            <td> <%= instructor.email %> </td>
-            <% if is_admin_html %>
-              <td> <%= link_to 'Edit', edit_instructor_path(instructor), id: instructor.id %> </td>
-              <td><%= link_to "Remove #{instructor.name}", remove_instructor_path(instructor), id: instructor.id, method: :get %></td>
-            <%end%>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-</div>
+<h1 class="display-4 mt-5 ml-5">Instructors</h1>
+<% if is_admin_html %>
+  <div id='create_instructor'>
+    <a class="btn btn-success ml-5" href="/instructors/new">Create Instructor</a>
+  </div> 
+<% end %>
 
-<div id='create_instructor'>
-  <a href='/instructors/new'>Create instructor</a>
-</div> 
+<table class="table table-striped table-bordered w-50 mx-auto" id='courses'>
+  <thead class="thead-dark">
+    <tr>
+      <th>Instructor Name</th>
+      <th>Email</th>
+      <% if is_admin_html %>
+        <th>Edit</th>
+        <th>Removal</th>
+      <%end%>
+    </tr>
+  </thead>
+  <tbody>
+    <% @instructors.each do |instructor| %>
+      <tr>
+        <td> <%= instructor.name %> </td>
+        <td> <%= instructor.email %> </td>
+        <% if is_admin_html %>
+          <td><%= link_to "Edit #{instructor.name}", edit_instructor_path(instructor), id: instructor.id , :method => :get , :class => "btn btn-danger"%> </td>
+          <td><%= link_to "Remove #{instructor.name}", remove_instructor_path(instructor), :id => instructor.id, :method => :get , :class => "btn btn-danger" %></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
