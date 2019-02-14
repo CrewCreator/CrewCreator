@@ -12,6 +12,10 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to 'Home', '/home', :method => :get , :class => "navbar-brand"%>
+          </li>
+          
           <% if !current_page?('/login') %>
             <% if !current_user %>
               <li class="nav-item active">
@@ -26,11 +30,7 @@
                 <%= link_to 'Sign Up', createaccount_path , :class => "nav-link"%>
               </li>
           <% end %>
-          
-          <li class="nav-item">
-              <%= link_to 'Home', '/home', :method => :get , :class => "navbar-brand"%>
-          </li>
-            
+        
           <% if is_admin_html %>
             <li class="nav-item">
               <%= link_to 'My Account', '/admin_account', :id => current_user.id, :method => :get , :class => "nav-link"%>
