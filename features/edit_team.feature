@@ -83,5 +83,5 @@ Feature: Edit a Team
     And I should see "Version control link"
     And I should see "Production link"
     And I should see "Management link"
-    And I should see "prohibited this project from being saved"
+    And I should see "prohibited this form from being saved"
     And I should be on the patch team page for team "team-name"

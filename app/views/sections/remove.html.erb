@@ -1,27 +1,14 @@
-<h1>Remove Section <%= @section.number %>: </h1>
-<h2>Projects will be removed.</h2>
-<table border="1">
-  <thead>
-    <tr>
-      <th>Section Number</th>
-      <th>Semester</th>
-      <th>Year</th>
-    </tr>
-  </thead>
-  <tr>
-    <td>
-      <%= @section.number %>
-    </td>
-    <td>
-      <%= @section.semester %>
-    </td>
-    <td>
-      <%= @section.year %>
-    </td>
-  </tr>
-</table>
-<br></br>
+<h1 class="display-4 mt-4 ml-5">Remove Section: <%= @section.number %> - <%= @section.semester %> <%= @section.year %></h1>
+<hp class="mt-3 ml-5 text-muted ">Will remove associated projects as well</p>
 
-<%= render "layouts/confirm_destroy", object: @section, as: 'object' %>
-<br/>
-<%= link_to 'Cancel', section_projects_path(@section), id: 'cancel' %>
+<%= link_to 'Cancel', section_projects_path(@section), id: 'cancel', :class => "btn btn-danger ml-5"%>
+
+
+<div class="card mt-4 w-50 mx-auto">
+  <div class="card-header mb-5">
+    <h5 class="card-title d-inline">Section: <%= @section.number %></h5>
+    <h5 class="card-title d-inline float-right"><%= @section.semester%> <%= @section.year %></h5>
+  </div>
+  
+  <%= render "layouts/confirm_destroy", object: @section, as: 'object' %>
+</div>

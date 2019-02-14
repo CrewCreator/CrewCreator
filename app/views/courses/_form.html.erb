@@ -1,43 +1,63 @@
-<div id="error_explanation">
-  <h3> Course Guidelines </h3>
-  <ul>
-    <li>Code must follow examples: (csce-121, EGL-1201)</li>
-    <li>Name must be less then 150 characters</li>
-    <li>Description must be less than 250 words</li>
-  </ul>
-</div>
-<%= form_for @course do |f| %>
-  <%= render 'layouts/error', object: @course, as: 'object' %>
-  <%= f.label "Code" %> <br>
-  <%= f.text_field :code %> <br>
-  
-  <%= f.label "Name" %> <br>
-  <%= f.text_field :name %> <br>
-  
-  <%= f.label "Description" %> <br>
-  <%= f.text_area :description, rows: 10, cols: 50 %> <br>
-  <br>
-  <% if params[:action] == "new" or params[:action] == "create" %>
-    <%= label("section_number", "Section Number") %> <br>
-    <%= number_field_tag "section[number]", in: 1...9999 %>
-    <br>
-    
-    <br><%= label("section_semester", "Section Semester") %>
-    <br><%= radio_button_tag "section[semester]", "Spring", true %> Spring
-    <br><%= radio_button_tag "section[semester]", "Summer" %> Summer
-    <br><%= radio_button_tag "section[semester]", "Fall" %> Fall 
-    <br><%= radio_button_tag "section[semester]", "Winter" %> Winter
-    
-    <br><br><%= label("section_year", "Section Year") %> <br>
-    <%= number_field_tag "section[year]", in: 1...9999 %>
-    <br>
-  <% end %>
-  <br>
-  <% if params[:action] == "edit" %>
-    <%= render "layouts/confirm_update", object: @course, as: 'object' %>
-  <% else %>
-    <%= f.submit "Save Course" %>
-  <% end %>
-<% end %>
 
-<%= link_to 'Cancel', courses_path, id: 'cancel' %>
+<%= link_to 'Cancel', courses_path, id: 'cancel' , :class => "btn btn-danger mt-3 ml-5"%>
+
+<div class='jumbotron w-50 mx-auto'>
+  <%= form_for @course do |f| %>
+    <%= render 'layouts/error', object: @course, as: 'object' %>
+    
+    <div class="row">
+      <div class="col">
+          <%= label_tag :code %>
+          <%= f.text_field :code, placeholder: "CSCE-XXX", :class => " form-control" %>
+      </div>
+      
+      <div class="col">
+          <%= label_tag :name %>
+          <%= f.text_field :name, placeholder: "Class Name ( < 150 char)", :class => " form-control"%>
+      </div>
+    </div>
+    
+    <div class='field'>
+      <%= label_tag :description, nil, :class => "mt-4" %>
+      <%= f.text_area :description, rows: 10, cols: 50, placeholder: "Class Description (< 250 words)", :class => " form-control" %>
+    </div>
+    
+    <% if params[:action] == "new" or params[:action] == "create" %>
+      <div class="row mt-4">
+        <div class="col">
+          <%= label("section_number", "Section Number") %>
+          <%= number_field_tag "section[number]", in: 1...9999 %>
+        </div>
+        <div class="col">
+          <%= label("section_year", "Section Year") %>
+          <%= number_field_tag "section[year]", in: 1...9999 %>
+        </div>
+      </div>
+      
+      
+      <%= label("section_semester", "Section Semester") %>
+      
+      <div class="form-check">
+        <%= radio_button_tag "section[semester]", "Spring", true %> Spring
+      </div>
+      <div class="form-check">
+        <%= radio_button_tag "section[semester]", "Summer"%> Summer
+      </div>
+      <div class="form-check">
+        <%= radio_button_tag "section[semester]", "Fall"%> Fall
+      </div>
+      <div class="form-check">
+        <%= radio_button_tag "section[semester]", "Winter" %> Winter
+      </div>
+      
+    <% end %>
+    
+    
+    <br>
+    <% if params[:action] == "edit" %>
+      <%= render "layouts/confirm_update", object: @course, as: 'object' %>
+    <% else %>
+      <%= f.submit "Save Course" , :class => "btn btn-primary" %>
+    <% end %>
+  <% end %>
+</div>

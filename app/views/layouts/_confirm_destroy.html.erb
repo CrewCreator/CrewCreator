@@ -1,7 +1,11 @@
-<%= form_for current_user, url: {action: "destroy"}, :method => :DELETE do |f| %>
-  <%= f.hidden_field :id, value: object.id %>
-  <%= f.label "Confirm Password" %>
-  <%= f.password_field :password, id: "admin_password"  %>
-  
-  <%= f.submit "Remove #{object.name}", id: "confirm" %>
-<% end %>
+<div class="mx-auto" style="width:75%">
+  <%= form_for current_user, url: {action: "destroy"}, :method => :DELETE do |f| %>
+    <%= f.hidden_field :id, value: object.id %>
+    
+    <%= f.label "Confirm Password" %>
+    <%= f.password_field :password, id: "admin_password" , placeholder: "Your Password", :class => " form-control"%>
+    
+    <%= f.submit "Remove #{object.name}", id: "confirm" , :class => "btn btn-danger mt-4 mb-4" %>
+    
+  <% end %>
+</div>

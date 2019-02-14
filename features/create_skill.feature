@@ -7,7 +7,7 @@ Feature: Create Skill
     Given I have an admin account
     Given I am logged in as "admin@admin.com" with "password1!"
     When I go to the skills page
-    Then I click the button create skill
+    Then I click the button add skill
     Then I should see the create skill page
 
   Scenario: Admin creates a skill

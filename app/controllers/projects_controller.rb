@@ -73,7 +73,7 @@ class ProjectsController < ApplicationController
       removed_project.destroy
       redirect_to section_projects_path(removed_project.section)
     else
-      flash[:notice] = "Incorrect Password!"
+      flash[:warning] = "Incorrect Password!"
       redirect_to :action => 'remove', :id => params[:id] , :method => :get
     end
   end

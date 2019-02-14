@@ -1,51 +1,37 @@
-<div id='main'>
-  <h1>All Courses</h1>
-    <table id='courses'>
-      <thead>
-        <tr>
-        <th>Code</th>
-        <th>Course Name</th>
-        <th>Description</th>
-        <th>Section(s)</th>
-        <% if super_access_html %>
-        <th>Options</th>
-        <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% @courses.each do |course| %>
-          <tr>
-            <td> <%= course.code %> </td>
-            <td> <%= course.name %> </td>
-            <td> <%= course.description %> </td>
-            <td>
-              <table>
-                <tr>
-                <% course.sections.each do |section| %>
-                  <td> <%= link_to "#{section.number} #{section.semester}-#{section.year}", section_projects_path(section) %> </td>
-                <% end %>
-                </tr>
-              </table>
-            </td>
-            <% if super_access_html %>
-            <td> 
-              <table>
-                <tr>
-                <td> <%= link_to 'Add Section', new_course_section_path(course), id: "add_section_to_#{course.code}" %> </td>
-                <% if is_admin_html %>
-                <td> <%= link_to 'Edit', edit_course_path(course), id: "edit_#{course.code}" %> </td>
-                <td> <%= link_to 'Delete', remove_course_path(course), id: "delete_#{course.code}", method: :get %> </td>
-                <% end %>
-                </tr>
-              </table>
-            </td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <% if is_admin_html %>
-      <%= button_to 'Create Course', {action: :new, controller: :courses}, method: :get %>
+
+<h1 class="ml-5 mt-5 mb-5">
+  <span class="display-4 d-inline-block">Courses</span>
+  <% if is_admin_html %>
+    <%= button_to 'Add Course', {:action => :new, :controller => :courses}, :method => :get , :class => "btn btn-success d-inline" %>
+  <% end %>
+</h1>
+
+<div class="container">
+  <div class="jumbotron">
+    <% @courses.each do |course| %>
+      <div class="card d-inline-block mt-4 w-100">
+        <div class="card-header">
+          <h5 class="card-title d-inline"><%= course.code %></h5>
+          <h5 class="card-title d-inline float-right"><%= course.name %></h5>
+        </div>
+        
+        <div class="card-body">
+          <p class="card-text text-muted text-center"><%= course.description %></p>
+          <hr/>
+          <h5 class="text-muted">Sections</h5>
+          <% course.sections.each do |section| %>
+            <%= link_to "#{section.number} #{section.semester}-#{section.year}", section_projects_path(section) , :class => "btn btn-primary" %>
+          <% end %>
+        </div>
+        
+        <div class="card-footer text-center">
+          <% if super_access_html %>
+            <%= link_to 'Add Section', new_course_section_path(course), :id => "add_section_to_#{course.code}" , :class => "btn btn-warning" %>
+            <%= link_to 'Edit', edit_course_path(course), :id => "edit_#{course.code}" , :class => "btn btn-warning" %>
+            <%= link_to 'Delete', remove_course_path(course), :id => "delete_#{course.code}", :method => :get , :class => "btn btn-warning" %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-    <%= link_to 'Back', home_path, id: 'back' %>
+  </div>
 </div>

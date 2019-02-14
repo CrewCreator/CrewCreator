@@ -9,7 +9,7 @@ Feature: Create Instructor
     When I fill in "Email" with "prof@email.com"
     And I fill in "password" with "password1!"
     And I press "Login"
-    Then I should see "Logged in"
+    Then I should see "prof@email.com"
   
   Scenario: Admin create an instructor
     Given I am logged in as an admin

@@ -54,13 +54,13 @@ RSpec.describe AdminsController, type: :controller do
     it "should redirect to the user path on succesful save" do
       login(@admin)
       post :create, params: {admin: {name: 'New Admin', email: 'email@email.com', password: 'password1!', password_confirmation: 'password1!'}}
-      expect(response).to redirect_to('/home')
+      expect(response).to redirect_to('/admins')
     end
   
     it "should render the new screen again with errors if the model doesn't save" do
       login(@admin)
       post :create, params: {admin: {name: 'New Admin', email: 'bad_email', password: 'password1!', password_confirmation: 'password1!'}}
-      expect(response).to redirect_to('/createaccount')
+      expect(response).to redirect_to('/admins/new')
     end
   end
 end

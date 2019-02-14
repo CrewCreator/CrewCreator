@@ -1,30 +1,38 @@
-<%= form_for [@section, @project] do |form| %>
-  
-  <%= render "layouts/error", object: @project, as: 'object' %>
 
-  <p>
-    <%= form.label :name %><br>
-    <%= form.text_field :name, id: "name" %>
-  </p>
+<div class="jumbotron w-50 mx-auto">
+  <%= form_for [@section, @project] do |form| %>
+    
+    <%= render "layouts/error", object: @project, as: 'object' %>
   
-  <p>
-    <%= form.label :description %><br>
-    <%= form.text_area :description, id: "description" %>
-  </p>
-  
-  <p>
-    <%= form.label :difficulty %><br>
-    <%= form.select :difficulty, Project.difficulties, id: "difficulty" %>
-  </p>
-  
-  <p>
-    <%= form.label :skills %><br>
-    <%= form.collection_check_boxes :skill_ids, Skill.all, :id, :name %> 
-    <%= form.submit 'Add Skill', controller: 'projects', action: 'handle_add_skills' %>
-  </p>
-  
-  <p>
-    <%= form.submit "Save Project", :id => "save" %>
-  </p>
 
-<% end %>
+    <%= label_tag :name %>
+    <%= form.text_field :name, :id =>"name" , :placeholder => "Name" ,  :class => "form-control" %>
+
+    <%= label_tag :description , nil , :class => "mt-4" %>
+    <%= form.text_area :description, :id => "description" , :placeholder => "Description" ,  :class => "form-control" %>
+
+    <%= label_tag :difficulty , nil , :class => "mt-4" %>
+    <%= form.select :difficulty, Project.difficulties, :id => "difficulty" %>
+    
+    <br>
+    <%= label_tag :skills , nil , :class => "mt-4" %>
+    
+    <%= form.collection_check_boxes(:skill_ids, Skill.all, :id, :name) do |skill| %>
+      <div class="row">
+        <%= skill.label do%>
+          <div class="col-xs-4 ml-3">
+            <%=skill.check_box %>
+            <%= skill.text %>
+          </div>       
+        <% end %>
+      </div>
+    <% end %>
+    
+    
+    <br>
+    <%= form.submit 'Add Skill', :controller => 'projects', :action => 'handle_add_skills', :class => "btn btn-success mt-4"  %>
+
+    <br>
+    <%= form.submit "Save Project", :id => "save", :class => "btn btn-primary mt-4"  %>
+  <% end %>
+</div>

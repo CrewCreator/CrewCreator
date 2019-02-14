@@ -1,29 +1,23 @@
-<h1>Create Admin Account</h1>
+<h1 class="display-4 mt-5 ml-5">Create Admin Account</h1>
+<%= link_to 'Cancel', admins_path, id: 'cancel' , :class => "btn btn-danger mt-3 ml-5"%>
 
-<h4>Guidelines:</h4>
-<ul>
-  <li>Email must be unique</li>
-  <li>Password must be a minimum of 8 characters</li>
-  <li>Password must contain a digit</li>
-  <li>Password must contain a symbol</li>
-</ul>
-<hr/>
-<%= form_for @admin, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
-
-  <%= render "layouts/error", object: @admin, as: 'object' %>
-
-  <%= f.label "Full Name" %>
-  <%= f.text_field :name %>
-  <br/><br/>
-  <%= f.label "Email" %>
-  <%= f.text_field :email %>
-  <br/><br/>
-  <%= f.label "Password" %>
-  <%= f.password_field :password %>
-  <br/><br/>
-  <%= f.label "Confirm Password" %>
-  <%= f.password_field :password_confirmation %>
-  <br/><br/>
-  <%= f.submit "Create Account" %>
-<% end %>
-
+<div class="jumbotron w-50 mx-auto">
+  <%= form_for @admin, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+  
+    <%= render "layouts/error", object: @admin, as: 'object' %>
+  
+    <%= label_tag :name %>
+    <%= f.text_field :name , :placeholder => "Name" ,  :class => "form-control" %>
+    
+    <%= label_tag :email , nil , :class => "mt-4" %>
+    <%= f.text_field :email , :placeholder => "Unique Email" , :class => "form-control" %>
+    
+    <%= label_tag :password , nil , :class => "mt-4"%>
+    <%= f.password_field :password , :placeholder => "Must contain a digit and a symbol and be >= 8 char" , :class => "form-control" %>
+    
+    <%= f.label "Confirm Password" , nil , :class => "mt-4"%>
+    <%= f.password_field :password_confirmation , :placeholder => "Re-Enter Password" , :class => "form-control" %>
+    
+    <%= f.submit "Create Account", :class => "btn btn-primary mt-4" %>
+  <% end %>
+</div>

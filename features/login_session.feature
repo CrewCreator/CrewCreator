@@ -20,12 +20,14 @@ Feature: user login
     Given I am logged in as "admin@admin.com" with "password1!"
     When I am on the home page
     And I follow "View Admins"
-    Then I should see "All Admins"
+    Then I should see "Admins"
+    And I should be on the all admin accounts page
     
   Scenario: I look at the list of courses
     When I am on the home page
     And I follow "View Courses"
-    Then I should see "All Courses"
+    Then I should see "Courses"
+    And I should be on the courses page
     
   Scenario: I try to login
     When I am on the home page

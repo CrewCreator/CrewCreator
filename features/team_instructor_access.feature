@@ -16,9 +16,9 @@ Feature: Instructor can access teams
     And I fill in "scrum_location" with "here"
     When I press "submit-team"
     Then I should see "team-name"
-    And I should see "http://vcl.com"
-    And I should see "http://pl.com"
-    And I should see "http://ml.com"
+    And I should see "Version Control"
+    And I should see "Production URL"
+    And I should see "Team Management"
     And I should be on the projects page for section "502"
     
   Scenario: Instructor edit all teams info

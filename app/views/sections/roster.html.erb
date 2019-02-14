@@ -1,17 +1,16 @@
-<h1>Roster for Course <%= @section.course.name %> Section <%= @section.number %></h1>
+<h1 class="display-4 mt-4 ml-5">Class Roster: <%= @section.number %> - <%= @section.semester %> <%= @section.year %></h1>
+<%= link_to 'Cancel', section_projects_path(@section), id: 'cancel', :class => "btn btn-danger ml-5"%>
 
-<%= form_for @section, url: {action: "update_roster"}, method: :patch do |form| %>
-
-  <%= render 'layouts/error', object: @section, as: 'object' %>
-
-  <%= form.fields_for :emails do |builder| %>
-    <%= render 'email_fields', f: builder %>
-  <% end %>
-  <%= link_to_add_fields "Add Student Email", form, :emails %><br/>
-  <br/>
-  <%= form.submit "Update Roster" %>
+<div class="jumbotron w-50 mx-auto">
+  <%= form_for @section, url: {action: "update_roster"}, method: :patch do |form| %>
   
-<% end %>
-
-<br/>
-<%= link_to 'Cancel', section_projects_path(@section), id: 'cancel' %>
+    <%= render 'layouts/error', object: @section, as: 'object' %>
+  
+    <%= form.fields_for :emails do |builder| %>
+      <%= render 'email_fields', f: builder %>
+    <% end %>
+    <%= link_to_add_fields "Add Student Email", form, :emails%>
+    <br>
+    <%= form.submit "Update Roster", :class => "btn btn-primary mt-4"  %>
+  <% end %>
+</div>

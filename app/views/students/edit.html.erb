@@ -1,5 +1,7 @@
-<h1><%=@student.name%>'s Account</h1>
+<br>
+<h1 class="display-4 mt-5 ml-5 d-inline"><%=@student.name%>'s Account</h1>
+<%= link_to "Delete your account", remove_student_path(@student), :id => @student.id, :method => :get , :class => "btn btn-danger d-inline float-right mt-5 mr-5"%>
+
+<br>
 
 <%= render 'form' %>
-
-<%= link_to "Delete your account", remove_student_path(@student), id: @student.id, method: :get %>

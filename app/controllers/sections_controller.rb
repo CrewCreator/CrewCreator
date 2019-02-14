@@ -39,7 +39,7 @@ class SectionsController < ApplicationController
       flash[:notice] = "Section #{@section.number} was successfully updated."
       redirect_to section_projects_path(@section)
     else
-      flash[:notice] = "Failed to save update. Check your inputs!"
+      flash[:warning] = "Failed to save update. Check your inputs!"
       render 'edit'
     end
   end
@@ -64,7 +64,7 @@ class SectionsController < ApplicationController
       @section.destroy
       redirect_to courses_path
     else
-      flash[:notice] = "Incorrect Password!"
+      flash[:warning] = "Incorrect Password!"
       redirect_to :action => 'remove', :id => params[:id], :method => :get
     end 
   end 
@@ -129,7 +129,7 @@ class SectionsController < ApplicationController
       @section.students << @student
       flash[:notice] = "You've successfully joined section #{@section.number} for the course #{@section.course.name}."
     else
-      flash[:notice] = "Sorry, you aren't currently enrolled in section #{@section.number} for the course #{@section.course.name}."
+      flash[:warning] = "Sorry, you aren't currently enrolled in section #{@section.number} for the course #{@section.course.name}."
     end
     redirect_to section_projects_path(@section)
   end
@@ -142,7 +142,7 @@ class SectionsController < ApplicationController
       @section.students.delete(@student)
       remove_student_from_teams(@student)
     else
-      flash[:notice] = "Sorry, you weren't enrolled in section #{@section.number} for the course #{@section.course.name}."
+      flash[:warning] = "Sorry, you weren't enrolled in section #{@section.number} for the course #{@section.course.name}."
     end
     redirect_to section_projects_path(@section)
   end

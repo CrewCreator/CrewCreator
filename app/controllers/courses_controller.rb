@@ -36,11 +36,11 @@ class CoursesController < ApplicationController
         flash[:notice] = "#{@course.code} : #{@course.name} was successfully updated."
         redirect_to :action => 'index'
       else
-        flash[:notice] = "Failed to save update. Check your inputs!"
+        flash[:warning] = "Failed to save update. Check your inputs!"
         redirect_to edit_course_path(@course)
       end
     else
-      flash[:notice] = "Incorrect Password!"
+      flash[:warning] = "Incorrect Password!"
       redirect_to :action => 'edit', :id => params[:id] , :method => :get
     end
   end
@@ -57,7 +57,7 @@ class CoursesController < ApplicationController
       removed_course.destroy
       redirect_to  courses_path
     else
-      flash[:notice] = "Incorrect Password!"
+      flash[:warning] = "Incorrect Password!"
       redirect_to :action => 'remove', :id => params[:id] , :method => :get
     end
   end

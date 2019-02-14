@@ -1,33 +1,20 @@
-<h1>Remove Course: <%= @course.name %></h1>
-<h2>Sections will be removed.</h2>
-<table border="1">
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Course Name</th>
-      <th>Section(s)</th>
-    </tr>
-  </thead>
-  <tr>
-    <td>
-      <%= @course.code %>
-    </td>
-    <td>
-      <%= @course.name %>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <% @course.sections.each do |section| %>
-            <td><%= section.number %></td>
-          <% end %>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-</br></br>
+<h1 class="display-4 mt-5 ml-5">Remove Course: <%=@course.name%></h1>
 
-<%= render "layouts/confirm_destroy", object: @course, as: 'object'  %>
+<%= link_to 'Cancel', courses_path, id: 'cancel' , :class => "btn btn-danger mt-3 ml-5"%>
 
-<%= link_to 'Cancel', courses_path, id: 'cancel' %>
+
+<div class="card mt-4 w-25 mx-auto">
+  <div class="card-header">
+    <h5 class="card-title d-inline"><%= @course.code %></h5>
+    <h5 class="card-title d-inline float-right"><%= @course.name %></h5>
+  </div>
+  
+  <div class="card-body">
+    <hp class="text-muted">Sections which will be deleted:</p>
+    <% @course.sections.each do |section| %>
+      <btn class="btn btn-warning disabled"><%= section.number %></btn>
+    <% end %>
+  </div>
+  
+  <%= render "layouts/confirm_destroy", object: @course, as: 'object' %>
+</div>
