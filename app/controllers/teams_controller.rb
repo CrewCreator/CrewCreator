@@ -32,10 +32,12 @@ class TeamsController < ApplicationController
     @team = @project.teams.build(team_create_params)
     if @team.save
       students = params[:team][:student_ids]
-      students.each do |id|
-        student = Student.find_by_id(id)
-        if student
-          @team.students << student
+      if students
+        students.each do |id|
+          student = Student.find_by_id(id)
+          if student
+            @team.students << student
+          end
         end
       end
       redirect_to section_projects_path(section_id: @project.section)

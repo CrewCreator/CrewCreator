@@ -19,7 +19,11 @@
     
     <% if super_access_html %>
       <br><%= form.label "Add/Remove Students" %><br>
-      <%= form.collection_check_boxes :student_ids, @project.section.students, :id, :email%>
+      <% if params[:action] == "new" %>
+        <%= form.collection_check_boxes :student_ids, @project.section.students, :id, :email %>
+      <% else %>
+        <%= form.collection_check_boxes :student_ids, @team.project.section.students, :id, :email %>
+        <% end %>
     <% end %>
 
     <br>
