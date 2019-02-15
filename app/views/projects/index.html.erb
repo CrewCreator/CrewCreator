@@ -57,17 +57,17 @@
           <% project.teams.each do |team| %>
               <%= link_to "View " + team.name, team_path(team) , class: "btn btn-primary mr-5"%>
               <% if team.version_control_link.present? %>
-                <a class="btn btn-info" href=<%= team.version_control_link %> target="_blank">Version Control</a>
+                <a class="btn btn-info" href=<%= team.version_control_link %> target='_blank'>Version Control</a>
               <% else %>
                 <a class="btn btn-info">Version Control</a>
               <% end %>
               <% if team.production_link.present? %>
-                <a class="btn btn-info" href=<%= team.production_link %> target="_blank">Production URL</a>
+                <a class="btn btn-info" href=<%= team.production_link %> target='_blank'>Production URL</a>
               <% else %>
                 <a class="btn btn-info">Production URL</a>
               <% end %>
               <% if team.management_link.present? %>
-                <a class="btn btn-info" href=<%= team.management_link %> target="_blank">Team Management</a>
+                <a class="btn btn-info" href=<%= team.management_link %> target='_blank'>Team Management</a>
               <% else %>
                 <a class="btn btn-info">Team Management</a>
               <% end %>

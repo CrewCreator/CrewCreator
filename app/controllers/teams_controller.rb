@@ -20,6 +20,10 @@ class TeamsController < ApplicationController
   end
   
   def new
+    unless has_section_html(@project.section)
+      flash[:warning] = "Unauthorized action"
+      redirect_to home_path
+    end
     @team = Team.new
   end
   
@@ -29,6 +33,10 @@ class TeamsController < ApplicationController
   end
   
   def create
+    unless has_section_html(@project.section)
+      flash[:warning] = "Unauthorized action"
+      redirect_to home_path
+    end
     @team = @project.teams.build(team_create_params)
     if @team.save
       students = params[:team][:student_ids]
@@ -59,6 +67,10 @@ class TeamsController < ApplicationController
   
   def remove
     @team = Team.find_by_id(params[:id])
+    unless has_section_html(@team.project.section)
+      flash[:warning] = "Unauthorized action"
+      redirect_to home_path
+    end
   end
   
   def destroy
@@ -102,8 +114,9 @@ class TeamsController < ApplicationController
   end
   
   private def is_admin_or_student_on_team(team)
-    unless is_student_on_team(current_user, team) || super_access_html
-      redirect_to new_session_path
+    unless is_student_on_team(current_user, team) || has_section_html(team.project.section)
+      flash[:warning] = "Unauthorized action"
+      redirect_to home_path
     end
   end
 end
