@@ -1,24 +1,24 @@
 <h1 class="display-4 mt-4 ml-5 d-inline-block">Section: <%= @section.number %> - <%= @section.semester %> <%= @section.year %></h1>
 
-<% if super_access_html %>
-  <%= link_to 'Delete Section' , remove_section_path(@section), id: "remove_section_#{@section.number}" , :class=>"btn btn-danger float-right mt-5 mr-5"%>
-  <%= link_to 'Edit Section' , edit_section_path(@section), id: "edit_section_#{@section.number}" , :class=>"btn btn-warning float-right d-inline-block mt-5 mr-5" %>
-  <%= link_to 'Adjust Roster' , section_roster_path(@section), id: "roster_section_#{@section.number}" , :class=>"btn btn-success float-right mt-5 mr-5" %>
+<% if has_section_html(@section.id) %>
+  <%= link_to 'Delete Section' , remove_section_path(@section), id: "remove_section_#{@section.number}" , class: "btn btn-danger float-right mt-5 mr-5"%>
+  <%= link_to 'Edit Section' , edit_section_path(@section), id: "edit_section_#{@section.number}" , class: "btn btn-warning float-right d-inline-block mt-5 mr-5" %>
+  <%= link_to 'Adjust Roster' , section_roster_path(@section), id: "roster_section_#{@section.number}" , class: "btn btn-success float-right mt-5 mr-5" %>
 <% end %>
 
 <% if is_student_html && !is_student_in_section(current_user, @section) %>
-  <%= link_to 'Join Section' , section_join_path(@section), method: :post, id: "join_section_#{@section.number}" , :class=>"btn btn-success float-right mt-5 mr-5" %>
+  <%= link_to 'Join Section' , section_join_path(@section), method: :post, id: "join_section_#{@section.number}" , class: "btn btn-success float-right mt-5 mr-5" %>
 <% end %>
 
 <% if is_student_in_section(current_user, @section) %>
   <p class="d-inline text-muted ml-4">Currently registered</p>
-  <%= link_to 'Leave Section' , section_leave_path(@section), method: :patch, id: "leave_section_#{@section.number}" , :class=>"btn btn-danger float-right mt-5 mr-5" %>
+  <%= link_to 'Leave Section' , section_leave_path(@section), method: :patch, id: "leave_section_#{@section.number}" , class: "btn btn-danger float-right mt-5 mr-5" %>
 <% end %>
 
 <hr>
 <%= link_to 'Back', courses_path, id: 'back', :class => "btn btn-warning float-right mt-1 mr-5"%>
-<% if super_access_html %>
-  <%= button_to "New Project", {:action => :new, :controller => :projects}, :method => :get, :id => "new_project" , :class=>"btn btn-success ml-5" %>
+<% if has_section_html(@section.id) %>
+  <%= button_to "New Project", { action: :new, controller: :projects}, method: :get, id: "new_project" , class: "btn btn-success ml-5" %>
 <% end %>
 
 
@@ -55,10 +55,22 @@
       <% unless project.teams.empty? %> 
         <div class="card-footer text-center">
           <% project.teams.each do |team| %>
-              <%= link_to "View " + team.name, team_path(team) , :class => "btn btn-primary mr-5"%>
-              <a class="btn btn-info" href=<%= team.version_control_link %> target="_blank">Version Control</a>
-              <a class="btn btn-info" href=<%= team.production_link %> target="_blank">Production URL</a>
-              <a class="btn btn-info" href=<%= team.management_link %> target="_blank">Team Management</a>
+              <%= link_to "View " + team.name, team_path(team) , class: "btn btn-primary mr-5"%>
+              <% if team.version_control_link.present? %>
+                <a class="btn btn-info" href=<%= team.version_control_link %> target="_blank">Version Control</a>
+              <% else %>
+                <a class="btn btn-info">Version Control</a>
+              <% end %>
+              <% if team.production_link.present? %>
+                <a class="btn btn-info" href=<%= team.production_link %> target="_blank">Production URL</a>
+              <% else %>
+                <a class="btn btn-info">Production URL</a>
+              <% end %>
+              <% if team.management_link.present? %>
+                <a class="btn btn-info" href=<%= team.management_link %> target="_blank">Team Management</a>
+              <% else %>
+                <a class="btn btn-info">Team Management</a>
+              <% end %>
               <hr>
           <% end %>
         </div>
