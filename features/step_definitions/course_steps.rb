@@ -9,14 +9,11 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-When /^(?:|I )create a course with name "(.*)" and code "(.*)" and description "(.*)" and section "(.*)"$/ do |name, code, description, section|
+When /^(?:|I )create a course with name "(.*)" and code "(.*)" and description "(.*)"$/ do |name, code, description|
   visit(new_course_path)
   fill_in("course_name", with: name)
   fill_in("course_code", with: code)
   fill_in("course_description", with: description)
-  fill_in("section[number]", with: section)
-  choose("section_semester_Spring")
-  fill_in("section[year]", with: "2018")
   click_button("Save Course")
 end
 

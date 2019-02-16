@@ -22,37 +22,6 @@
       <%= f.text_area :description, rows: 10, cols: 50, placeholder: "Class Description (< 250 words)", :class => " form-control" %>
     </div>
     
-    <% if params[:action] == "new" or params[:action] == "create" %>
-      <div class="row mt-4">
-        <div class="col">
-          <%= label("section_number", "Section Number") %>
-          <%= number_field_tag "section[number]", in: 1...9999 %>
-        </div>
-        <div class="col">
-          <%= label("section_year", "Section Year") %>
-          <%= number_field_tag "section[year]", in: 1...9999 %>
-        </div>
-      </div>
-      
-      
-      <%= label("section_semester", "Section Semester") %>
-      
-      <div class="form-check">
-        <%= radio_button_tag "section[semester]", "Spring", true %> Spring
-      </div>
-      <div class="form-check">
-        <%= radio_button_tag "section[semester]", "Summer"%> Summer
-      </div>
-      <div class="form-check">
-        <%= radio_button_tag "section[semester]", "Fall"%> Fall
-      </div>
-      <div class="form-check">
-        <%= radio_button_tag "section[semester]", "Winter" %> Winter
-      </div>
-      
-    <% end %>
-    
-    
     <br>
     <% if params[:action] == "edit" %>
       <%= render "layouts/confirm_update", object: @course, as: 'object' %>
