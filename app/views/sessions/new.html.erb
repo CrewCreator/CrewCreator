@@ -1,18 +1,20 @@
-<h1>Login</h1>
 
-<%= form_tag sessions_path do |form| %>
-  <div class='field'>
-    <%= label_tag :email %>
-    <%= text_field_tag :email %>
-  </div>
-  
-  <div class='field'>
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-  </div>
-  
-  <div class='actions'>
-    <%= submit_tag 'Login' %>
-  </div>
-  
-<% end %>
+<h1 class="display-4 w-50 mx-auto mt-5">Login</h1>
+<div class='jumbotron w-50 mx-auto'>
+  <%= form_tag sessions_path do |form| %>
+    <div class='field'>
+      <%= label_tag :email %>
+      <%= text_field_tag :email , nil , :class => "form-control" ,  :placeholder => "name@example.com"%>
+    </div>
+    
+    <div class='field'>
+      <%= label_tag :password , nil , :class => "mt-4" %>
+      <%= password_field_tag :password , nil , :class => "form-control pr-5" %>
+    </div>
+    
+    <div class='actions'>
+      <%= submit_tag 'Login' , :class => "btn btn-primary mt-4"%>
+    </div>
+    
+  <% end %>
+</div>

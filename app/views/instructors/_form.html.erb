@@ -1,0 +1,24 @@
+<div class="jumbotron w-50 mx-auto">
+  <%= form_for @instructor, html: {class: "nifty_form"} do |f| %>
+  
+    <%= render "layouts/error", object: @instructor, as: 'object' %>
+  
+    <%= label_tag :name %>
+    <%= f.text_field :name , :placeholder => "Name" ,  :class => "form-control" %>
+    
+    <%= label_tag :email , nil , :class => "mt-4" %>
+    <%= f.text_field :email , :placeholder => "Unique Email" , :class => "form-control" %>
+    
+    <% if params[:action] == "edit" %>
+      <%= render "layouts/confirm_update", object: @instructor, as: 'object' %>
+    <% else %>
+      <%= label_tag :password , nil , :class => "mt-4"%>
+      <%= f.password_field :password , :placeholder => "Must contain a digit and a symbol and be >= 8 char" , :class => "form-control" %>
+      
+      <%= f.label "Confirm Password" , nil , :class => "mt-4"%>
+      <%= f.password_field :password_confirmation , :placeholder => "Re-Enter Password" , :class => "form-control" %>
+      
+      <%= f.submit "Create Account", :class => "btn btn-primary mt-4" %>
+    <% end %>
+  <% end %>
+</div>

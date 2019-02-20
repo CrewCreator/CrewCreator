@@ -1,43 +1,35 @@
-<h1>Remove Project: <%= @project.name %></h1>
-<h2>Teams will be removed.</h2>
-<table border="1">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Difficulty</th>
-      <th>Skills</th>
-      <th><%= pluralize(2,"Team") %></th>
-    </tr>
-  </thead>
-  <tr>
-    <td>
-      <%= @project.name %>
-    </td>
-    <td>
-      <%= @project.description %>
-    </td>
-    <td>
-      <%= @project.difficulty %>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <% @project.skills.each do |skill| %>
-            <%= skill.name %>
-          <% end %>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          List Teams
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-</br></br>
+<h1 class="display-4 mt-4 ml-5">Remove Project: <%= @project.name %></h1>
+<hp class="mt-3 ml-5 text-muted ">Will remove associated teams as well</p>
 
-<%= render "layouts/confirm_destroy", object: @project, as: 'object'  %>
+<%= link_to 'Cancel', section_projects_path(@project.section), id: 'cancel', :class => "btn btn-danger ml-5"%>
+
+
+<div class="card mt-4 w-50 mx-auto">
+  <div class="card-header">
+    <h5 class="card-title d-inline"><%= @project.name %></h5>
+    <h5 class="card-title d-inline float-right"><%= pluralize(2,"Team") %></h5>
+  </div>
+  
+  <div class="card-body">
+    <p class="text-muted"><%= @project.description %></p>
+    
+    <% unless @project.skills.empty? %> 
+      <hr>
+      <h5 class="card-title mb-3">Projects Skills:</h5>
+        <% @project.skills.each do |skill| %>
+            <button class="btn btn-primary mr-3 d-inline disabled"><%= skill.name %></button>
+        <% end %>
+    <% end %>
+    
+    <% unless @project.teams.empty? %> 
+      <hr>
+      <h5 class="card-title mb-3">Associated Teams:</h5>
+        <% @project.teams.each do |team| %>
+            <%= link_to team.name, team_path(team) , :class => "btn btn-primary mr-3 d-inline disabled"%>
+        <% end %>
+    <% end %>
+    <hr>
+  </div>
+  
+  <%= render "layouts/confirm_destroy", object: @project, as: 'object' %>
+</div>

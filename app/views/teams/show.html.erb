@@ -1,33 +1,68 @@
-<h1>Team: <%= @team.name %></h1>
-
-<ul>
-  <li>Version Control: 
-    <a href=<%= @team.version_control_link %> target="_blank">
-      <%= @team.version_control_link %>
-    </a>
-  </li>
-  <li>Production Website:
-    <a href=<%= @team.production_link %> target="_blank">
-      <%= @team.production_link %>
-    </a>
-  </li>
-  <li>Management Tracker:
-    <a href=<%= @team.management_link %> target="_blank">
-      <%= @team.management_link %>
-    </a>
-  </li>
-  <li>Scrum Location:
-    <%= @team.scrum_location %>
-  </li>
-  <li>Scrum Time:
-    <%= @team.scrum_time %>
-  </li>
-</ul>
-
-<% if is_user_html %>
-  <%= link_to "Edit Team", edit_team_path(@team) %></td>
+<br>
+<h1 class="display-4 mt-5 ml-5 d-inline">Team: <%=@team.name%></h1>
+<% if has_section_html(@team.project.section.id) || is_student_on_team(current_user, @team) %>
+  <%= link_to 'Edit Team' , edit_team_path(@team), class: "btn btn-danger float-right mt-5 mr-5"%>
 <% end %>
-<%if is_admin_html %>
-  <%= link_to "Delete Team", remove_team_path(@team) %>
+<% if has_section_html(@team.project.section.id) %>
+    <%= link_to "Delete Team", remove_team_path(@team), class: "btn btn-danger float-right mt-5 mr-5" %>
 <% end %>
-<%= link_to "Back", section_projects_path(@team.project.section) %>
+
+<br>
+<%= link_to 'Back', section_projects_path(@team.project.section), id: 'back', :class => "btn btn-warning mt-3 ml-5"%>
+<br>
+
+<div class="container text-center">
+  <div class="card d-inline-block ml-4 mt-4 text-center w-75">
+    <div class="card-header">
+      <h5 class="card-title">Team members</h5>
+    </div>
+    <div class="card-body">
+      <% if @team.students.empty? %>
+        <p>No team members</p>
+      <% else %>
+        <% @team.students.each do |student| %>
+          <p class="mt-2"><%= student.name %> : (<%= student.email %>)</p><br>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container text-center">
+  <div class="card d-inline-block ml-2 mt-4 text-center" style="width:23%">
+    <div class="card-header">
+      <h5 class="card-title">Version Control</h5>
+    </div>
+    <div class="card-body">
+       <a href=<%= @team.version_control_link %> target="_blank"><%= @team.version_control_link %></a>
+    </div>
+  </div>
+  
+  <div class="card d-inline-block ml-2 mt-4 text-center" style="width:23%">
+    <div class="card-header">
+      <h5 class="card-title">Production Site</h5>
+    </div>
+    <div class="card-body">
+       <a href=<%= @team.production_link %> target="_blank"><%= @team.production_link %></a>
+    </div>
+  </div>
+  
+  <div class="card d-inline-block ml-2 mt-4 text-center" style="width:23%">
+    <div class="card-header">
+      <h5 class="card-title">Management Tracker</h5>
+    </div>
+    <div class="card-body">
+       <a href=<%= @team.management_link %> target="_blank"><%= @team.management_link %></a>
+    </div>
+  </div>
+  
+  <div class="card d-inline-block ml-2 mt-4 text-center" style="width:23%">
+    <div class="card-header">
+      <h5 class="card-title">Scrum Details</h5>
+    </div>
+    <div class="card-body">
+       <a class="disabled"><strong>Location:</strong> <%= @team.scrum_location %></a>
+       <a class="disabled"><strong>Time:</strong> <%= @team.scrum_time %></a>
+    </div>
+  </div>
+</div>

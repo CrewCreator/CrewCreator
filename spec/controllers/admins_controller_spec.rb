@@ -9,6 +9,7 @@ RSpec.describe AdminsController, type: :controller do
 
   describe "GET admin#index" do
       it "should list all the admins" do
+        login(@admin)
         get :index
         expect(response).to render_template("index")
       end
@@ -30,13 +31,13 @@ RSpec.describe AdminsController, type: :controller do
   describe "PUT admin#update" do
     it "should redirect to the user path on succesful save" do
       login(@admin)
-      post :update, :params => {:admin => {:name => 'New Admin', :password => 'password1!'}}
+      post :update, params: {admin: {name: 'New Admin', password: 'password1!'}}
       expect(response).to redirect_to('/admin_account')
     end
   
     it "should render the edit screen again with errors if the model doesn't save" do
       login(@admin)
-      post :update, :params => {:admin => {:name => 'New Admin', :password => 'wrong_password'}}
+      post :update, params: {admin: {name: 'New Admin', password: 'wrong_password'}}
       expect(response).to redirect_to('/admin_account')
     end
   end
@@ -52,14 +53,14 @@ RSpec.describe AdminsController, type: :controller do
   describe "PUT admin#create" do
     it "should redirect to the user path on succesful save" do
       login(@admin)
-      post :create, :params => {:admin => {:name => 'New Admin', :email => 'email@email.com', :password => 'password1!', :password_confirmation => 'password1!'}}
-      expect(response).to redirect_to('/home')
+      post :create, params: {admin: {name: 'New Admin', email: 'email@email.com', password: 'password1!', password_confirmation: 'password1!'}}
+      expect(response).to redirect_to('/admins')
     end
   
     it "should render the new screen again with errors if the model doesn't save" do
       login(@admin)
-      post :create, :params => {:admin => {:name => 'New Admin',:email => 'bad email', :password => 'password1!', :password_confirmation => 'password1!'}}
-      expect(response).to redirect_to('/createaccount')
+      post :create, params: {admin: {name: 'New Admin', email: 'bad_email', password: 'password1!', password_confirmation: 'password1!'}}
+      expect(response).to redirect_to('/admins/new')
     end
   end
 end

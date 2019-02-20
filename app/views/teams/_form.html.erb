@@ -1,43 +1,50 @@
-<%= form_for [@project, @team] do |form| %>
-  
-  <%= render "layouts/error", object: @team, as: 'object' %>
 
-  <p>
-    * - required fields
-  </p>
+<div class='jumbotron w-50 mx-auto'>
+  <%= form_for [@project, @team] do |form| %>
+    <%= render "layouts/error", object: @team, as: 'object' %>
+  
+      <%= label_tag :name %> *
+      <%= form.text_field :name, id: "name", placeholder: "Gold Team", :class => " form-control" %>
 
-  <p>
-    <%= form.label :name %>*<br>
-    <%= form.text_field :name, id: "name" %>
-  </p>
+    <% if @team and @team.students.size > 0 %>
+        Current Students <br>
+        <ul>
+          <% @team.students.each do |student| %>
+          <li>
+            <%= student.name %> (<%= student.email %>)
+          </li>
+          <% end %>
+        </ul>
+    <% end %>
+    
+    <% if super_access_html %>
+      <br><%= form.label "Add/Remove Students" %><br>
+      <% if params[:action] == "new" %>
+        <%= form.collection_check_boxes :student_ids, @project.section.students, :id, :email %>
+      <% else %>
+        <%= form.collection_check_boxes :student_ids, @team.project.section.students, :id, :email %>
+        <% end %>
+    <% end %>
+
+    <br>
+    <%= label_tag :version_control_link , nil , :class => "mt-4" %>
+    <%= form.text_field :version_control_link, id: "version_control_link", placeholder: "https://github.tamu.edu/", :class => " form-control" %>
   
-  <p>
-    <%= form.label :version_control_link %><br>
-    <%= form.text_field :version_control_link, id: "version_control_link" %>
-  </p>
+    <%= label_tag :production_link , nil , :class => "mt-4" %>
+    <%= form.text_field :production_link, id: "production_link", placeholder: "https://dashboard.heroku.com/", :class => " form-control" %>
   
-  <p>
-    <%= form.label :production_link %><br>
-    <%= form.text_field :production_link, id: "production_link" %>
-  </p>
+    <%= label_tag :management_link , nil , :class => "mt-4" %>
+    <%= form.text_field :management_link, id: "management_link", placeholder: "https://www.pivotaltracker.com/dashboard", :class => " form-control" %>
   
-  <p>
-    <%= form.label :management_link %><br>
-    <%= form.text_field :management_link, id: "management_link" %>
-  </p>
+    <%= label_tag :scrum_location , nil , :class => "mt-4" %>
+    <%= form.text_field :scrum_location, id: "scrum_location", placeholder: "Zachry 423A", :class => " form-control" %>
   
-  <p>
-    <%= form.label :scrum_location %><br>
-    <%= form.text_field :scrum_location, id: "scrum_location" %>
-  </p>
-  
-  <p>
-    <%= form.label :scrum_time %><br>
+    <%= label_tag :scrum_time , nil , :class => "mt-4" %>
+    <br>
     <%= form.datetime_select(:scrum_time) %>
-  </p>
-  
-  <p>
-    <%= form.submit id: "submit-team" %>
-  </p>
-
-<% end %>
+    
+    <br><br>
+    
+    <%= form.submit id: "submit-team" , :class => "btn btn-primary" %>
+  <% end %>
+</div>

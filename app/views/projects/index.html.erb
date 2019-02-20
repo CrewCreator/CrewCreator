@@ -1,71 +1,80 @@
-<h1>Projects for Section <%= @section.number %></h1>
+<h1 class="display-4 mt-4 ml-5 d-inline-block">Section: <%= @section.number %> - <%= @section.semester %> <%= @section.year %></h1>
 
-<% if is_admin_html %>
-<p>
-<%= link_to 'Edit Section' , edit_section_path(@section), :id => "edit_section_#{@section.number}" %>
-<%= link_to 'Delete Section' , remove_section_path(@section), :id => "remove_section_#{@section.number}" %>
-</p>
+<% if has_section_html(@section.id) %>
+  <%= link_to 'Delete Section' , remove_section_path(@section), id: "remove_section_#{@section.number}" , class: "btn btn-danger float-right mt-5 mr-5"%>
+  <%= link_to 'Edit Section' , edit_section_path(@section), id: "edit_section_#{@section.number}" , class: "btn btn-warning float-right d-inline-block mt-5 mr-5" %>
+  <%= link_to 'Adjust Roster' , section_roster_path(@section), id: "roster_section_#{@section.number}" , class: "btn btn-success float-right mt-5 mr-5" %>
 <% end %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Difficulty</th>
-    <th><%= link_to 'Skills', skills_path %></th>
-    <th><%= link_to 'Teams', section_teams_path(@section) %></th>
-    <% if is_admin_html %>
-      <th>Options</th>
-    <% end %>
-  </tr>
-  
+<% if is_student_html && !is_student_in_section(current_user, @section) %>
+  <%= link_to 'Join Section' , section_join_path(@section), method: :post, id: "join_section_#{@section.number}" , class: "btn btn-success float-right mt-5 mr-5" %>
+<% end %>
+
+<% if is_student_in_section(current_user, @section) %>
+  <p class="d-inline text-muted ml-4">Currently registered</p>
+  <%= link_to 'Leave Section' , section_leave_path(@section), method: :patch, id: "leave_section_#{@section.number}" , class: "btn btn-danger float-right mt-5 mr-5" %>
+<% end %>
+
+<hr>
+<%= link_to 'Back', courses_path, id: 'back', :class => "btn btn-warning float-right mt-1 mr-5"%>
+<% if has_section_html(@section.id) %>
+  <%= button_to "New Project", { action: :new, controller: :projects}, method: :get, id: "new_project" , class: "btn btn-success ml-5" %>
+<% end %>
+
+
+
+<h3 class="text-center display-4">Projects</h3>
+<div class="container mx-auto text-center">
   <% @projects.each do |project| %>
-    <tr>
-      <td><%= project.name %></td>
-      <td><%= project.description %></td>
-      <td><%= project.difficulty %></td>
+    <div class="card d-inline-block mt-4" style="width:90%">
+      <div class="card-header">
+        <div class="row">
+          <div class="col">
+            <h5 class="card-title d-inline"><%= project.name %></h5>
+          </div>
+          <div class="col">
+            <% if has_section_html(project.section.id) %>
+              <%= link_to 'Add Team', new_project_team_path(project), id: "add-team" , :class => "btn btn-success ml-2 d-inline-block" %>
+              <%= link_to 'Edit', edit_project_path(project) , :class => "btn btn-warning ml-2 d-inline-block" %>
+              <%= link_to 'Delete', remove_project_path(project) , :class => "btn btn-danger ml-2 d-inline-block" %>
+            <% end %>
+          </div>
+          <div class="col text-right">
+            <button class="btn btn-dark d-inline text-center">Difficulty: <%= project.difficulty %></h5>
+          </div>
+        </div>
+      </div>
       
-      <td>
-        <table>
-          <% project.skills.each do |skill| %>
-            <td><%= skill.name %></td>
-          <% end %>
-        </table>
-      </td>
+      <div class="card-body text-center">
+        <p class="card-title d-inline text-muted float-left"><%= project.description %></p>
+        <% project.skills.each do |skill| %>
+          <button class="btn btn-info disabled ml-2"><%= skill.name %></button>
+        <% end %>
+      </div>
       
-      <td>
-        <table>
-          <% unless project.teams.empty? %> 
-            <th>Name</th>
-            <th>Version Control</th>
-            <th>Production Website</th>
-            <th>Management Tracker</th>
-          <% end %>
+      <% unless project.teams.empty? %> 
+        <div class="card-footer text-center">
           <% project.teams.each do |team| %>
-            <tr>
-              <td><%= link_to team.name, team_path(team) %></td>
-              <td><a href=<%= team.version_control_link %> target="_blank"><%= team.version_control_link %></a></td>
-              <td><a href=<%= team.production_link %> target="_blank"><%= team.production_link %></a></td>
-              <td><a href=<%= team.management_link %> target="_blank"><%= team.management_link %></a></td>
-            </tr>
+              <%= link_to "View " + team.name, team_path(team) , class: "btn btn-primary mr-5"%>
+              <% if team.version_control_link.present? %>
+                <a class="btn btn-info" href=<%= team.version_control_link %> target='_blank'>Version Control</a>
+              <% else %>
+                <a class="btn btn-info">Version Control</a>
+              <% end %>
+              <% if team.production_link.present? %>
+                <a class="btn btn-info" href=<%= team.production_link %> target='_blank'>Production URL</a>
+              <% else %>
+                <a class="btn btn-info">Production URL</a>
+              <% end %>
+              <% if team.management_link.present? %>
+                <a class="btn btn-info" href=<%= team.management_link %> target='_blank'>Team Management</a>
+              <% else %>
+                <a class="btn btn-info">Team Management</a>
+              <% end %>
+              <hr>
           <% end %>
-        </table>
-      </td>
-      
-      <% if is_admin_html %>
-       <td>
-          <table>
-            <td><%= link_to 'Add Team', new_project_team_path(project), id: "add-team" %></td> 
-            <td><%= link_to 'Edit', edit_project_path(project) %></td> 
-            <td><%= link_to 'Delete', remove_project_path(project) %></td> 
-          </table>
-        </td>
+        </div>
       <% end %>
-      
-    </tr>
+    </div>
   <% end %>
-</table>
-
-<% if is_admin_html %>
-  <%= button_to "New Project", {:action => :new, :controller => :projects}, :method => :get, :id => "new_project"  %>
-<% end %>
+</div>

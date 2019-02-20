@@ -7,7 +7,7 @@ Feature: Create Skill
     Given I have an admin account
     Given I am logged in as "admin@admin.com" with "password1!"
     When I go to the skills page
-    Then I click the button create skill
+    Then I click the button add skill
     Then I should see the create skill page
 
   Scenario: Admin creates a skill
@@ -17,7 +17,6 @@ Feature: Create Skill
     And I fill in "skill_name" with "Android"
     And I fill in "skill_description" with "Building Android Apps"
     And I press "submit_skill"
-#    Then I should see "successfully"
     And I should see "Android"
     And I should see "Building Android Apps"
     And I should be on the skills page

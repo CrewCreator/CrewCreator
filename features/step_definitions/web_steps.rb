@@ -37,11 +37,11 @@ When /^(?:|I )follow "([^\"]*)"$/ do |link|
 end
 
 When /^(?:|I )fill in "([^\"]*)" with "([^\"]*)"$/ do |field, value|
-  fill_in(field, :with => value)
+  fill_in(field, with: value)
 end
 
 When /^(?:|I )fill in "([^\"]*)" for "([^\"]*)"$/ do |value, field|
-  fill_in(field, :with => value)
+  fill_in(field, with: value)
 end
 
 # Use this to fill in an entire form with data from a table. Example:
@@ -230,4 +230,10 @@ end
 
 Then /^show me the page$/ do
   save_and_open_page
+end
+
+Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  #  ensure that that e1 occurs before e2.
+  #  page.body is the entire content of the page as a string.
+  expect(page.body.index(e1) < page.body.index(e2))
 end

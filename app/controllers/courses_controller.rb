@@ -6,17 +6,14 @@ class CoursesController < ApplicationController
   end
   
   def new
-      @course = Course.new
-      @section = Section.new
+    @course = Course.new
   end
   
   def create
     @course = Course.new(course_params)
-    @section = @course.sections.build(section_params)
     
-    #autosave forced section to be saved
     if @course.save
-      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created with sections#{params[:section][:number]}"
+      flash[:notice] = "#{@course.code} -- #{@course.name} was successfully created!"
       redirect_to courses_path
     else
       render new_course_path
@@ -36,11 +33,11 @@ class CoursesController < ApplicationController
         flash[:notice] = "#{@course.code} : #{@course.name} was successfully updated."
         redirect_to :action => 'index'
       else
-        flash[:notice] = "Failed to save update. Check your inputs!"
+        flash[:warning] = "Failed to save update. Check your inputs!"
         redirect_to edit_course_path(@course)
       end
     else
-      flash[:notice] = "Incorrect Password!"
+      flash[:warning] = "Incorrect Password!"
       redirect_to :action => 'edit', :id => params[:id] , :method => :get
     end
   end
@@ -57,16 +54,12 @@ class CoursesController < ApplicationController
       removed_course.destroy
       redirect_to  courses_path
     else
-      flash[:notice] = "Incorrect Password!"
+      flash[:warning] = "Incorrect Password!"
       redirect_to :action => 'remove', :id => params[:id] , :method => :get
     end
   end
   
   private def course_params 
     params.require(:course).permit(:name, :code, :description)
-  end
-  
-  private def section_params
-    params.require(:section).permit(:number)
   end
 end

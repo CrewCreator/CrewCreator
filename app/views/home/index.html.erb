@@ -1,6 +1,36 @@
-<h1>CrewCreator</h1>
-<br\>
-<br\>
-<br\>
+<h1 class="display-3 mt-5 ml-5 mb-5">CrewCreator</h1>
 
-<p> Welcome to Crew Creator</p>
+<% if is_user_html %>
+  <div class="container">
+    <div class="jumbotron">
+      <% if is_admin_html  %>
+        <h2>All Courses & Sections</h2>
+      <% else %>
+        <h2>Your Courses & Sections</h2>
+      <% end %>
+      
+      <% get_years.each do |year| %>
+        <% get_semesters.each do |semester| %>
+          <% if does_year_semester_exist(year, semester) %>
+            <div class="card d-inline-block mt-4 w-100">
+              <div class="card-header text-center">
+                <h5 class="card-title d-inline"><%= semester %> <%= year %></h5>
+              </div>
+          
+              <div class="card-body text-center">
+                <% get_sections(year, semester).each do |section| %>
+                  <div class="btn-group ml-3 mt-3" role="group">
+                    <%= link_to "#{section.course.code}: #{section.course.name}", nil, :class => "btn btn-secondary disabled" %>
+                    <%= link_to "Section #{section.number}", section_projects_path(section), :class => "btn btn-info" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<% end %>

@@ -1,0 +1,13 @@
+<h1 class="display-4 mt-5 ml-5">Remove User: <%=@user_removing.name%></h1>
+
+<%= link_to 'Cancel', instructors_path, id: 'cancel' , :class => "btn btn-danger mt-3 ml-5"%>
+
+
+<div class="card mt-4 w-50 mx-auto">
+  <div class="card-header mb-5">
+    <h5 class="card-title d-inline"><%= @user_removing.name %></h5>
+    <h5 class="card-title d-inline float-right"><%= @user_removing.email %></h5>
+  </div>
+  
+  <%= render "layouts/confirm_destroy", object: @user_removing, as: 'object' %>
+</div>

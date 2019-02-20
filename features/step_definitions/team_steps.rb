@@ -16,3 +16,10 @@ Given /^(?:|I )have a project for section "(.*)" with default values and team wi
   project.teams.create(name: name, version_control_link: links, production_link: links, management_link: links, scrum_location: location).save
   visit(section_projects_path(section))
 end
+
+Given("I have the email {string} on the roster for section {string} and course {string}") do |email, section, course|
+  section = Course.find_by_code(course).sections.find_by_number(section)
+  email = Email.create!(email: email)
+  section.emails << email
+  section.save
+end

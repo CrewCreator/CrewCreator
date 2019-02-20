@@ -21,11 +21,19 @@ Rails.application.routes.draw do
     get 'teams/:id/remove', to: 'teams#remove', as: 'remove_team'
     
     get 'sections/:section_id/teams', to: 'teams#index', as: 'section_teams'
+    get 'sections/:section_id/roster', to: 'sections#roster', as: 'section_roster'
+    patch 'sections/:section_id/update_roster', to: 'sections#update_roster'
+    post 'sections/:section_id/join', to: 'sections#join', as: 'section_join'
+    patch 'sections/:section_id/leave', to: 'sections#leave', as: 'section_leave'
     
   resources :admins, except: [:show]
     get 'admin_account', to: 'admins#edit', as:'admin_account'
     post 'admin_account', to: 'admins#update', as: 'update_admin'
     get 'admins/:id/remove', to: 'admins#remove', as: 'remove_admin'
+    
+  resources :instructors
+    get 'instructors/:id/remove', to: 'instructors#remove', as: 'remove_instructor'
+    post 'instructors/:id', to: 'instructors#update', as: 'update_instructor'
     
   resources :students, except: [:show]
     get 'createaccount', to: 'students#new', as: 'createaccount'

@@ -1,9 +1,23 @@
-<%= form_for @skill do |form| %>
-
-  <%= render "layouts/error", object: @skill, as: 'object' %>
+<div class='jumbotron w-50 mx-auto'>
+  <%= form_for @skill do |form| %>
   
-  <%= form.text_field :name, placeholder: "name", id: 'skill_name' %>
-  <%= form.text_field :description, placeholder: "Description of skill", id: 'skill_description' %>
-
-  <%= form.submit id: 'submit_skill' %>
-<% end %>
+    <%= render "layouts/error", object: @skill, as: 'object' %>
+    
+    <div class="container">
+      <div class='field'>
+        <%= label_tag :name %>
+        <%= form.text_field :name, :placeholder => "Name of Skill", id: 'skill_name', :class => "form-control"%>
+      </div>
+      
+      <div class='field'>
+        <%= label_tag :description , nil , :class => "mt-4" %>
+        <%= form.text_field :description, placeholder: "Description of Skill", id: 'skill_description' , :class => " form-control"%>
+      </div>
+      
+      <div class='actions'>
+        <%= form.submit id: 'submit_skill', :class => "btn btn-primary mt-4" %>
+      </div>
+    </div>
+    
+  <% end %>
+</div>

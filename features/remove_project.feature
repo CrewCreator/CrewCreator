@@ -15,7 +15,6 @@ Feature: Remove a Project
     When I confirm my password as "admin@admin.com" with password "password1!"
     Then I should see "any-project-name was successfully deleted."
     And I should not see "any-project-description"
-    And I should not see "4"
     And I should not see "any-skill" 
     And I should be on the projects page for section "501"
   
@@ -32,6 +31,5 @@ Feature: Remove a Project
     Then I should see "Incorrect Password"
     And I should see "any-project-description"
     And I should see "any-project-name"
-    And I should see "4"
     And I should see "any-skill" 
     And I should be on the remove project page for project "any-project-name"

@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :section do
-    number { 501 }
+    sequence(:number) { |n| "12#{n}" }
+    semester { "Fall" }
+    year { 2019 }
     course
   end
 end

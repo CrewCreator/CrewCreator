@@ -1,14 +1,27 @@
-<%= form_for [@course, @section] do |form| %>
 
-  <%= render "layouts/error", object: @section, as: 'object' %>
-
-  <p>
-    <%= form.label :number %><br>
-    <%= form.number_field :number, in: 1...9999, :id => "number" %>
-  </p>
+<div class="jumbotron w-50 mx-auto">
+  <%= form_for [@course, @section] do |form| %>
   
-  <p>
-    <%= form.submit :id => "create" %>
-  </p>
+    <%= render "layouts/error", object: @section, as: 'object' %>
+  
+      <%= label_tag :number %>
+      <%= form.number_field :number, in: 1...9999, :id => "number" , :placeholder => "000" , :class => "form-control" %>
 
-<% end %>
+      <%= label_tag :semester , nil , :class => "mt-4" %>
+      <br>
+      <%= form.radio_button :semester, "Spring", :checked => true, :id => "spring"%> Spring
+      <br>
+      <%= form.radio_button :semester, "Summer", :id => "summer" %> Summer
+      <br>
+      <%= form.radio_button :semester, "Fall", :id => "fall" %> Fall
+      <br>
+      <%= form.radio_button :semester, "Winter", :id => "winter" %> Winter
+      <br>
+
+      <%= label_tag :year , nil , :class => "mt-4" %>
+      <%= form.number_field :year, in: 1...9999, :id => "year"  , :placeholder => "XXXX" , :class => "form-control" %>
+
+      <%= form.submit :id => "create", :class => "btn btn-primary mt-4" %>
+
+  <% end %>
+</div>
