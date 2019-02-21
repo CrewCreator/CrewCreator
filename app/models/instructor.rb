@@ -17,4 +17,12 @@ class Instructor < ApplicationRecord
   validates_length_of :password , minimum: 8
   validates_format_of :password, :with => PASSWORD_FORMAT, :on => :create
   validates_format_of :password, :with => PASSWORD_FORMAT, :on => :update
+  
+  def Instructor.names
+    names = []
+    Instructor.all.each do |instructor|
+      names << instructor.name
+    end
+    names
+  end
 end

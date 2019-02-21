@@ -7,6 +7,12 @@
       <%= label_tag :number %>
       <%= form.number_field :number, in: 1...9999, :id => "number" , :placeholder => "000" , :class => "form-control" %>
 
+      <% if is_admin_html %>
+      <%= label_tag :instructors, nil , :class => "mt-4" %>
+      <%= form.select :instructor_ids, Instructor.all.collect {|i| [i.name, i.id]} %>
+      <% end %>
+      <br>
+
       <%= label_tag :semester , nil , :class => "mt-4" %>
       <br>
       <%= form.radio_button :semester, "Spring", :checked => true, :id => "spring"%> Spring
