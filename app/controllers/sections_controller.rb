@@ -20,7 +20,7 @@ class SectionsController < ApplicationController
     @section = @course.sections.build(section_params)
     if @section.save
       instructor_id = params[:section][:instructor_ids]
-      if instructor_id
+      if instructor_id && is_admin_html
         instructor = Instructor.find_by_id(instructor_id)
         @section.instructors << instructor
       end
@@ -42,7 +42,7 @@ class SectionsController < ApplicationController
     @section = find_section(params[:id])
     if @section.update_attributes(section_params)
       instructor_id = params[:section][:instructor_ids]
-      if instructor_id
+      if instructor_id && is_admin_html
         @section.instructors = []
         instructor = Instructor.find_by_id(instructor_id)
         @section.instructors << instructor
