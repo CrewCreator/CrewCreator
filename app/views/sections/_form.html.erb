@@ -9,7 +9,7 @@
 
       <% if is_admin_html %>
       <%= label_tag :instructors, nil , :class => "mt-4" %>
-      <%= form.select :instructor_ids, Instructor.all.collect {|i| [i.name, i.id]} %>
+      <%= form.select :instructor_ids, Instructor.all.collect {|i| [i.name, i.id]}, :prompt => "Select" %>
       <% end %>
       <br>
 

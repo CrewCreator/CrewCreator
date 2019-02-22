@@ -22,7 +22,9 @@ class SectionsController < ApplicationController
       instructor_id = params[:section][:instructor_ids]
       if instructor_id && is_admin_html
         instructor = Instructor.find_by_id(instructor_id)
-        @section.instructors << instructor
+        if instructor
+          @section.instructors << instructor
+        end
       end
       if is_instructor_html
         user = Instructor.find_by_id(session[:user_id])
