@@ -1,11 +1,15 @@
 <h1 class="display-4 mt-4 ml-5 d-inline-block">Section: <%= @section.number %> - <%= @section.semester %> <%= @section.year %></h1>
-
 <% if has_section_html(@section.id) %>
-  <%= link_to 'Delete Section' , remove_section_path(@section), id: "remove_section_#{@section.number}" , class: "btn btn-danger float-right mt-5 mr-5"%>
-  <%= link_to 'Edit Section' , edit_section_path(@section), id: "edit_section_#{@section.number}" , class: "btn btn-warning float-right d-inline-block mt-5 mr-5" %>
-  <%= link_to 'Adjust Roster' , section_roster_path(@section), id: "roster_section_#{@section.number}" , class: "btn btn-success float-right mt-5 mr-5" %>
+  <%= link_to 'Delete Section' , remove_section_path(@section), id: "remove_section_#{@section.number}" , class: "btn btn-danger float-right mt-4 mr-5"%>
+  <%= link_to 'Edit Section' , edit_section_path(@section), id: "edit_section_#{@section.number}" , class: "btn btn-warning float-right d-inline-block mt-4 mr-5" %>
+  <%= link_to 'Adjust Roster' , section_roster_path(@section), id: "roster_section_#{@section.number}" , class: "btn btn-success float-right mt-4 mr-5" %>
 <% end %>
-
+<br>
+<h2 class="display-5 mt-4 ml-5 d-inline-block">Instructor: 
+<% @section.instructors.each do |i| %>
+<%= i.name %>
+<% end %>
+</h2>
 <% if is_student_html && !is_student_in_section(current_user, @section) %>
   <%= link_to 'Join Section' , section_join_path(@section), method: :post, id: "join_section_#{@section.number}" , class: "btn btn-success float-right mt-5 mr-5" %>
 <% end %>

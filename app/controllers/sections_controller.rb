@@ -19,6 +19,13 @@ class SectionsController < ApplicationController
     @course = Course.find(params[:course_id])
     @section = @course.sections.build(section_params)
     if @section.save
+      instructor_id = params[:section][:instructor_ids]
+      if instructor_id && is_admin_html
+        instructor = Instructor.find_by_id(instructor_id)
+        if instructor
+          @section.instructors << instructor
+        end
+      end
       if is_instructor_html
         user = Instructor.find_by_id(session[:user_id])
         user.sections << @section
@@ -36,6 +43,12 @@ class SectionsController < ApplicationController
   def update
     @section = find_section(params[:id])
     if @section.update_attributes(section_params)
+      instructor_id = params[:section][:instructor_ids]
+      if instructor_id && is_admin_html
+        @section.instructors = []
+        instructor = Instructor.find_by_id(instructor_id)
+        @section.instructors << instructor if instructor
+      end
       flash[:notice] = "Section #{@section.number} was successfully updated."
       redirect_to section_projects_path(@section)
     else
