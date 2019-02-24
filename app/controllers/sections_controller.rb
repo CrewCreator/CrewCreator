@@ -47,7 +47,7 @@ class SectionsController < ApplicationController
       if instructor_id && is_admin_html
         @section.instructors = []
         instructor = Instructor.find_by_id(instructor_id)
-        @section.instructors << instructor
+        @section.instructors << instructor if instructor
       end
       flash[:notice] = "Section #{@section.number} was successfully updated."
       redirect_to section_projects_path(@section)
