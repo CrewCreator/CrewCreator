@@ -137,7 +137,7 @@ class SectionsController < ApplicationController
   
   def import
     @section = find_section(params[:section_id])
-    Section.import(params[:section][:file], params[:section])
+    Section.import(params[:section][:file], params[:section_id])
     redirect_to section_projects_path(@section), notice: "Emails successfully added"
   end
   

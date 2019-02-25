@@ -1,5 +1,6 @@
 class Section < ApplicationRecord
-  require 'smarter_csv'
+  #require 'smarter_csv'
+  require 'csv'
   belongs_to :course, touch: true, validate: true, autosave: true
   has_many :projects, dependent: :delete_all
   has_many :teams, through: :projects
@@ -25,11 +26,21 @@ class Section < ApplicationRecord
   end 
   
   def self.import(file, section)
-    f = File.open(file.tempfile, "r:bom|utf-8")
-    emailsCSV = SmarterCSV.process(f, row_sep: :auto, :force_utf8 => true)
+    #f = File.open(file.tempfile, "r:bom|utf-8")
+    #emailsCSV = SmarterCSV.process(f, row_sep: :auto, :file_encoding => "utf-8")
+    csv_text = File.read(file.tempfile)
+    emailsCSV = CSV.parse(csv_text)
+    emailsCSV = emailsCSV.flatten
+    puts "Section id: #{section}"
+    puts "Email array imported: #{emailsCSV}"
+    counter = 0
     emailsCSV.each do |csv_email|
-      Email.create! csv_email.to_h
+      @temp = Email.create(email: csv_email)
+      puts "Email #{@temp.email} success"
+      
     end
+    
+    puts "Imported #{counter} emails"
   end 
 
   scope :by_priority, -> { order(order_by_case) }
