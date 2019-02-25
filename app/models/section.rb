@@ -35,9 +35,11 @@ class Section < ApplicationRecord
     puts "Email array imported: #{emailsCSV}"
     counter = 0
     emailsCSV.each do |csv_email|
-      @temp = Email.create(email: csv_email)
-      puts "Email #{@temp.email} success"
-      
+      puts "Conditional logic: #{Email.find_by_email(csv_email) and Section.find_by_id(section).emails.find_by_email(csv_email)}"
+      if !(Email.find_by_email(csv_email) and emails_sections.find_by_section_id(section))
+        @temp = Email.create(email: csv_email)
+        puts "Email #{@temp.email} success"
+      end
     end
     
     puts "Imported #{counter} emails"
