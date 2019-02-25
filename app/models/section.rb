@@ -28,26 +28,32 @@ class Section < ApplicationRecord
   def self.import(file, section)
     #f = File.open(file.tempfile, "r:bom|utf-8")
     #emailsCSV = SmarterCSV.process(f, row_sep: :auto, :file_encoding => "utf-8")
-    csv_text = File.read(file.tempfile)
-    emailsCSV = CSV.parse(csv_text)
-    emailsCSV = emailsCSV.flatten
-    puts "Section id: #{section}"
-    @section = Section.find_by_id(section)
-    puts "localSection: #{@section}"
-    puts "Email array imported: #{emailsCSV}"
-    counter = 0
-    emailsCSV.each do |csv_email|
-      emailObj = Email.find_by_email(csv_email)
-      puts "Conditional logic: #{emailObj}"
-      if emailObj
-        @section.emails << emailObj
-      else
-        # create new email
-        @section.emails << csv_email
+    if File.extname(file.tempfile) == ".csv"
+      puts "#{File.extname(file.tempfile) == ".csv" }"
+      csv_text = File.read(file.tempfile, :encoding => 'utf-8')
+      emailsCSV = CSV.parse(csv_text)
+      emailsCSV = emailsCSV.flatten
+      
+      puts "Section id: #{section}"
+      @section = Section.find_by_id(section)
+      puts "localSection: #{@section}"
+      puts "Email array imported: #{emailsCSV}"
+      counter = 0
+      
+      emailsCSV.each do |csv_email|
+        emailObj = Email.find_by_email(csv_email)
+        puts "Conditional logic: #{emailObj}"
+        if emailObj
+          @section.emails << emailObj
+        else
+          # create new email
+          @section.emails << csv_email
+          counter += 1
+        end
       end
+      
+      puts "Imported #{counter} emails"
     end
-    
-    puts "Imported #{counter} emails"
   end 
 
   scope :by_priority, -> { order(order_by_case) }

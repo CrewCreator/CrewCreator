@@ -137,8 +137,15 @@ class SectionsController < ApplicationController
   
   def import
     @section = find_section(params[:section_id])
-    Section.import(params[:section][:file], params[:section_id])
-    redirect_to section_projects_path(@section), notice: "Emails successfully added"
+    # Check to make sure file exists (within section params) and is not nil
+    if params.fetch(:section, {}).fetch(:file, false)
+      # Extract filename extension
+      #fileName = params[:section][:file][@original_filename].to_s.split(".")[1]
+      Section.import(params[:section][:file], params[:section_id])
+      redirect_to section_projects_path(@section), notice: "CSV Upload completed. Section #{@section.number} roster updated."
+    else
+      redirect_to section_projects_path(@section), notice: "CSV Upload ERROR! No file/wrong file type uploaded! CSV files accepted only."
+    end
   end
   
   def join
