@@ -32,13 +32,18 @@ class Section < ApplicationRecord
     emailsCSV = CSV.parse(csv_text)
     emailsCSV = emailsCSV.flatten
     puts "Section id: #{section}"
+    @section = Section.find_by_id(section)
+    puts "localSection: #{@section}"
     puts "Email array imported: #{emailsCSV}"
     counter = 0
     emailsCSV.each do |csv_email|
-      puts "Conditional logic: #{Email.find_by_email(csv_email) and Section.find_by_id(section).emails.find_by_email(csv_email)}"
-      if !(Email.find_by_email(csv_email) and emails_sections.find_by_section_id(section))
-        @temp = Email.create(email: csv_email)
-        puts "Email #{@temp.email} success"
+      emailObj = Email.find_by_email(csv_email)
+      puts "Conditional logic: #{emailObj}"
+      if emailObj
+        @section.emails << emailObj
+      else
+        # create new email
+        @section.emails << csv_email
       end
     end
     
