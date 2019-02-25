@@ -135,6 +135,12 @@ class SectionsController < ApplicationController
     end
   end
   
+  def import
+    @section = Section.find(params[:section_id])
+    Section.import(params[:file, @section])
+    redirect_to home_path, notice: "Emails successfully added"
+  end
+  
   def join
     @section = Section.find(params[:section_id])
     @student = current_user

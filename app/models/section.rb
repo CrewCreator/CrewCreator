@@ -22,6 +22,13 @@ class Section < ApplicationRecord
       super
     end
   end 
+  
+  def import(file, section)
+    emailsCSV = SmarterCSV.process(file)
+    emailsCSV.each do |csv_email|
+      Email.create! csv_email.to_h
+    end
+  end 
 
   scope :by_priority, -> { order(order_by_case) }
   
