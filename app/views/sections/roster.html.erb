@@ -16,7 +16,7 @@
 </div>
 
 <div class="jumbotron w-50 mx-auto">
- <%#= form_for @section, url: {action: "import"}, multipart: true, method: :patch do |form| %>
+ <%= form_for @section, url: {action: "import"}, multipart: true, method: :post do |form| %>
  <div id="email_bulk_explanation">
     <h3>Bulk Add Emails</h3>
     <ul>
@@ -25,10 +25,11 @@
     </ul>
   </div>
   
-  <%= form_tag import_sections_path, multipart: true do %>
-  <%= file_field_tag :file, :accept => 'csv', :class => "btn btn-primary mt-4" %> <br/>
+  <%#= form_tag import_section_path, multipart: true do %>
+  <%#= file_field_tag :file, :accept => 'csv', :class => "btn btn-primary mt-4" %>
+  <%= form.file_field :file, :accept => 'csv', :class => "btn btn-primary mt-4" %> <br/>
   
-  <br/>
-  <%= submit_tag "Import CSV emails", :class => "btn btn-primary mt-4" %> <br/>
+  <%#= submit_tag "Import CSV emails", :class => "btn btn-primary mt-4" %>
+  <%= form.submit "Import CSV emails", :class => "btn btn-primary mt-4" %>
   <% end %>
 </div>

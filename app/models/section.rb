@@ -1,4 +1,5 @@
 class Section < ApplicationRecord
+  require 'smarter_csv'
   belongs_to :course, touch: true, validate: true, autosave: true
   has_many :projects, dependent: :delete_all
   has_many :teams, through: :projects
@@ -23,8 +24,9 @@ class Section < ApplicationRecord
     end
   end 
   
-  def import(file, section)
-    emailsCSV = SmarterCSV.process(file)
+  def self.import(file, section)
+    f = File.open(file.tempfile, "r:bom|utf-8")
+    emailsCSV = SmarterCSV.process(f, row_sep: :auto, :force_utf8 => true)
     emailsCSV.each do |csv_email|
       Email.create! csv_email.to_h
     end

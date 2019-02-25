@@ -136,9 +136,9 @@ class SectionsController < ApplicationController
   end
   
   def import
-    @section = Section.find(params[:section_id])
-    Section.import(params[:file, @section])
-    redirect_to home_path, notice: "Emails successfully added"
+    @section = find_section(params[:section_id])
+    Section.import(params[:section][:file], params[:section])
+    redirect_to section_projects_path(@section), notice: "Emails successfully added"
   end
   
   def join
