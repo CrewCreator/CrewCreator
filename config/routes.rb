@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :skills, except: [:show]
-
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'home', to: 'home#index', as: 'home'
   
@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     patch 'sections/:section_id/update_roster', to: 'sections#update_roster'
     post 'sections/:section_id/join', to: 'sections#join', as: 'section_join'
     patch 'sections/:section_id/leave', to: 'sections#leave', as: 'section_leave'
+    post 'sections/:section_id/import', to: 'sections#import'
     
   resources :admins, except: [:show]
     get 'admin_account', to: 'admins#edit', as:'admin_account'

@@ -22,6 +22,36 @@ class Section < ApplicationRecord
       super
     end
   end 
+  
+  def self.import(file, section)
+    if File.extname(file.tempfile) == ".csv"
+      # Parse CSV and get into 1D array
+      csv_text = File.read(file.tempfile, :encoding => 'utf-8')
+      emailsCSV = CSV.parse(csv_text)
+      emailsCSV = emailsCSV.flatten
+
+      @section = Section.find_by_id(section)
+      
+      emailsCSV.each do |csv_email|
+        csv_email = csv_email.downcase
+        emailObj = Email.find_by_email(csv_email)
+        if emailObj
+          sectionEmail = @section.emails.find_by_email(csv_email)
+          unless sectionEmail
+          @section.emails << emailObj
+          end
+        else
+          # create new email
+          newEmail = Email.create(email: csv_email)
+          @section.emails << newEmail
+        end
+      end
+      
+      return 1
+    else
+      return 0
+    end
+  end 
 
   scope :by_priority, -> { order(order_by_case) }
   

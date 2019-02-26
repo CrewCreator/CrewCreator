@@ -135,6 +135,24 @@ class SectionsController < ApplicationController
     end
   end
   
+  def import
+    @section = find_section(params[:section_id])
+    # Check to make sure file exists (within section params) and is not nil
+    if params.fetch(:section, {}).fetch(:file, false)
+      # Run CSV processing function in section.rb
+      csvCheck = Section.import(params[:section][:file], params[:section_id])
+      # Check if file processed is CSV or not and redirect with proper notice
+      if csvCheck == 1
+        redirect_to section_projects_path(@section), notice: "CSV Upload completed. Section #{@section.number} roster updated."
+      else
+        redirect_to section_projects_path(@section), notice: "Wrong file type uploaded! Please make sure only CSV email roster files are being uploaded and try again!"
+      end
+    # If file doesn't exist (empty upload), flash notice
+    else
+      redirect_to section_projects_path(@section), notice: "No file uploaded! Please check your CSV roster upload and try again!"
+    end
+  end
+  
   def join
     @section = Section.find(params[:section_id])
     @student = current_user
