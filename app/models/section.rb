@@ -22,6 +22,8 @@ class Section < ApplicationRecord
       super
     end
   end 
+
+  scope :by_priority, -> { order(order_by_case) }
   
   def self.import(file, section)
     if File.extname(file.tempfile) == ".csv"
