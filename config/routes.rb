@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
 
   resources :skills, except: [:show]
-  #resources :sections do
-    #get 'sections/import'
-    # collection {post :import}
-  #end
-
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'home', to: 'home#index', as: 'home'
   

@@ -1,5 +1,4 @@
 class Section < ApplicationRecord
-  require 'csv'
   belongs_to :course, touch: true, validate: true, autosave: true
   has_many :projects, dependent: :delete_all
   has_many :teams, through: :projects
@@ -34,13 +33,17 @@ class Section < ApplicationRecord
       @section = Section.find_by_id(section)
       
       emailsCSV.each do |csv_email|
+        csv_email = csv_email.downcase
         emailObj = Email.find_by_email(csv_email)
-        puts "Conditional logic: #{emailObj}"
         if emailObj
+          sectionEmail = @section.emails.find_by_email(csv_email)
+          unless sectionEmail
           @section.emails << emailObj
+          end
         else
           # create new email
-          @section.emails << csv_email
+          newEmail = Email.create(email: csv_email)
+          @section.emails << newEmail
         end
       end
       
