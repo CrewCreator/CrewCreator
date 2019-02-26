@@ -19,6 +19,13 @@ class SectionsController < ApplicationController
     @course = Course.find(params[:course_id])
     @section = @course.sections.build(section_params)
     if @section.save
+      instructor_id = params[:section][:instructor_ids]
+      if instructor_id && is_admin_html
+        instructor = Instructor.find_by_id(instructor_id)
+        if instructor
+          @section.instructors << instructor
+        end
+      end
       if is_instructor_html
         user = Instructor.find_by_id(session[:user_id])
         user.sections << @section
@@ -36,6 +43,12 @@ class SectionsController < ApplicationController
   def update
     @section = find_section(params[:id])
     if @section.update_attributes(section_params)
+      instructor_id = params[:section][:instructor_ids]
+      if instructor_id && is_admin_html
+        @section.instructors = []
+        instructor = Instructor.find_by_id(instructor_id)
+        @section.instructors << instructor if instructor
+      end
       flash[:notice] = "Section #{@section.number} was successfully updated."
       redirect_to section_projects_path(@section)
     else
@@ -119,6 +132,24 @@ class SectionsController < ApplicationController
       
     else
       redirect_to section_projects_path(@section)
+    end
+  end
+  
+  def import
+    @section = find_section(params[:section_id])
+    # Check to make sure file exists (within section params) and is not nil
+    if params.fetch(:section, {}).fetch(:file, false)
+      # Run CSV processing function in section.rb
+      csvCheck = Section.import(params[:section][:file], params[:section_id])
+      # Check if file processed is CSV or not and redirect with proper notice
+      if csvCheck == 1
+        redirect_to section_projects_path(@section), notice: "CSV Upload completed. Section #{@section.number} roster updated."
+      else
+        redirect_to section_projects_path(@section), notice: "Wrong file type uploaded! Please make sure only CSV email roster files are being uploaded and try again!"
+      end
+    # If file doesn't exist (empty upload), flash notice
+    else
+      redirect_to section_projects_path(@section), notice: "No file uploaded! Please check your CSV roster upload and try again!"
     end
   end
   
