@@ -22,15 +22,12 @@
     <ul>
       <li>Emails must be valid</li>
       <li>Emails must be comma separated</li>
-      <li>CSV file type only, UTF-8 encoding enforced</li>
+      <li>CSV file type only, UTF-8 encoding required</li>
     </ul>
   </div>
   
-  <%#= form_tag import_section_path, multipart: true do %>
-  <%#= file_field_tag :file, :accept => 'csv', :class => "btn btn-primary mt-4" %>
   <%= form.file_field :file, :accept => 'csv', :class => "btn btn-primary mt-4" %> <br/>
   
-  <%#= submit_tag "Import CSV emails", :class => "btn btn-primary mt-4" %>
   <%= form.submit "Import CSV emails", :class => "btn btn-primary mt-4" %>
   <% end %>
 </div>

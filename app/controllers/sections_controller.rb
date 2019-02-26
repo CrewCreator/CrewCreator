@@ -139,8 +139,7 @@ class SectionsController < ApplicationController
     @section = find_section(params[:section_id])
     # Check to make sure file exists (within section params) and is not nil
     if params.fetch(:section, {}).fetch(:file, false)
-      # Extract filename extension
-      #fileName = params[:section][:file][@original_filename].to_s.split(".")[1]
+      # Run CSV processing function in section.rb
       csvCheck = Section.import(params[:section][:file], params[:section_id])
       # Check if file processed is CSV or not and redirect with proper notice
       if csvCheck == 1
