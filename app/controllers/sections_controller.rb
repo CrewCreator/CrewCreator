@@ -141,10 +141,16 @@ class SectionsController < ApplicationController
     if params.fetch(:section, {}).fetch(:file, false)
       # Extract filename extension
       #fileName = params[:section][:file][@original_filename].to_s.split(".")[1]
-      Section.import(params[:section][:file], params[:section_id])
-      redirect_to section_projects_path(@section), notice: "CSV Upload completed. Section #{@section.number} roster updated."
+      csvCheck = Section.import(params[:section][:file], params[:section_id])
+      # Check if file processed is CSV or not and redirect with proper notice
+      if csvCheck == 1
+        redirect_to section_projects_path(@section), notice: "CSV Upload completed. Section #{@section.number} roster updated."
+      else
+        redirect_to section_projects_path(@section), notice: "Wrong file type uploaded! Please make sure only CSV email roster files are being uploaded and try again!"
+      end
+    # If file doesn't exist (empty upload), flash notice
     else
-      redirect_to section_projects_path(@section), notice: "CSV Upload ERROR! No file/wrong file type uploaded! CSV files accepted only."
+      redirect_to section_projects_path(@section), notice: "No file uploaded! Please check your CSV roster upload and try again!"
     end
   end
   

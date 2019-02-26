@@ -29,7 +29,7 @@ class Section < ApplicationRecord
     #f = File.open(file.tempfile, "r:bom|utf-8")
     #emailsCSV = SmarterCSV.process(f, row_sep: :auto, :file_encoding => "utf-8")
     if File.extname(file.tempfile) == ".csv"
-      puts "#{File.extname(file.tempfile) == ".csv" }"
+      # puts "#{File.extname(file.tempfile) == ".csv" }"
       csv_text = File.read(file.tempfile, :encoding => 'utf-8')
       emailsCSV = CSV.parse(csv_text)
       emailsCSV = emailsCSV.flatten
@@ -48,11 +48,14 @@ class Section < ApplicationRecord
         else
           # create new email
           @section.emails << csv_email
-          counter += 1
+          counter = counter + 1
         end
       end
       
       puts "Imported #{counter} emails"
+      return 1
+    else
+      return 0
     end
   end 
 
